@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {Order, OrderItem} from "../../interfaces/order";
 import {IonButton, IonContent} from "@ionic/angular";
-import {Plugins} from "@capacitor/core";
+import {Capacitor, Plugins} from "@capacitor/core";
 
 @Component({
     selector: 'app-tab2',
@@ -27,13 +27,15 @@ export class Tab2Page implements AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        Plugins.Keyboard.addListener('keyboardDidShow', () => {
-            setTimeout(() => {
-                if (this.activeIndex === this.lastIndex) {
-                    this.content.scrollToBottom(200);
-                }
-            }, 10);
-        });
+        if (Capacitor.isPluginAvailable("Keyboard")) {
+            Plugins.Keyboard.addListener('keyboardDidShow', () => {
+                setTimeout(() => {
+                    if (this.activeIndex === this.lastIndex) {
+                        this.content.scrollToBottom(200);
+                    }
+                }, 10);
+            });
+        }
     }
 
     public addItem(): void {
