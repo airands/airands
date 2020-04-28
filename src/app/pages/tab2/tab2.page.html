@@ -13,32 +13,19 @@
     </ion-toolbar>
   </ion-header>
 
-  <form action="#">
-    <p>Add items to your order below</p>
+  <form action="#" class="ion-padding-horizontal">
     <ion-grid>
-      <ion-row>
 
-        <ion-col size="9">
-          <ion-item>
-            <ion-label position="stacked">Item Name</ion-label>
-            <ion-input type="text"
-                       autocapitalize="words"
-            ></ion-input>
-          </ion-item>
-        </ion-col>
-
-        <ion-col>
-          <ion-item>
-            <ion-label position="stacked">Quantity</ion-label>
-            <ion-input type="number"></ion-input>
-          </ion-item>
-        </ion-col>
-
-      </ion-row>
+      <app-item-field
+          *ngFor="let item of orderItems; index as i"
+          (click)="handleClick(i)"
+          [item]="item"
+          [active]="isActive(i)"
+      ></app-item-field>
 
       <ion-row>
         <ion-col>
-          <ion-item lines="none" button [detail]="false">
+          <ion-item (click)="addItem()" lines="none" button [detail]="false">
             <ion-label color="primary">Add Item</ion-label>
             <ion-icon color="primary" name="add-outline" slot="start"></ion-icon>
           </ion-item>
