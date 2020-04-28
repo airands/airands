@@ -3,9 +3,13 @@
   <ion-col size="9">
     <ion-item>
       <ion-label position="stacked">Item Name</ion-label>
-      <ion-input type="text"
+      <ion-input #ionInput
+                 type="text"
                  [(ngModel)]="item.name"
-                 autocapitalize="words"
+                 [placeholder]="placeholder"
+                 autocapitalize="on"
+                 autocorrect="on"
+                 maxlength="64"
       ></ion-input>
     </ion-item>
   </ion-col>
@@ -13,7 +17,11 @@
   <ion-col size="3">
     <ion-item>
       <ion-label position="stacked">Quantity</ion-label>
-      <ion-input type="number" [(ngModel)]="item.quantity"></ion-input>
+      <ion-input type="number"
+                 [(ngModel)]="item.quantity"
+                 inputmode="numeric"
+                 maxlength="4"
+      ></ion-input>
     </ion-item>
   </ion-col>
 

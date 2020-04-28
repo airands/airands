@@ -6,10 +6,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" #content>
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">New Order</ion-title>
+      <ion-buttons slot="end">
+        <ion-button >Edit</ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
@@ -19,13 +22,15 @@
       <app-item-field
           *ngFor="let item of orderItems; index as i"
           (click)="handleClick(i)"
+          [placeholder]="getPlaceholder(i)"
           [item]="item"
+          [skipFocus]="i === 0"
           [active]="isActive(i)"
       ></app-item-field>
 
       <ion-row>
         <ion-col>
-          <ion-item (click)="addItem()" lines="none" button [detail]="false">
+          <ion-item [disabled]="!canCreateItem" (click)="addItem()" lines="none" button [detail]="false">
             <ion-label color="primary">Add Item</ion-label>
             <ion-icon color="primary" name="add-outline" slot="start"></ion-icon>
           </ion-item>
@@ -33,6 +38,6 @@
       </ion-row>
 
     </ion-grid>
-    <ion-button size="large" expand="block">Place Order</ion-button>
+    <ion-button #submitBtn [disabled]="!canPlaceOrder" size="large" expand="block">Place Order</ion-button>
   </form>
 </ion-content>
