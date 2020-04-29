@@ -12,8 +12,8 @@ const routes: Routes = [
         loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        path: 'order',
+        loadChildren: () => import('../order/order.module').then(m => m.OrderPageModule)
       },
       {
         path: 'tab3',
@@ -21,14 +21,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/tab2',
+        redirectTo: '/tabs/order',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab2',
+    redirectTo: '/tabs/order',
     pathMatch: 'full'
   }
 ];

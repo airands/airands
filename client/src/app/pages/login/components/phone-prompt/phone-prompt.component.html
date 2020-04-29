@@ -1,0 +1,15 @@
+<ion-content [scrollY]="false">
+  <div id="onboard-container" class="ion-padding">
+    <h4>Enter your mobile number</h4>
+    <ion-item class="ion-no-padding" color="light" lines="none">
+      <ion-note>+1</ion-note>
+      <ion-input
+          maxlength="64"
+          type="tel"
+          placeholder="(778) 986-9397"
+          [(ngModel)]="phoneNumber"
+      ></ion-input>
+    </ion-item>
+    <ion-button (click)="goNext()" expand="block">Next</ion-button>
+  </div>
+</ion-content>
