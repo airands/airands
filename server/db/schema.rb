@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_28_231347) do
+ActiveRecord::Schema.define(version: 2020_04_29_044353) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "users", force: :cascade do |t|
-    t.string "uid", null: false
-    t.string "mobile_number", null: false
-    t.integer "confirmation_pin"
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "phone_number", null: false
+    t.string "confirmation_pin"
     t.datetime "confirmed_at"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2020_04_28_231347) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["mobile_number", "uid"], name: "index_users_on_mobile_number_and_uid", unique: true
+    t.index ["phone_number"], name: "index_users_on_phone_number", unique: true
   end
 
 end

@@ -7,7 +7,7 @@ default: &default
   database: eve
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: eve
-  password: <%= ENV.fetch("DELIVERY_DB_PASS") %>
+  password: <%= ENV.fetch("EVE_DB_PASS") %>
   timeout: 5000
 
 development:
