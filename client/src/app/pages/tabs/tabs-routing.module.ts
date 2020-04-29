@@ -8,22 +8,22 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+        path: 'receipts',
+        loadChildren: () => import('../receipts/receipts.module').then( m => m.ReceiptsPageModule)
       },
       {
         path: 'order',
         loadChildren: () => import('../order/order.module').then(m => m.OrderPageModule)
       },
       {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        path: 'account',
+        loadChildren: () => import('../account/account.module').then(m => m.AccountPageModule)
       },
       {
         path: '',
         redirectTo: '/tabs/order',
         pathMatch: 'full'
-      }
+      },
     ]
   },
   {

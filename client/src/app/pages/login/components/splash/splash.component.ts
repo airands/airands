@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NavController} from "@ionic/angular";
 
 @Component({
   selector: 'app-splash',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SplashComponent implements OnInit {
 
-  constructor() { }
+  constructor(private navCtrl: NavController) { }
 
   ngOnInit() {}
 
+  public goNext() {
+    this.navCtrl.navigateForward('/login/phone-prompt')
+  }
 }

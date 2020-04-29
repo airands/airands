@@ -48,9 +48,10 @@ export class OrderPage implements AfterViewInit {
 
   public handleClick(index): void {
     const {activeIndex} = this;
-    if (index < this.lastIndex && !Boolean(this.orderItems[this.lastIndex].name)) {
+    const emptyName = !Boolean(this.orderItems[this.lastIndex].name);
+    if (index < this.lastIndex && emptyName) {
       this.orderItems.pop();
-    } else if (this.orderItems.length > 1 && index === this.lastIndex) {
+    } else if (this.orderItems.length > 1 && index === this.lastIndex && emptyName) {
       this.orderItems.pop();
     } else {
       this.activeIndex = activeIndex === index ? -1 : index;

@@ -1,6 +1,7 @@
 ion-button {
   transition: transform 0.15s ease;
-  --background-activated: unset;
+  --background-activated: var(--background);
+  --background-hover: var(--background);
 
   &:active {
     transform: scale(1.09);
