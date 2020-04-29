@@ -4,7 +4,8 @@
     <ion-item class="ion-no-padding" color="light" lines="none">
       <ion-note>+1</ion-note>
       <ion-input
-          maxlength="64"
+          #ionInput
+          maxlength="10"
           type="tel"
           placeholder="(778) 986-9397"
           [(ngModel)]="phoneNumber"

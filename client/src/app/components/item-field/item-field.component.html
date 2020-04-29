@@ -1,7 +1,7 @@
 <ion-row *ngIf="active; else inactive">
 
   <ion-col size="9">
-    <ion-item>
+    <ion-item color="transparent">
       <ion-label position="stacked">Item Name</ion-label>
       <ion-input #ionInput
                  type="text"
@@ -15,7 +15,7 @@
   </ion-col>
 
   <ion-col size="3">
-    <ion-item>
+    <ion-item color="transparent">
       <ion-label position="stacked">Quantity</ion-label>
       <ion-input type="number"
                  [(ngModel)]="item.quantity"
@@ -29,9 +29,9 @@
 <ng-template #inactive>
   <ion-row>
     <ion-col>
-      <ion-item button [detail]="false" lines="none">
-        <ion-label color="primary">{{ item.name }}</ion-label>
-        <ion-note slot="end">{{ item.quantity }}</ion-note>
+      <ion-item class="inactive-item" button [detail]="false" lines="none" color="transparent">
+        <ion-label color="white">{{ item.name }}</ion-label>
+        <ion-note slot="end" color="white">{{ item.quantity }}</ion-note>
       </ion-item>
     </ion-col>
   </ion-row>

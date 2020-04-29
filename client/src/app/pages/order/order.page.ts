@@ -50,6 +50,8 @@ export class OrderPage implements AfterViewInit {
     const {activeIndex} = this;
     if (index < this.lastIndex && !Boolean(this.orderItems[this.lastIndex].name)) {
       this.orderItems.pop();
+    } else if (this.orderItems.length > 1 && index === this.lastIndex) {
+      this.orderItems.pop();
     } else {
       this.activeIndex = activeIndex === index ? -1 : index;
     }

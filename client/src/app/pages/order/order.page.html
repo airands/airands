@@ -11,7 +11,7 @@
     <ion-toolbar>
       <ion-title size="large">New Order</ion-title>
       <ion-buttons slot="end">
-        <ion-button >Edit</ion-button>
+        <ion-button>Edit</ion-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
@@ -30,7 +30,14 @@
 
       <ion-row>
         <ion-col>
-          <ion-item [disabled]="!canCreateItem" (click)="addItem()" lines="none" button [detail]="false">
+          <ion-item button
+                    class="add-item-button"
+                    lines="none"
+                    color="transparent"
+                    [disabled]="!canCreateItem"
+                    (click)="addItem()"
+                    [detail]="false"
+          >
             <ion-label color="primary">Add Item</ion-label>
             <ion-icon color="primary" name="add-outline" slot="start"></ion-icon>
           </ion-item>

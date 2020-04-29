@@ -1,3 +1,9 @@
 ion-item {
   --padding-start: 0;
+
+  &.inactive-item {
+    ion-label {
+      font-weight: bold;
+    }
+  }
 }

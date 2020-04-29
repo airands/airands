@@ -1,6 +1,6 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import PhoneNumber from 'awesome-phonenumber';
-import {NavController} from "@ionic/angular";
+import {IonInput, NavController} from "@ionic/angular";
 
 @Component({
     selector: 'app-phone-prompt',
@@ -9,8 +9,9 @@ import {NavController} from "@ionic/angular";
 })
 export class PhonePromptComponent implements AfterViewInit {
 
-    ayt = PhoneNumber.getAsYouType('CA');
+    @ViewChild('ionInput', {static: false}) ionInput: IonInput;
 
+    ayt = PhoneNumber.getAsYouType('CA');
     phoneNumber = "";
 
     constructor(private navCtrl: NavController) {
@@ -19,8 +20,12 @@ export class PhonePromptComponent implements AfterViewInit {
     ngAfterViewInit(): void {
     }
 
+    ionViewDidEnter(): void {
+        this.ionInput.setFocus();
+    }
+
     public goNext() {
-        this.navCtrl.back();
+        this.navCtrl.navigateForward('/tabs/order');
     }
 
     // TODO: Format phone input
