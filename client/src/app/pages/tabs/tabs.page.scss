@@ -1,4 +1,5 @@
 
 ion-tab-button {
-  --color: white;
+  --color: var(--ion-color-primary);
+  --color-selected: white;
 }
