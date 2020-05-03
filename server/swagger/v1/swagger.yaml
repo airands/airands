@@ -1,0 +1,61 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/sessions":
+    post:
+      summary: Creates an authenticated session
+      tags:
+      - Sessions
+      parameters: []
+      responses:
+        '200':
+          description: session authenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: string
+                  phone_number:
+                    type: string
+                required:
+                - user_id,
+                - phone_number
+        '422':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone_number:
+                  type: integer
+                confirmation_pin:
+                  type: string
+              required:
+              - phone_number
+              - confirmation_pin
+    delete:
+      summary: Deletes an auth session
+      tags:
+      - Sessions
+      responses:
+        '200':
+          description: session deleted
+          content: {}
+        '401':
+          description: unauthorized
+          content: {}
+servers:
+- url: https://{defaultHost}/api/v1
+  variables:
+    defaultHost:
+      default: api.levimurray.dev
+components:
+  schemas: {}

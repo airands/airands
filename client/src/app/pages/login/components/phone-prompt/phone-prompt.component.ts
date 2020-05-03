@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import PhoneNumber from 'awesome-phonenumber';
 import {IonInput, NavController} from "@ionic/angular";
+import {AuthenticationService} from "../../../../services/authentication.service";
 
 @Component({
     selector: 'app-phone-prompt',
@@ -14,7 +15,10 @@ export class PhonePromptComponent implements AfterViewInit {
     ayt = PhoneNumber.getAsYouType('CA');
     phoneNumber = "";
 
-    constructor(private navCtrl: NavController) {
+    constructor(
+        private navCtrl: NavController,
+        private authenticationService: AuthenticationService,
+    ) {
     }
 
     ngAfterViewInit(): void {
@@ -25,6 +29,7 @@ export class PhonePromptComponent implements AfterViewInit {
     }
 
     public goNext() {
+        this.authenticationService.login();
         this.navCtrl.navigateForward('/tabs/order');
     }
 

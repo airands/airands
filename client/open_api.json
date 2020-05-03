@@ -1,0 +1,6 @@
+{
+ "modelPropertyNaming": "snake_case",
+ "generateAliasAsModel": true,
+ "ngVersion": "8.2.14"
+}
+

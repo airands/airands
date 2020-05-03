@@ -6,27 +6,31 @@ import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 
-import {AngularTokenModule} from "angular-token";
 import {HttpClientModule} from "@angular/common/http";
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {AuthGuard} from "./services/auth-guard.service";
+import {AuthenticationService} from "./services/authentication.service";
+import {IonicStorageModule} from "@ionic/storage";
+import {ApiModule} from "../open_api";
 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
     imports: [
+        HttpClientModule,
+        ApiModule,
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
-        HttpClientModule,
-        AngularTokenModule.forRoot({
-            apiBase: 'http://localhost:3000',
-        }),
+        IonicStorageModule.forRoot(),
     ],
     providers: [
         StatusBar,
         SplashScreen,
+        AuthGuard,
+        AuthenticationService,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     bootstrap: [AppComponent]
