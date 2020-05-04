@@ -174,3 +174,6 @@ fabric.properties
 
 # End of https://www.gitignore.io/api/git,rails,rubymine
 
+.git/
+.gitignore
+

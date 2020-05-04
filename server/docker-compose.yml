@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:11-alpine
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  web:
+    depends_on:
+      - db
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/airand
+    env_file:
+      - .env

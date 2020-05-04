@@ -4,22 +4,24 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  database: eve
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: eve
-  password: <%= ENV.fetch("EVE_DB_PASS") %>
-  timeout: 5000
+  host: db
+  username: postgres
+  password:
 
 development:
   <<: *default
-  database: delivery_dev
+  database: airand_dev
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: delivery_test
+  database: airand_test
 
 production:
   <<: *default
+  database: airand_prod
+  username: airand
+  password: <%= ENV['AIRAND_DB_PASSWORD'] %>
