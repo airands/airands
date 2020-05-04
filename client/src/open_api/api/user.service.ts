@@ -17,8 +17,7 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
-import { InlineObject } from '../model/models';
-import { InlineResponse200 } from '../model/models';
+import { RegisterDto } from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -28,7 +27,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class SessionsService {
+export class UserService {
 
     protected basePath = 'https://api.levimurray.dev/api/v1';
     public defaultHeaders = new HttpHeaders();
@@ -87,55 +86,15 @@ export class SessionsService {
     }
 
     /**
-     * Deletes an auth session
+     * SMS confirmation for new/existing phone user
+     * @param registerDto 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public sessionsDelete(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<any>;
-    public sessionsDelete(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpResponse<any>>;
-    public sessionsDelete(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpEvent<any>>;
-    public sessionsDelete(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined}): Observable<any> {
-
-        let headers = this.defaultHeaders;
-
-        let httpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (httpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-            ];
-            httpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (httpHeaderAcceptSelected !== undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-
-        let responseType: 'text' | 'json' = 'json';
-        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
-            responseType = 'text';
-        }
-
-        return this.httpClient.delete<any>(`${this.configuration.basePath}/sessions`,
-            {
-                responseType: <any>responseType,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Creates an authenticated session
-     * @param inlineObject 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public sessionsPost(inlineObject?: InlineObject, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<InlineResponse200>;
-    public sessionsPost(inlineObject?: InlineObject, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<InlineResponse200>>;
-    public sessionsPost(inlineObject?: InlineObject, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<InlineResponse200>>;
-    public sessionsPost(inlineObject?: InlineObject, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public sendConfirmation(registerDto?: RegisterDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<RegisterDto>;
+    public sendConfirmation(registerDto?: RegisterDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<RegisterDto>>;
+    public sendConfirmation(registerDto?: RegisterDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<RegisterDto>>;
+    public sendConfirmation(registerDto?: RegisterDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -166,8 +125,8 @@ export class SessionsService {
             responseType = 'text';
         }
 
-        return this.httpClient.post<InlineResponse200>(`${this.configuration.basePath}/sessions`,
-            inlineObject,
+        return this.httpClient.post<RegisterDto>(`${this.configuration.basePath}/users`,
+            registerDto,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,

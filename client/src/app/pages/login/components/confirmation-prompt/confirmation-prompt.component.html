@@ -1,0 +1,24 @@
+<ion-content [scrollY]="false">
+  <div id="onboard-container" class="ion-padding">
+    <h4>An SMS has been sent to <b>{{ phoneNumber }}</b> with your confirmation pin and should be received shortly</h4>
+    <ion-text color="danger" *ngIf="error">
+      <small>{{ error.message }}</small>
+    </ion-text>
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let item of [].constructor(numInputs); let i = index">
+          <ion-item class="ion-no-padding" color="light" lines="none">
+            <ion-input (ionInput)="handleInput(i, $event)"
+                       (keydown)="handleKeydown(i, $event)"
+                       [(ngModel)]="confirmationPinValues[i]"
+                       maxlength="1"
+                       autocapitalize="characters"
+                       placeholder="0"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button (click)="submitConfirmation()" color="secondary" expand="block">Next</ion-button>
+  </div>
+</ion-content>

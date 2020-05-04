@@ -25,6 +25,6 @@ class ApplicationController < ActionController::API
       user = User.find_by(id: decoded_token["user_id"])
     end
 
-    user.present? ? user : false
+    user
   end
 end

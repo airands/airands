@@ -1,2 +1,4 @@
-export * from './inlineObject';
-export * from './inlineResponse200';
+export * from './errorDto';
+export * from './phoneConfirmation';
+export * from './registerDto';
+export * from './userDto';

@@ -3,7 +3,8 @@ import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
 
-import { SessionsService } from './api/sessions.service';
+import { SessionService } from './api/session.service';
+import { UserService } from './api/user.service';
 
 @NgModule({
   imports:      [],

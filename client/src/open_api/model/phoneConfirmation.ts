@@ -11,8 +11,8 @@
  */
 
 
-export interface InlineResponse200 { 
-    user_id?: string;
+export interface PhoneConfirmation { 
     phone_number: string;
+    confirmation_pin: string;
 }
 

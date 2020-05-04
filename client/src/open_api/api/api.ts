@@ -1,3 +1,5 @@
-export * from './sessions.service';
-import { SessionsService } from './sessions.service';
-export const APIS = [SessionsService];
+export * from './session.service';
+import { SessionService } from './session.service';
+export * from './user.service';
+import { UserService } from './user.service';
+export const APIS = [SessionService, UserService];

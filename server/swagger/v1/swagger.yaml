@@ -8,7 +8,8 @@ paths:
     post:
       summary: Creates an authenticated session
       tags:
-      - Sessions
+      - Session
+      operationId: authenticate
       parameters: []
       responses:
         '200':
@@ -16,35 +17,41 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  user_id:
-                    type: string
-                  phone_number:
-                    type: string
-                required:
-                - user_id,
-                - phone_number
+                "$ref": "#/components/schemas/user_dto"
         '422':
           description: invalid request
-          content: {}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_dto"
       requestBody:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                phone_number:
-                  type: integer
-                confirmation_pin:
-                  type: string
-              required:
-              - phone_number
-              - confirmation_pin
+              "$ref": "#/components/schemas/phone_confirmation"
+    get:
+      summary: get session
+      tags:
+      - Session
+      operationId: getCurrentSession
+      responses:
+        '200':
+          description: session info
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/user_dto"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_dto"
     delete:
       summary: Deletes an auth session
       tags:
-      - Sessions
+      - Session
+      operationId: logout
       responses:
         '200':
           description: session deleted
@@ -52,10 +59,64 @@ paths:
         '401':
           description: unauthorized
           content: {}
+  "/users":
+    post:
+      summary: SMS confirmation for new/existing phone user
+      tags:
+      - User
+      operationId: sendConfirmation
+      parameters: []
+      responses:
+        '201':
+          description: sms confirmation sent
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/register_dto"
+        '422':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/register_dto"
 servers:
 - url: https://{defaultHost}/api/v1
   variables:
     defaultHost:
       default: api.levimurray.dev
 components:
-  schemas: {}
+  schemas:
+    error_dto:
+      type: object
+      properties:
+        message:
+          type: string
+    user_dto:
+      type: object
+      properties:
+        id:
+          type: string
+        phone_number:
+          type: string
+      required:
+      - id
+      - phone_number
+    register_dto:
+      type: object
+      properties:
+        phone_number:
+          type: string
+      required:
+      - phone_number
+    phone_confirmation:
+      type: object
+      properties:
+        phone_number:
+          type: string
+        confirmation_pin:
+          type: string
+      required:
+      - phone_number
+      - confirmation_pin

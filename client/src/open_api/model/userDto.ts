@@ -11,8 +11,8 @@
  */
 
 
-export interface InlineObject { 
-    phone_number: number;
-    confirmation_pin: string;
+export interface UserDto { 
+    id: string;
+    phone_number: string;
 }
 

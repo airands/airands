@@ -1,65 +1,87 @@
 import {Injectable} from '@angular/core';
 import {Storage} from "@ionic/storage";
 import {Router} from "@angular/router";
-import {Platform, ToastController} from "@ionic/angular";
+import {NavController, Platform} from "@ionic/angular";
 import {BehaviorSubject} from "rxjs";
-import {SessionsService} from "../../open_api";
+import {PhoneConfirmation, SessionService, UserDto} from "../../open_api";
+import {CachedUserInfo} from "../interfaces/auth";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthenticationService {
 
+    USER_INFO_KEY = 'USER_INFO';
+
     authState = new BehaviorSubject(false);
 
     constructor(
-        private router: Router,
+        private navController: NavController,
         private storage: Storage,
         private platform: Platform,
-        private sessionsService: SessionsService,
-        public toastController: ToastController,
+        private sessionService: SessionService,
     ) {
         this.platform.ready().then(() => {
             this.ifLoggedIn();
         });
     }
 
-    ifLoggedIn() {
-        this.storage.get('USER_INFO').then((response) => {
-            if (response) {
-                this.authState.next(false);
-            }
-        });
+    isAuthenticated() {
+        return this.authState.value;
     }
 
-    login() {
-        this.sessionsService.sessionsPost({
-            confirmation_pin: '1234',
-            phone_number: 7789869397,
-        }).subscribe((value) => {
-            console.log(value);
+    ifLoggedIn() {
+        this.getUserInfo().then((userInfo) => {
+            if (!userInfo || !userInfo.cacheExpiry) {
+                this.logout();
+            } else {
+                if (Date.now() >= userInfo.cacheExpiry.valueOf()) {
+                    this.sessionService.getCurrentSession().subscribe(
+                        (userDto) => {
+                            this.setUserInfo(userDto).then(() => this.authState.next(true))
+                        },
+                        (error) => this.logout());
+                }
+            }
         })
+    }
 
-
-        const dummyResponse = {
-            user_id: '007',
-            user_name: 'levi',
-        };
-
-        this.storage.set('USER_INFO', dummyResponse).then((response) => {
-            this.router.navigate(['tabs']);
-            this.authState.next(true);
+    async login(phoneConfirmation: PhoneConfirmation): Promise<UserDto> {
+        return new Promise((resolve, reject) => {
+            this.sessionService.authenticate(phoneConfirmation).subscribe(
+                (userDto) => {
+                    this.setUserInfo(userDto).then(() => {
+                        this.navController.navigateForward(['tabs'])
+                        this.authState.next(true);
+                        resolve(userDto);
+                    });
+                },
+                (error) => reject(error),
+            );
         });
     }
 
     logout() {
-        this.storage.remove('USER_INFO').then(() => {
-            this.router.navigate(['login']);
+        this.setUserInfo(null).then(() => {
             this.authState.next(false);
+            this.navController.navigateBack(['login']);
         });
     }
 
-    isAuthenticated() {
-        return this.authState.value;
+    private async getUserInfo(): Promise<CachedUserInfo | undefined> {
+        return await this.storage.get(this.USER_INFO_KEY);
+    }
+
+    private async setUserInfo(userDto: UserDto): Promise<void> {
+        if (!userDto) {
+            return await this.storage.remove(this.USER_INFO_KEY);
+        }
+
+        const cachedUserInfo: CachedUserInfo = {
+            ...userDto,
+            cacheExpiry: new Date(Date.now() + (600 * 1000)),
+        };
+
+        return await this.storage.set(this.USER_INFO_KEY, cachedUserInfo);
     }
 }

@@ -4,17 +4,25 @@ class Api::V1::UsersController < ApplicationController
     authenticate_cookie
   end
 
-  # POST /users
+  # POST /api/v1/users
   def create
-    @user = User.new(user_params)
+    Rails.logger.info(user_params)
+    @user = User.find_or_initialize_by(user_params)
 
     if @user.save
+      @user.generate_confirmation_pin
+
+      # TODO: Send SMS confirmation (twilio?)
+      msg = "Airand confirmation code: #{@user.confirmation_pin}"
+      Rails.logger.info("Sending SMS (+1#{@user.phone_number}): '#{msg}'")
+
       render json: {phone_number: @user.phone_number}, status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
     end
   end
 
+  # GET /api/v1/users
   def show
     render json: current_user&.to_hash, status: :ok
   end

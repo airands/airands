@@ -4,6 +4,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {LoginPage} from './login.page';
 import {SplashComponent} from "./components/splash/splash.component";
 import {PhonePromptComponent} from "./components/phone-prompt/phone-prompt.component";
+import {ConfirmationPromptComponent} from "./components/confirmation-prompt/confirmation-prompt.component";
 
 const routes: Routes = [
     {
@@ -15,9 +16,13 @@ const routes: Routes = [
                 component: SplashComponent,
             },
             {
-                path: 'phone-prompt',
+                path: 'phone',
                 component: PhonePromptComponent,
             },
+            {
+                path: 'confirmation',
+                component: ConfirmationPromptComponent,
+            }
         ]
     },
 ];

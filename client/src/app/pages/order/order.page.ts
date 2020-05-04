@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {Order, OrderItem} from "../../interfaces/order";
 import {IonButton, IonContent} from "@ionic/angular";
 import {Capacitor, Plugins} from "@capacitor/core";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
   selector: 'app-order',
@@ -23,7 +24,7 @@ export class OrderPage implements AfterViewInit {
 
   activeIndex: number = 0;
 
-  constructor() {
+  constructor(private authenticationService: AuthenticationService) {
   }
 
   ngAfterViewInit(): void {
@@ -36,6 +37,10 @@ export class OrderPage implements AfterViewInit {
         }, 10);
       });
     }
+  }
+
+  public handleEditClick() {
+      this.authenticationService.logout();
   }
 
   public addItem(): void {

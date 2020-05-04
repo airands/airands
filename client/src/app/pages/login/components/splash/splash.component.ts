@@ -13,6 +13,6 @@ export class SplashComponent implements OnInit {
   ngOnInit() {}
 
   public goNext() {
-    this.navCtrl.navigateForward('/login/phone-prompt')
+    this.navCtrl.navigateForward('/login/phone')
   }
 }

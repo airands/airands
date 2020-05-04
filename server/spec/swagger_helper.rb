@@ -34,9 +34,47 @@ RSpec.configure do |config|
       ],
 
       components: {
-        schemas: {}
+        schemas: {
+
+          error_dto: {
+            type: :object,
+            properties: {
+              message: {type: :string}
+            },
+          },
+
+        # Application DTOs
+
+        user_dto: {
+          type: :object,
+          properties: {
+            id: {type: :string},
+            phone_number: {type: :string}
+          },
+          required: %w[id phone_number]
+        },
+
+        # Request Payloads
+
+        register_dto: {
+          type: :object,
+          properties: {
+            phone_number: {type: :string},
+          },
+          required: %w[phone_number]
+        },
+
+        phone_confirmation: {
+          type: :object,
+          properties: {
+            phone_number: {type: :string},
+            confirmation_pin: {type: :string},
+          },
+          required: %w[phone_number confirmation_pin]
+        }
       }
     }
+  }
   }
 
   # Specify the format of the output Swagger file when running 'rswag:specs:swaggerize'.

@@ -13,14 +13,21 @@ import {AppComponent} from './app.component';
 import {AuthGuard} from "./services/auth-guard.service";
 import {AuthenticationService} from "./services/authentication.service";
 import {IonicStorageModule} from "@ionic/storage";
-import {ApiModule} from "../open_api";
+import {ApiModule, Configuration, ConfigurationParameters} from "../open_api";
+
+export function apiConfigFactory(): Configuration {
+    const params: ConfigurationParameters = {
+        withCredentials: true,
+    }
+    return new Configuration(params);
+}
 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
     imports: [
         HttpClientModule,
-        ApiModule,
+        ApiModule.forRoot(apiConfigFactory),
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
