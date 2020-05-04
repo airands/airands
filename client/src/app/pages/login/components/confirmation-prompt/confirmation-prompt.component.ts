@@ -2,7 +2,7 @@ import {AfterViewInit, Component, QueryList, ViewChildren} from '@angular/core';
 import {IonInput} from "@ionic/angular";
 import {Storage} from "@ionic/storage";
 import {ErrorDto, SessionService} from "../../../../../open_api";
-import {AuthenticationService} from "../../../../services/authentication.service";
+import {AuthenticationService} from "../../../../services/auth/authentication.service";
 
 @Component({
     selector: 'app-confirmation-prompt',

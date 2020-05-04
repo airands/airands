@@ -2,7 +2,7 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {Order, OrderItem} from "../../interfaces/order";
 import {IonButton, IonContent} from "@ionic/angular";
 import {Capacitor, Plugins} from "@capacitor/core";
-import {AuthenticationService} from "../../services/authentication.service";
+import {AuthenticationService} from "../../services/auth/authentication.service";
 
 @Component({
   selector: 'app-order',

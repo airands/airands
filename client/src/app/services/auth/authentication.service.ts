@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Storage} from "@ionic/storage";
-import {Router} from "@angular/router";
 import {NavController, Platform} from "@ionic/angular";
 import {BehaviorSubject} from "rxjs";
-import {PhoneConfirmation, SessionService, UserDto} from "../../open_api";
-import {CachedUserInfo} from "../interfaces/auth";
+import {PhoneConfirmation, SessionService, UserDto} from "../../../open_api";
+import {CachedUserInfo} from "../../interfaces/auth";
 
 @Injectable({
     providedIn: 'root'
@@ -26,13 +25,17 @@ export class AuthenticationService {
         });
     }
 
+    static isValid(userInfo: CachedUserInfo) {
+        return userInfo && userInfo.cacheExpiry && userInfo.phone_number && userInfo.id;
+    }
+
     isAuthenticated() {
         return this.authState.value;
     }
 
     ifLoggedIn() {
         this.getUserInfo().then((userInfo) => {
-            if (!userInfo || !userInfo.cacheExpiry) {
+            if (!AuthenticationService.isValid(userInfo)) {
                 this.logout();
             } else {
                 if (Date.now() >= userInfo.cacheExpiry.valueOf()) {
@@ -70,7 +73,7 @@ export class AuthenticationService {
         });
     }
 
-    private async getUserInfo(): Promise<CachedUserInfo | undefined> {
+    async getUserInfo(): Promise<CachedUserInfo | undefined> {
         return await this.storage.get(this.USER_INFO_KEY);
     }
 

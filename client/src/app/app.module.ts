@@ -10,8 +10,9 @@ import {HttpClientModule} from "@angular/common/http";
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {AuthGuard} from "./services/auth-guard.service";
-import {AuthenticationService} from "./services/authentication.service";
+import {AuthGuard} from "./services/auth/auth.guard";
+import {NoAuthGuard} from "./services/auth/no-auth.guard";
+import {AuthenticationService} from "./services/auth/authentication.service";
 import {IonicStorageModule} from "@ionic/storage";
 import {ApiModule, Configuration, ConfigurationParameters} from "../open_api";
 
@@ -37,6 +38,7 @@ export function apiConfigFactory(): Configuration {
         StatusBar,
         SplashScreen,
         AuthGuard,
+        NoAuthGuard,
         AuthenticationService,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],

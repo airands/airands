@@ -14,7 +14,7 @@ export class ReceiptsPage implements OnInit {
   }
 
   goNext() {
-    this.navCtrl.navigateBack('/login');
+    this.navCtrl.navigateBack(['/login']);
   }
 
 }
