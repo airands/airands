@@ -1,5 +1,7 @@
 class User < ApplicationRecord
 
+  has_one :profile
+
   def self.handle_login(phone_number, confirmation_pin)
     User.find_by_phone_number(phone_number)&.authenticate(confirmation_pin.upcase)
   end

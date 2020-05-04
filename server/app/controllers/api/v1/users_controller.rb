@@ -6,7 +6,6 @@ class Api::V1::UsersController < ApplicationController
 
   # POST /api/v1/users
   def create
-    Rails.logger.info(user_params)
     @user = User.find_or_initialize_by(user_params)
 
     if @user.save
