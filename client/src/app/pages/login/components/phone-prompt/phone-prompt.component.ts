@@ -2,7 +2,6 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import PhoneNumber from 'awesome-phonenumber';
 import {IonInput, NavController} from "@ionic/angular";
 import {RegisterDto, UserService} from "../../../../../open_api";
-import {NavigationExtras} from "@angular/router";
 import {Storage} from "@ionic/storage";
 
 @Component({

@@ -41,6 +41,8 @@ export class AuthenticationService {
                             this.setUserInfo(userDto).then(() => this.authState.next(true))
                         },
                         (error) => this.logout());
+                } else {
+                    this.authState.next(true);
                 }
             }
         })
