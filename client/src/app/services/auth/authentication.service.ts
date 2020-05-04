@@ -39,16 +39,19 @@ export class AuthenticationService {
                 this.logout();
             } else {
                 if (Date.now() >= userInfo.cacheExpiry.valueOf()) {
-                    this.sessionService.getCurrentSession().subscribe(
-                        (userDto) => {
-                            this.setUserInfo(userDto).then(() => this.authState.next(true))
-                        },
-                        (error) => this.logout());
+                    this.verifyLogin();
                 } else {
                     this.authState.next(true);
                 }
             }
         })
+    }
+
+    verifyLogin() {
+        this.sessionService.getCurrentSession().subscribe(
+            (userDto) => this.setUserInfo(userDto).then(() => this.authState.next(true)),
+            (error) => this.logout(),
+        );
     }
 
     async login(phoneConfirmation: PhoneConfirmation): Promise<UserDto> {

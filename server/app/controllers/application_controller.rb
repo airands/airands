@@ -10,7 +10,7 @@ class ApplicationController < ActionController::API
     end
 
     if user.nil?
-      render json: {status: 'unauthorized', code: 401}
+      render json: {message: 'You are not logged in'}, status: :unauthorized
     else
       true
     end
