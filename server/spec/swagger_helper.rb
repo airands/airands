@@ -43,38 +43,47 @@ RSpec.configure do |config|
             },
           },
 
-        # Application DTOs
+          # Application DTOs
 
-        user_dto: {
-          type: :object,
-          properties: {
-            id: {type: :string},
-            phone_number: {type: :string}
+          user_dto: {
+            type: :object,
+            properties: {
+              id: {type: :string},
+              phone_number: {type: :string},
+              profile_status: {'$ref': '#/components/schemas/profile_status'}
+            },
+            required: %w[id phone_number profile_status]
           },
-          required: %w[id phone_number]
-        },
 
-        # Request Payloads
+          # Request Payloads
 
-        register_dto: {
-          type: :object,
-          properties: {
-            phone_number: {type: :string},
+          register_dto: {
+            type: :object,
+            properties: {
+              phone_number: {type: :string},
+            },
+            required: %w[phone_number]
           },
-          required: %w[phone_number]
-        },
 
-        phone_confirmation: {
-          type: :object,
-          properties: {
-            phone_number: {type: :string},
-            confirmation_pin: {type: :string},
+          phone_confirmation: {
+            type: :object,
+            properties: {
+              phone_number: {type: :string},
+              confirmation_pin: {type: :string},
+            },
+            required: %w[phone_number confirmation_pin]
           },
-          required: %w[phone_number confirmation_pin]
+
+
+          # Enums
+
+          profile_status: {
+            type: :string,
+            enum: %w(profile_status_name profile_status_address profile_status_billing profile_status_complete)
+          }
         }
       }
     }
-  }
   }
 
   # Specify the format of the output Swagger file when running 'rswag:specs:swaggerize'.

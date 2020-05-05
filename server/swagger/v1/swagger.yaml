@@ -100,9 +100,12 @@ components:
           type: string
         phone_number:
           type: string
+        profile_status:
+          "$ref": "#/components/schemas/profile_status"
       required:
       - id
       - phone_number
+      - profile_status
     register_dto:
       type: object
       properties:
@@ -120,3 +123,10 @@ components:
       required:
       - phone_number
       - confirmation_pin
+    profile_status:
+      type: string
+      enum:
+      - profile_status_name
+      - profile_status_address
+      - profile_status_billing
+      - profile_status_complete

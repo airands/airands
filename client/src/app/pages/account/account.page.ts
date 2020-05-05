@@ -12,6 +12,7 @@ export class AccountPage implements OnInit {
     user: CachedUserInfo = {
         id: null,
         phone_number: null,
+        profile_status: null,
         cacheExpiry: null,
     };
 
