@@ -1,4 +1,4 @@
-# Airand
+# airands
 
 ## Setup
 
