@@ -38,6 +38,11 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-button (click)="submitConfirmation()" size="large" color="secondary" expand="block">Next</ion-button>
+    <ion-button (click)="submitConfirmation()"
+                [disabled]="!canSubmit"
+                size="large"
+                color="secondary"
+                expand="block"
+    >Next</ion-button>
   </div>
 </ion-content>

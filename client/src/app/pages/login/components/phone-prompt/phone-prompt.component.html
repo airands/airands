@@ -25,6 +25,11 @@
                  [(ngModel)]="phoneNumber"
       ></ion-input>
     </ion-item>
-    <ion-button (click)="goNext()" color="secondary" size="large" expand="block">Next</ion-button>
+    <ion-button (click)="goNext()"
+                [disabled]="!canSubmit"
+                color="secondary"
+                size="large"
+                expand="block"
+    >Next</ion-button>
   </div>
 </ion-content>

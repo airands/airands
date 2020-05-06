@@ -84,4 +84,9 @@ export class AddressPromptComponent implements AfterViewInit {
         }
     }
 
+    get canSubmit(): boolean {
+        const {street_number, street_name, city, province, postal_code} = this.profileAddress;
+        return Boolean(street_number && street_name && city && province && postal_code);
+    }
+
 }

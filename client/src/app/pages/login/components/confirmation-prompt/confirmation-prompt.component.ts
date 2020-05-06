@@ -105,4 +105,8 @@ export class ConfirmationPromptComponent implements AfterViewInit {
         return this.confirmationPinValues.join('');
     }
 
+    get canSubmit(): boolean {
+        return this.confirmationPin.length === this.numInputs;
+    }
+
 }

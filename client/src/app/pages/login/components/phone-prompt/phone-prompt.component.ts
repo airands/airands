@@ -62,4 +62,8 @@ export class PhonePromptComponent implements AfterViewInit {
         return this.ayt.getPhoneNumber().getNumber('national');
     }
 
+    get canSubmit(): boolean {
+        return this.phoneNumber.length === 10;
+    }
+
 }

@@ -14,7 +14,7 @@
 
     <div class="onboarding-text">
       <ion-text>
-        <h2>Where would you like us to deliver to?</h2>
+        <h2>Where would you like us to <ion-text color="secondary">deliver</ion-text> to?</h2>
       </ion-text>
     </div>
 
@@ -25,6 +25,11 @@
                  placeholder="Street Address"
       ></ion-input>
     </ion-item>
-    <ion-button (click)="goNext()" color="secondary" expand="block">Next</ion-button>
+    <ion-button (click)="goNext()"
+                [disabled]="!canSubmit"
+                size="large"
+                color="secondary"
+                expand="block"
+    >Next</ion-button>
   </div>
 </ion-content>
