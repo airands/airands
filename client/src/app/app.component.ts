@@ -36,7 +36,7 @@ export class AppComponent {
 
             this.authenticationService.authUser.subscribe((state) => {
                 if (!state) {
-                    this.navController.pop();
+                    this.navController.navigateBack(['/login']);
                 }
             });
         });
