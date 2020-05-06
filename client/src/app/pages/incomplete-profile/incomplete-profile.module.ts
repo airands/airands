@@ -16,7 +16,7 @@ import {LastNamePromptComponent} from "./components/last-name-prompt/last-name-p
     CommonModule,
     FormsModule,
     IonicModule,
-    IncompleteProfilePageRoutingModule
+    IncompleteProfilePageRoutingModule,
   ],
   declarations: [IncompleteProfilePage, FirstNamePromptComponent, LastNamePromptComponent, AddressPromptComponent],
 })

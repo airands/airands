@@ -984,6 +984,11 @@
   dependencies:
     tslib "^1.9.0"
 
+"@capacitor/ios@^2.0.1":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-2.0.2.tgz#3736af5a444804686fc1bd98aaea59f33287c6ff"
+  integrity sha512-z4erWGR0+ivZDDPXyM+qCTpcP7ewuIWEgBtyTn1xiV/favPsbnOdeUbWlKE+inZxvT7aAAT+rDH3kMbq1e0WSA==
+
 "@ionic-native/core@^5.0.7":
   version "5.24.0"
   resolved "https://registry.yarnpkg.com/@ionic-native/core/-/core-5.24.0.tgz#538e2623f3290982a9b1891a365d69ad83a9b481"
@@ -1116,6 +1121,11 @@
     "@types/events" "*"
     "@types/minimatch" "*"
     "@types/node" "*"
+
+"@types/googlemaps@^3.39.4":
+  version "3.39.4"
+  resolved "https://registry.yarnpkg.com/@types/googlemaps/-/googlemaps-3.39.4.tgz#c32ec3bb1481e53a7282598f7fa96a75bc834139"
+  integrity sha512-R11RyCccERJhqSXlePFdoOXbWiTsY3H17Wl5e+JEpJFBXl8P+0Rm+JP8eqqSqOCtZjXDlYeKKnhE8a4VZlhtTw==
 
 "@types/jasmine@*":
   version "3.5.10"

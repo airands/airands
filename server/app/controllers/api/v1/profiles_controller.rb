@@ -15,15 +15,15 @@ class Api::V1::ProfilesController < ApplicationController
   def update_params
     address = params.require(:address)
     {
-      first_name: params.require(:first_name),
-      last_name: params.require(:last_name),
+      first_name: params[:first_name],
+      last_name: params[:last_name],
       address_street_number: address[:street_number],
       address_street_name: address[:street_name],
       address_unit_number: address[:unit_number],
       address_city: address[:city],
       address_province: address[:province],
       address_postal_code: address[:postal_code],
-    }
+    }.compact
   end
 
 end
