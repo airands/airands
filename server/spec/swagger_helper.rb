@@ -50,9 +50,13 @@ RSpec.configure do |config|
             properties: {
               id: {type: :string},
               phone_number: {type: :string},
-              profile_status: {'$ref': '#/components/schemas/profile_status'}
+              profile: {'$ref': '#/components/schemas/profile'},
+              complete_profile: {type: :boolean},
+              complete_name: {type: :boolean},
+              complete_address: {type: :boolean},
+              complete_billing: {type: :boolean},
             },
-            required: %w[id phone_number profile_status]
+            required: %w[id phone_number complete_profile complete_name complete_address complete_billing, profile],
           },
 
           # Request Payloads
@@ -62,7 +66,7 @@ RSpec.configure do |config|
             properties: {
               phone_number: {type: :string},
             },
-            required: %w[phone_number]
+            required: %w[phone_number],
           },
 
           phone_confirmation: {
@@ -71,15 +75,33 @@ RSpec.configure do |config|
               phone_number: {type: :string},
               confirmation_pin: {type: :string},
             },
-            required: %w[phone_number confirmation_pin]
+            required: %w[phone_number confirmation_pin],
           },
 
 
           # Enums
 
-          profile_status: {
-            type: :string,
-            enum: %w(profile_status_name profile_status_address profile_status_billing profile_status_complete)
+          profile: {
+            type: :object,
+            properties: {
+              first_name: {type: :string},
+              last_name: {type: :string},
+              address: {'$ref': '#/components/schemas/profile_address'},
+            },
+            required: %w[first_name last_name address],
+        },
+
+          profile_address: {
+            type: :object,
+            properties: {
+              street_number: {type: :string},
+              street_name: {type: :string},
+              unit_number: {type: :string},
+              city: {type: :string},
+              province: {type: :string},
+              postal_code: {type: :string},
+            },
+            required: %w[street_number, street_name, unit_number, city, province, postal_code],
           }
         }
       }

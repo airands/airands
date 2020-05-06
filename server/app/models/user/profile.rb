@@ -38,4 +38,19 @@ class User::Profile < ApplicationRecord
     self.address_postal_code
   end
 
+  def to_hash
+    {
+      first_name: first_name,
+      last_name: last_name,
+      address: {
+        street_number: street_number,
+        street_name: street_name,
+        unit_number: unit_number,
+        city: city,
+        province: province,
+        postal_code: postal_code,
+      }
+    }
+  end
+
 end

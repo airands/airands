@@ -9,12 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ProfileStatus } from './profileStatus';
+import { Profile } from './profile';
 
 
 export interface UserDto { 
     id: string;
     phone_number: string;
-    profile_status: ProfileStatus;
+    profile: Profile;
+    complete_profile: boolean;
+    complete_name: boolean;
+    complete_address: boolean;
+    complete_billing?: boolean;
 }
 

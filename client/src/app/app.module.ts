@@ -10,11 +10,13 @@ import {HttpClientModule} from "@angular/common/http";
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {AuthGuard} from "./services/auth/auth.guard";
-import {NoAuthGuard} from "./services/auth/no-auth.guard";
+import {AuthGuard} from "./guards/auth/auth.guard";
+import {NoAuthGuard} from "./guards/auth/no-auth.guard";
 import {AuthenticationService} from "./services/auth/authentication.service";
 import {IonicStorageModule} from "@ionic/storage";
 import {ApiModule, Configuration, ConfigurationParameters} from "../open_api";
+import {AllGuard} from "./guards/all.guard";
+import {ProfileService} from "./services/user/profile.service";
 
 export function apiConfigFactory(): Configuration {
     const params: ConfigurationParameters = {
@@ -39,7 +41,9 @@ export function apiConfigFactory(): Configuration {
         SplashScreen,
         AuthGuard,
         NoAuthGuard,
+        AllGuard,
         AuthenticationService,
+        ProfileService,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     bootstrap: [AppComponent]

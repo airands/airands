@@ -1,10 +1,5 @@
 class User < ApplicationRecord
 
-  PROFILE_STATUS_NAME = 'profile_status_name'
-  PROFILE_STATUS_ADDRESS = 'profile_status_address'
-  PROFILE_STATUS_BILLING = 'profile_status_billing'
-  PROFILE_STATUS_COMPLETE = 'profile_status_complete'
-
   has_one :profile
 
   before_create :create_profile
@@ -19,16 +14,6 @@ class User < ApplicationRecord
     end
 
     false
-  end
-
-  def profile_status
-    if !profile.name_complete?
-      PROFILE_STATUS_NAME
-    elsif !profile.address_complete?
-      PROFILE_STATUS_ADDRESS
-    else
-      PROFILE_STATUS_COMPLETE
-    end
   end
 
   def complete_profile?
@@ -52,7 +37,11 @@ class User < ApplicationRecord
     {
         id: id,
         phone_number: phone_number,
-        profile_status: profile_status,
+        profile: profile.to_hash,
+        complete_profile: complete_profile?,
+        complete_name: profile.name_complete?,
+        complete_address: profile.address_complete?,
+        complete_billing: false, # TODO: User billing
     }
   end
 

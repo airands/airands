@@ -11,7 +11,12 @@
  */
 
 
-export interface ErrorMessage { 
-    message?: string;
+export interface ProfileAddress { 
+    street_number?: string;
+    street_name?: string;
+    unit_number?: string;
+    city?: string;
+    province?: string;
+    postal_code: string;
 }
 

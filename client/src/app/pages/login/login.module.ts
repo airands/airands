@@ -18,7 +18,12 @@ import {ConfirmationPromptComponent} from "./components/confirmation-prompt/conf
         IonicModule,
         LoginPageRoutingModule,
     ],
-    declarations: [LoginPage, SplashComponent, PhonePromptComponent, ConfirmationPromptComponent],
+    declarations: [
+        LoginPage,
+        SplashComponent,
+        PhonePromptComponent,
+        ConfirmationPromptComponent,
+    ],
 })
 export class LoginPageModule {
 }

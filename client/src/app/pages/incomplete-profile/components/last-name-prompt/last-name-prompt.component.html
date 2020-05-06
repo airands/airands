@@ -1,0 +1,33 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="transparent">
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" [scrollY]="false">
+
+  <div class="ion-padding onboarding-container">
+
+    <div class="onboarding-text">
+      <ion-text>
+        <h2>And your last name</h2>
+      </ion-text>
+    </div>
+
+    <ion-item class="ion-no-padding offset-right" color="transparent">
+      <ion-input
+          #ionInput
+          maxlength="32"
+          autocapitalize="on"
+          type="text"
+          placeholder="Last Name"
+          [(ngModel)]="lastName"
+      ></ion-input>
+    </ion-item>
+    <ion-button (click)="goNext()" color="secondary" expand="block">Next</ion-button>
+  </div>
+</ion-content>

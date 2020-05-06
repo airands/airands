@@ -24,7 +24,6 @@ class Api::V1::SessionsController < ApplicationController
 
   # GET /api/v1/sessions
   def show
-    Rails.logger.info(current_user)
     render json: current_user&.to_hash
   end
 

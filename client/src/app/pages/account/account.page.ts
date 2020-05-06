@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../../services/auth/authentication.service";
-import {CachedUserInfo} from "../../interfaces/auth";
+import {User} from "../../models/user/user.model";
 
 @Component({
     selector: 'app-account',
@@ -9,16 +9,10 @@ import {CachedUserInfo} from "../../interfaces/auth";
 })
 export class AccountPage implements OnInit {
 
-    user: CachedUserInfo = {
-        id: null,
-        phone_number: null,
-        profile_status: null,
-        cacheExpiry: null,
-    };
+    user: User;
 
     constructor(private authenticationService: AuthenticationService) {
-        this.authenticationService.getUserInfo()
-            .then((userInfo) => this.user = userInfo);
+        this.user = this.authenticationService.authUser.value;
     }
 
     ngOnInit() {

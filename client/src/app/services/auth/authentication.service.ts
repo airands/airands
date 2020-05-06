@@ -3,16 +3,14 @@ import {Storage} from "@ionic/storage";
 import {NavController, Platform} from "@ionic/angular";
 import {BehaviorSubject} from "rxjs";
 import {PhoneConfirmation, SessionService, UserDto} from "../../../open_api";
-import {CachedUserInfo} from "../../interfaces/auth";
+import {User} from "../../models/user/user.model";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthenticationService {
 
-    USER_INFO_KEY = 'USER_INFO';
-
-    authState = new BehaviorSubject(false);
+    authUser: BehaviorSubject<User> = new BehaviorSubject(null);
 
     constructor(
         private navController: NavController,
@@ -21,48 +19,36 @@ export class AuthenticationService {
         private sessionService: SessionService,
     ) {
         this.platform.ready().then(() => {
-            this.ifLoggedIn();
+            this.verifyLogin();
         });
     }
 
-    static isValid(userInfo: CachedUserInfo) {
-        return userInfo && userInfo.cacheExpiry && userInfo.phone_number && userInfo.id;
+    isAuthenticated(): boolean {
+        return Boolean(this.authUser.value);
     }
 
-    isAuthenticated() {
-        return this.authState.value;
-    }
-
-    ifLoggedIn() {
-        this.getUserInfo().then((userInfo) => {
-            if (!AuthenticationService.isValid(userInfo)) {
-                this.logout();
-            } else {
-                if (Date.now() >= userInfo.cacheExpiry.valueOf()) {
-                    this.verifyLogin();
-                } else {
-                    this.authState.next(true);
+    verifyLogin(): Promise<boolean> {
+        return new Promise((resolve, reject) => {
+            this.sessionService.getCurrentSession().subscribe(
+                (userDto) => {
+                    this.setUser(userDto);
+                    resolve(true);
+                },
+                (error) => {
+                    resolve(false);
+                    this.logout();
                 }
-            }
+            );
         })
-    }
-
-    verifyLogin() {
-        this.sessionService.getCurrentSession().subscribe(
-            (userDto) => this.setUserInfo(userDto).then(() => this.authState.next(true)),
-            (error) => this.logout(),
-        );
     }
 
     async login(phoneConfirmation: PhoneConfirmation): Promise<UserDto> {
         return new Promise((resolve, reject) => {
             this.sessionService.authenticate(phoneConfirmation).subscribe(
                 (userDto) => {
-                    this.setUserInfo(userDto).then(() => {
-                        this.navController.navigateForward(['tabs'])
-                        this.authState.next(true);
-                        resolve(userDto);
-                    });
+                    this.setUser(userDto);
+                    this.navController.navigateForward(['tabs'])
+                    resolve(userDto);
                 },
                 (error) => reject(error),
             );
@@ -70,26 +56,16 @@ export class AuthenticationService {
     }
 
     logout() {
-        this.setUserInfo(null).then(() => {
-            this.authState.next(false);
-            this.navController.navigateBack(['login']);
-        });
+        this.setUser(null);
+        this.navController.navigateBack(['login']);
     }
 
-    async getUserInfo(): Promise<CachedUserInfo | undefined> {
-        return await this.storage.get(this.USER_INFO_KEY);
-    }
-
-    private async setUserInfo(userDto: UserDto): Promise<void> {
+    setUser(userDto: UserDto): void {
         if (!userDto) {
-            return await this.storage.remove(this.USER_INFO_KEY);
+            this.authUser.next(null);
+        } else {
+            this.authUser.next(new User(userDto));
         }
-
-        const cachedUserInfo: CachedUserInfo = {
-            ...userDto,
-            cacheExpiry: new Date(Date.now() + (600 * 1000)),
-        };
-
-        return await this.storage.set(this.USER_INFO_KEY, cachedUserInfo);
     }
+
 }

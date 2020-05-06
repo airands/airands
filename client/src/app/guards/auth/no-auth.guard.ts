@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
-import {AuthenticationService} from "./authentication.service";
+import {AuthenticationService} from "../../services/auth/authentication.service";
 import {NavController} from "@ionic/angular";
 
 @Injectable({

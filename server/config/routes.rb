@@ -8,11 +8,14 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
 
-      resources :users
-
       get '/sessions', to: 'sessions#show'
       post '/sessions', to: 'sessions#create'
       delete '/sessions', to: 'sessions#destroy'
+
+      resources :users
+
+      put '/profiles', to: 'profiles#update'
+
     end
   end
 
