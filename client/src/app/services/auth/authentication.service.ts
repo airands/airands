@@ -18,9 +18,6 @@ export class AuthenticationService {
         private platform: Platform,
         private sessionService: SessionService,
     ) {
-        this.platform.ready().then(() => {
-            this.verifyLogin();
-        });
     }
 
     isAuthenticated(): boolean {
@@ -36,7 +33,7 @@ export class AuthenticationService {
                 },
                 (error) => {
                     resolve(false);
-                    this.cleanUserGoToLogin();
+                    this.setUser(null);
                 }
             );
         })
@@ -56,12 +53,8 @@ export class AuthenticationService {
 
     logout() {
         this.sessionService.logout().toPromise().finally(() => {
-            this.cleanUserGoToLogin();
+            this.setUser(null);
         });
-    }
-
-    cleanUserGoToLogin() {
-        this.setUser(null);
     }
 
     setUser(userDto: UserDto): void {

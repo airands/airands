@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {NavController} from "@ionic/angular";
 
 @Component({
-  selector: 'app-splash',
-  templateUrl: './splash.component.html',
-  styleUrls: ['./splash.component.scss'],
+    selector: 'app-splash',
+    templateUrl: './splash.component.html',
+    styleUrls: ['./splash.component.scss'],
 })
 export class SplashComponent implements OnInit {
 
-  constructor(private navCtrl: NavController) { }
+    constructor(private navCtrl: NavController) {
+    }
 
-  ngOnInit() {}
+    ngOnInit() {
+    }
 
-  public goNext() {
-    this.navCtrl.navigateForward('/login/phone')
-  }
+    public goNext() {
+        this.navCtrl.navigateForward('/login/phone')
+    }
 }

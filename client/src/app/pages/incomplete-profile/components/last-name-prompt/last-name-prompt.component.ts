@@ -37,7 +37,8 @@ export class LastNamePromptComponent implements AfterViewInit {
     goNext() {
         if (this.canSubmit) {
             this.profileService.setLastName(this.lastName);
-            this.profileService.updateProfile().then(() => {
+            this.profileService.updateProfileName().then(() => {
+                this.profileService.clean();
                 this.navController.navigateForward(['/incomplete/address']);
             });
         }

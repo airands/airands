@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       resources :users
 
       put '/profiles', to: 'profiles#update'
+      put '/profile/name', to: 'profiles#update_name'
+      put '/profile/address', to: 'profiles#update_address'
 
     end
   end

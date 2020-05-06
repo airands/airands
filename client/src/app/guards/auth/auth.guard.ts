@@ -1,20 +1,27 @@
 import {Injectable} from '@angular/core';
 import {CanActivate} from "@angular/router";
 import {AuthenticationService} from "../../services/auth/authentication.service";
+import {NavController} from "@ionic/angular";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
 
-    constructor(public authenticationService: AuthenticationService) {
+    constructor(
+        private authenticationService: AuthenticationService,
+        private navController: NavController,
+    ) {
     }
 
-    canActivate(): boolean | Promise<boolean> {
+    async canActivate(route, state): Promise<boolean> {
         if (this.authenticationService.isAuthenticated()) {
-            return true
+            return true;
+        } else if (await this.authenticationService.verifyLogin()) {
+            return true;
         } else {
-            return this.authenticationService.verifyLogin();
+            this.navController.navigateBack(['/login']);
+            return false;
         }
     }
 }

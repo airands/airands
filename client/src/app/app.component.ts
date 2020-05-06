@@ -29,15 +29,21 @@ export class AppComponent {
             this.splashScreen.hide();
 
             if (Capacitor.isPluginAvailable("Keyboard")) {
-                Plugins.Keyboard.setResizeMode({ mode: KeyboardResize.None });
+                Plugins.Keyboard.setResizeMode({mode: KeyboardResize.None});
             }
 
-            this.authenticationService.authUser.subscribe((state) => {
-                if (!state) {
-                    this.navController.navigateBack(['/login']);
-                } else if (state.hasCompleteProfile) {
+            this.authenticationService.verifyLogin().then((isAuthenticated) => {
+                if (isAuthenticated) {
                     this.navController.navigateForward(['/tabs']);
+                } else {
+                    this.navController.navigateBack(['/login']);
                 }
+
+                this.authenticationService.authUser.subscribe((state) => {
+                    if (!state) {
+                        this.navController.navigateBack(['/login']);
+                    }
+                });
             });
         });
     }

@@ -26,6 +26,58 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/profile"
+  "/profile/name":
+    put:
+      summary: Update user profile name
+      tags:
+      - Profile
+      operationId: updateProfileName
+      parameters: []
+      responses:
+        '200':
+          description: user profile updated
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/user_dto"
+        '422':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+              required:
+              - first_name
+              - last_name
+  "/profile/address":
+    put:
+      summary: Update user profile address
+      tags:
+      - Profile
+      operationId: updateProfileAddress
+      parameters: []
+      responses:
+        '200':
+          description: user profile updated
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/user_dto"
+        '422':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/profile_address"
   "/sessions":
     post:
       summary: Creates an authenticated session

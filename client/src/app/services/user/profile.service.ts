@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Profile, ProfileAddress, ProfileService as ProfileApi} from "../../../open_api";
+import {Profile, ProfileAddress, ProfileService as ProfileApi, UserDto} from "../../../open_api";
 import {AuthenticationService} from "../auth/authentication.service";
+import {Observable} from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -26,9 +27,18 @@ export class ProfileService {
     ) {
     }
 
-    public updateProfile() {
+    public async updateProfileName() {
+        const params = {first_name: this.firstName, last_name: this.lastName};
+        return await this.updateProfile(this.profileApi.updateProfileName(params));
+    }
+
+    public async updateProfileAddress() {
+        return await this.updateProfile(this.profileApi.updateProfileAddress(this.profile.address));
+    }
+
+    private updateProfile(observer: Observable<UserDto>) {
         return new Promise((resolve, reject) => {
-            this.profileApi.updateProfile(this.profile).subscribe(
+            observer.subscribe(
                 (userDto) => {
                     this.authenticationService.setUser(userDto);
                     resolve(userDto);
