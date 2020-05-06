@@ -1,12 +1,12 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="primary">
     <ion-title>Account</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 
-  <ion-header collapse="condense">
+  <ion-header collapse="condense" class="ion-no-border">
     <ion-toolbar>
       <ion-title size="large">Account</ion-title>
     </ion-toolbar>
@@ -18,11 +18,21 @@
         <ion-label color="secondary">Mobile Number</ion-label>
         <ion-label class="ion-text-end">{{ user.phoneNumber }}</ion-label>
       </ion-item>
+      <ion-item class="ion-no-padding" color="transparent" lines="none">
+        <ion-label color="secondary">Name</ion-label>
+        <ion-label class="ion-text-end">{{ user.fullName }}</ion-label>
+      </ion-item>
+      <ion-item class="ion-no-padding" color="transparent" lines="none">
+        <ion-label color="secondary">Address</ion-label>
+        <ion-label class="ion-text-end">{{ user.formattedAddress }}</ion-label>
+      </ion-item>
     </div>
     <ion-button (click)="logout()"
+                color="secondary"
                 expand="block"
                 size="large"
-    >Log Out</ion-button>
+    >Log Out
+    </ion-button>
   </div>
 
 </ion-content>

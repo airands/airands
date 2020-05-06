@@ -18,9 +18,6 @@ export class AuthenticationService {
         private platform: Platform,
         private sessionService: SessionService,
     ) {
-        this.platform.ready().then(() => {
-            this.verifyLogin();
-        });
     }
 
     isAuthenticated(): boolean {
@@ -36,7 +33,7 @@ export class AuthenticationService {
                 },
                 (error) => {
                     resolve(false);
-                    this.logout();
+                    this.setUser(null);
                 }
             );
         })
@@ -47,7 +44,6 @@ export class AuthenticationService {
             this.sessionService.authenticate(phoneConfirmation).subscribe(
                 (userDto) => {
                     this.setUser(userDto);
-                    this.navController.navigateForward(['tabs'])
                     resolve(userDto);
                 },
                 (error) => reject(error),
@@ -56,8 +52,9 @@ export class AuthenticationService {
     }
 
     logout() {
-        this.setUser(null);
-        this.navController.navigateBack(['login']);
+        this.sessionService.logout().toPromise().finally(() => {
+            this.setUser(null);
+        });
     }
 
     setUser(userDto: UserDto): void {

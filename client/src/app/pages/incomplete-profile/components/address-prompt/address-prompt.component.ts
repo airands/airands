@@ -6,6 +6,8 @@ import {ProfileService} from "../../../../services/user/profile.service";
 import {ProfileAddress} from "../../../../../open_api";
 import GeocoderAddressComponent = google.maps.GeocoderAddressComponent;
 import AutocompleteOptions = google.maps.places.AutocompleteOptions;
+import {AuthenticationService} from "../../../../services/auth/authentication.service";
+import {User} from "../../../../models/user/user.model";
 
 @Component({
     selector: 'app-address-prompt',
@@ -33,6 +35,7 @@ export class AddressPromptComponent implements AfterViewInit {
     constructor(
         private profileService: ProfileService,
         private navController: NavController,
+        private authenticationService: AuthenticationService,
     ) {
     }
 
@@ -44,9 +47,14 @@ export class AddressPromptComponent implements AfterViewInit {
         this.input.setFocus();
     }
 
+    logout() {
+        this.profileService.clean();
+        this.authenticationService.logout();
+    }
+
     goNext() {
         this.profileService.setAddress(this.profileAddress);
-        this.profileService.updateProfile()
+        this.profileService.updateProfileAddress()
             .then(() => {
                 this.navController.navigateForward(['/tabs']);
             });
@@ -75,6 +83,15 @@ export class AddressPromptComponent implements AfterViewInit {
         } else if (types.includes('postal_code')) {
             this.profileAddress.postal_code = long_name;
         }
+    }
+
+    get canSubmit(): boolean {
+        const {street_number, street_name, city, province, postal_code} = this.profileAddress;
+        return Boolean(street_number && street_name && city && province && postal_code);
+    }
+
+    get user(): User {
+        return this.authenticationService.authUser.value;
     }
 
 }

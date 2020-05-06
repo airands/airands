@@ -1,34 +1,35 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar color="transparent">
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon slot="icon-only" name="close"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true" [scrollY]="false">
+
+  <ion-header slot="fixed" class="ion-no-border">
+    <ion-toolbar color="transparent">
+      <ion-buttons slot="end">
+        <ion-button (click)="logout()">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
 
   <div class="ion-padding onboarding-container">
 
     <div class="onboarding-text">
       <ion-text>
-        <h2>Where would you like us to deliver to?</h2>
+        <h2>Where would you like us to <ion-text color="secondary">deliver</ion-text> to, {{ user.firstName }}?</h2>
       </ion-text>
     </div>
 
     <ion-item class="ion-no-padding offset-right" color="transparent">
-<!--      <input ngx-google-places-autocomplete-->
-<!--             (onAddressChange)="handleAddressChange($event)"-->
-<!--             [options]="options"-->
-<!--      />-->
       <ion-input #ionInput
                  maxlength="256"
                  type="text"
                  placeholder="Street Address"
       ></ion-input>
     </ion-item>
-    <ion-button (click)="goNext()" color="secondary" expand="block">Next</ion-button>
+    <ion-button (click)="goNext()"
+                [disabled]="!canSubmit"
+                size="large"
+                color="secondary"
+                expand="block"
+    >Next</ion-button>
   </div>
 </ion-content>

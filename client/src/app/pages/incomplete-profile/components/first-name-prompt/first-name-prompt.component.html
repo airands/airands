@@ -1,20 +1,22 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar color="transparent">
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon slot="icon-only" name="close"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true" [scrollY]="false">
+
+  <ion-header slot="fixed" class="ion-no-border">
+    <ion-toolbar color="transparent">
+      <ion-buttons slot="end">
+        <ion-button (click)="logout()">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
 
   <div class="ion-padding onboarding-container">
 
     <div class="onboarding-text">
       <ion-text>
-        <h2>We just need to get a bit more information so we know who to deliver to!</h2>
+        <h2>
+          <ion-text color="secondary">Great!</ion-text>
+          We just need to get a little more information so we know who to deliver to!</h2>
       </ion-text>
     </div>
 
@@ -28,6 +30,11 @@
           [(ngModel)]="firstName"
       ></ion-input>
     </ion-item>
-    <ion-button (click)="goNext()" color="secondary" expand="block">Next</ion-button>
+    <ion-button (click)="goNext()"
+                [disabled]="!canSubmit"
+                size="large"
+                color="secondary"
+                expand="block"
+    >Next</ion-button>
   </div>
 </ion-content>

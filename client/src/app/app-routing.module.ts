@@ -9,7 +9,7 @@ import {AllGuard} from "./guards/all.guard";
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'tabs',
+        redirectTo: 'login',
         pathMatch: 'full',
     },
     {

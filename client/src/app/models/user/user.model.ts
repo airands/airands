@@ -1,4 +1,4 @@
-import {Profile, UserDto} from "../../../open_api";
+import {Profile, ProfileAddress, UserDto} from "../../../open_api";
 
 export class User {
 
@@ -30,8 +30,29 @@ export class User {
         return this._phoneNumber;
     }
 
+    get formattedAddress(): string {
+        const {street_number, street_name, city, province, postal_code} = this.address;
+        return `${street_number} ${street_name}, ${city}, ${province} ${postal_code}`;
+    }
+
+    get fullName(): string {
+        return `${this.firstName} ${this.lastName}`;
+    }
+
+    get lastName(): string {
+        return this.profile.last_name;
+    }
+
+    get firstName(): string {
+        return this.profile.first_name;
+    }
+
     get profile(): Profile {
         return this._profile;
+    }
+
+    get address(): ProfileAddress {
+        return this.profile.address;
     }
 
     get hasCompleteProfile(): boolean {
