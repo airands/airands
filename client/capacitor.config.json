@@ -1,8 +1,14 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "myApp",
+  "appId": "ca.airands.airands",
+  "appName": "airands",
   "bundledWebRuntime": false,
-  "npmClient": "npm",
+  "npmClient": "yarn",
   "webDir": "www",
+	"server": {
+		"url": "https://delivery.levimurray.dev",
+		"allowNavigation": [
+			"delivery.levimurray.dev"
+		]
+	},
   "cordova": {}
 }
