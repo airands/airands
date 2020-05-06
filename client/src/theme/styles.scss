@@ -57,3 +57,16 @@ ion-button {
   }
 }
 
+ion-tabs {
+
+  --ion-background-color: white;
+  --ion-background-color-rgb: 255, 255, 255;
+
+  --ion-text-color: var(--ion-color-secondary);
+  --ion-text-color-rgb: var(--ion-color-secondary-rgb);
+
+  ion-tab-button {
+    --color-selected: var(--ion-color-secondary-tint);
+  }
+
+}

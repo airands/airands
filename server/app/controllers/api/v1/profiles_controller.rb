@@ -37,7 +37,10 @@ class Api::V1::ProfilesController < ApplicationController
   def update_name_params
     params.require(:first_name)
     params.require(:last_name)
-    params.permit(:first_name, :last_name)
+    {
+      first_name: params[:first_name],
+      last_name: params[:last_name],
+    }
   end
 
 end

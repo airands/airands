@@ -15,9 +15,9 @@
 
     <div class="onboarding-text">
       <ion-text>
-        <h2>An SMS has been sent to <b>
+        <h2>
+          Your confirmation code has been sent to
           <ion-text color="secondary">{{ phoneNumber }}</ion-text>
-        </b> with your confirmation pin and should be received shortly
         </h2>
       </ion-text>
       <ion-text color="danger" *ngIf="error">
@@ -25,24 +25,21 @@
       </ion-text>
     </div>
 
-    <ion-grid>
-      <ion-row>
-        <ion-col *ngFor="let item of [].constructor(numInputs); let i = index">
-          <ion-input (ionInput)="handleInput(i, $event)"
-                     (keydown)="handleKeydown(i, $event)"
-                     [(ngModel)]="confirmationPinValues[i]"
-                     maxlength="1"
-                     autocapitalize="characters"
-                     placeholder="0"
-          ></ion-input>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-item class="ion-no-padding pin-item" color="transparent">
+      <ion-input *ngFor="let item of [].constructor(numInputs); let i = index"
+                 (ionInput)="handleInput(i, $event)"
+                 (keydown)="handleKeydown(i, $event)"
+                 [(ngModel)]="confirmationPinValues[i]"
+                 maxlength="1"
+                 autocapitalize="characters"
+                 placeholder="0"></ion-input>
+    </ion-item>
     <ion-button (click)="submitConfirmation()"
                 [disabled]="!canSubmit"
                 size="large"
                 color="secondary"
                 expand="block"
-    >Next</ion-button>
+    >Next
+    </ion-button>
   </div>
 </ion-content>
