@@ -6,6 +6,7 @@ import {ProfileService} from "../../../../services/user/profile.service";
 import {ProfileAddress} from "../../../../../open_api";
 import GeocoderAddressComponent = google.maps.GeocoderAddressComponent;
 import AutocompleteOptions = google.maps.places.AutocompleteOptions;
+import {AuthenticationService} from "../../../../services/auth/authentication.service";
 
 @Component({
     selector: 'app-address-prompt',
@@ -33,6 +34,7 @@ export class AddressPromptComponent implements AfterViewInit {
     constructor(
         private profileService: ProfileService,
         private navController: NavController,
+        private authenticationService: AuthenticationService,
     ) {
     }
 
@@ -42,6 +44,11 @@ export class AddressPromptComponent implements AfterViewInit {
 
     ionViewDidEnter(): void {
         this.input.setFocus();
+    }
+
+    logout() {
+        this.profileService.clean();
+        this.authenticationService.logout();
     }
 
     goNext() {

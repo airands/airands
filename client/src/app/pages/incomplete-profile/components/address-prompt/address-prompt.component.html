@@ -1,14 +1,14 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar color="transparent">
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon slot="icon-only" name="close"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true" [scrollY]="false">
+
+  <ion-header slot="fixed" class="ion-no-border">
+    <ion-toolbar color="transparent">
+      <ion-buttons slot="end">
+        <ion-button (click)="logout()">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
 
   <div class="ion-padding onboarding-container">
 
@@ -19,10 +19,6 @@
     </div>
 
     <ion-item class="ion-no-padding offset-right" color="transparent">
-<!--      <input ngx-google-places-autocomplete-->
-<!--             (onAddressChange)="handleAddressChange($event)"-->
-<!--             [options]="options"-->
-<!--      />-->
       <ion-input #ionInput
                  maxlength="256"
                  type="text"

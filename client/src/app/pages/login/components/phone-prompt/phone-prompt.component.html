@@ -1,16 +1,30 @@
-<ion-content [scrollY]="false">
-  <div id="onboard-container" class="ion-padding">
-    <h4>Enter your mobile number</h4>
-    <ion-item class="ion-no-padding" color="light" lines="none">
+<ion-content [fullscreen]="true" [scrollY]="false">
+
+  <ion-header slot="fixed" class="ion-no-border">
+    <ion-toolbar color="transparent">
+      <ion-buttons slot="end">
+        <ion-button (click)="logout()">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="onboarding-container ion-padding">
+    <div class="onboarding-text">
+      <ion-text>
+        <h2>Your <ion-text color="secondary">mobile number</ion-text> is required for authentication & contact purposes</h2>
+      </ion-text>
+    </div>
+    <ion-item class="ion-no-padding offset-right" color="transparent" lines="none">
       <ion-note>+1</ion-note>
-      <ion-input
-          #ionInput
-          maxlength="10"
-          type="tel"
-          placeholder="(778) 986-9397"
-          [(ngModel)]="phoneNumber"
+      <ion-input #ionInput
+                 maxlength="10"
+                 type="tel"
+                 placeholder="(778) 986-9397"
+                 [(ngModel)]="phoneNumber"
       ></ion-input>
     </ion-item>
-    <ion-button (click)="goNext()" color="secondary" expand="block">Next</ion-button>
+    <ion-button (click)="goNext()" color="secondary" size="large" expand="block">Next</ion-button>
   </div>
 </ion-content>

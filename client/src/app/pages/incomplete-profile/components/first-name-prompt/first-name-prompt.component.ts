@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {IonInput, NavController} from "@ionic/angular";
 import {ProfileService} from "../../../../services/user/profile.service";
+import {AuthenticationService} from "../../../../services/auth/authentication.service";
 
 @Component({
     selector: 'app-name-prompt',
@@ -16,6 +17,7 @@ export class FirstNamePromptComponent implements AfterViewInit {
     constructor(
         private navController: NavController,
         private profileService: ProfileService,
+        private authenticationService: AuthenticationService,
     ) {
     }
 
@@ -32,6 +34,11 @@ export class FirstNamePromptComponent implements AfterViewInit {
             this.profileService.setFirstName(this.firstName);
             this.navController.navigateForward(['/incomplete/last-name']);
         }
+    }
+
+    logout() {
+        this.profileService.clean();
+        this.authenticationService.logout();
     }
 
     get canSubmit(): boolean {

@@ -26,8 +26,8 @@ export class ProfileService {
     ) {
     }
 
-    public async updateProfile() {
-        new Promise((resolve, reject) => {
+    public updateProfile() {
+        return new Promise((resolve, reject) => {
             this.profileApi.updateProfile(this.profile).subscribe(
                 (userDto) => {
                     this.authenticationService.setUser(userDto);
@@ -38,6 +38,19 @@ export class ProfileService {
                     reject(error);
                 }
             );
+        });
+    }
+
+    public clean() {
+        this.setFirstName(null);
+        this.setLastName(null);
+        this.setAddress({
+            street_number: null,
+            street_name: null,
+            unit_number: null,
+            city: null,
+            province: null,
+            postal_code: null,
         });
     }
 

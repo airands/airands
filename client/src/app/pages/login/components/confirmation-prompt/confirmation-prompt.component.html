@@ -1,24 +1,43 @@
-<ion-content [scrollY]="false">
-  <div id="onboard-container" class="ion-padding">
-    <h4>An SMS has been sent to <b><ion-text color="secondary">{{ phoneNumber }}</ion-text></b> with your confirmation pin and should be received shortly</h4>
-    <ion-text color="danger" *ngIf="error">
-      <small>{{ error.message }}</small>
-    </ion-text>
+<ion-content [fullscreen]="true" [scrollY]="false">
+
+  <ion-header slot="fixed" class="ion-no-border">
+    <ion-toolbar color="transparent">
+      <ion-buttons slot="end">
+        <ion-button (click)="logout()">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <div class="onboarding-container ion-padding">
+
+    <div class="onboarding-text">
+      <ion-text>
+        <h2>An SMS has been sent to <b>
+          <ion-text color="secondary">{{ phoneNumber }}</ion-text>
+        </b> with your confirmation pin and should be received shortly
+        </h2>
+      </ion-text>
+      <ion-text color="danger" *ngIf="error">
+        <small>{{ error.message }}</small>
+      </ion-text>
+    </div>
+
     <ion-grid>
       <ion-row>
         <ion-col *ngFor="let item of [].constructor(numInputs); let i = index">
-          <ion-item class="ion-no-padding" color="light" lines="none">
-            <ion-input (ionInput)="handleInput(i, $event)"
-                       (keydown)="handleKeydown(i, $event)"
-                       [(ngModel)]="confirmationPinValues[i]"
-                       maxlength="1"
-                       autocapitalize="characters"
-                       placeholder="0"
-            ></ion-input>
-          </ion-item>
+          <ion-input (ionInput)="handleInput(i, $event)"
+                     (keydown)="handleKeydown(i, $event)"
+                     [(ngModel)]="confirmationPinValues[i]"
+                     maxlength="1"
+                     autocapitalize="characters"
+                     placeholder="0"
+          ></ion-input>
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-button (click)="submitConfirmation()" color="secondary" expand="block">Next</ion-button>
+    <ion-button (click)="submitConfirmation()" size="large" color="secondary" expand="block">Next</ion-button>
   </div>
 </ion-content>

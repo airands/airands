@@ -4,7 +4,6 @@ import {Routes, RouterModule} from '@angular/router';
 import {IncompleteNameGuard} from "../../guards/profile/incomplete-name.guard";
 import {IncompleteAddressGuard} from "../../guards/profile/incomplete-address.guard";
 
-import {IncompleteProfilePage} from './incomplete-profile.page';
 import {FirstNamePromptComponent} from "./components/first-name-prompt/first-name-prompt.component";
 import {AddressPromptComponent} from "./components/address-prompt/address-prompt.component";
 import {LastNamePromptComponent} from "./components/last-name-prompt/last-name-prompt.component";
@@ -12,29 +11,24 @@ import {LastNamePromptComponent} from "./components/last-name-prompt/last-name-p
 const routes: Routes = [
     {
         path: '',
-        component: IncompleteProfilePage,
-        children: [
-            {
-                path: '',
-                redirectTo: 'first-name'
-            },
-            {
-                path: 'first-name',
-                component: FirstNamePromptComponent,
-                canActivate: [IncompleteNameGuard],
-            },
-            {
-                path: 'last-name',
-                component: LastNamePromptComponent,
-                canActivate: [IncompleteNameGuard],
-            },
-            {
-                path: 'address',
-                component: AddressPromptComponent,
-                canActivate: [IncompleteAddressGuard],
-            },
-        ]
-    }
+        redirectTo: 'first-name',
+        pathMatch: 'full',
+    },
+    {
+        path: 'first-name',
+        component: FirstNamePromptComponent,
+        canActivate: [IncompleteNameGuard],
+    },
+    {
+        path: 'last-name',
+        component: LastNamePromptComponent,
+        canActivate: [IncompleteNameGuard],
+    },
+    {
+        path: 'address',
+        component: AddressPromptComponent,
+        canActivate: [IncompleteAddressGuard],
+    },
 ];
 
 @NgModule({

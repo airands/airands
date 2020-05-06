@@ -2,7 +2,7 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import PhoneNumber from 'awesome-phonenumber';
 import {IonInput, NavController} from "@ionic/angular";
 import {RegisterDto, UserService} from "../../../../../open_api";
-import {Storage} from "@ionic/storage";
+import {AuthenticationService} from "../../../../services/auth/authentication.service";
 
 @Component({
     selector: 'app-phone-prompt',
@@ -22,7 +22,7 @@ export class PhonePromptComponent implements AfterViewInit {
     constructor(
         private navController: NavController,
         private userService: UserService,
-        private storage: Storage,
+        private authenticationService: AuthenticationService,
     ) {
     }
 
@@ -33,19 +33,24 @@ export class PhonePromptComponent implements AfterViewInit {
         this.ionInput.setFocus();
     }
 
-    public goNext() {
+    logout() {
+        this.navController.pop();
+    }
+
+    goNext() {
         const registerDto: RegisterDto = {phone_number: this.phoneNumber};
-        this.userService.sendConfirmation(registerDto).subscribe((response) => {
-            this.storage.set('PHONE_NUMBER', response.phone_number).then(() => {
-                this.navController.navigateForward(['/login/confirmation']);
-            });
+        this.userService.sendConfirmation(registerDto).subscribe(({phone_number}) => {
+            this.navController.navigateForward(
+                ['/login/confirmation'],
+                {
+                    queryParams: { phone_number },
+                },
+            );
         });
-        // this.authenticationService.login();
-        // this.navCtrl.navigateForward('/tabs/order');
     }
 
     // TODO: Format phone input
-    public handleInput(value: any) {
+    handleInput(value: any) {
         if (value.inputType === "deleteContentBackward") {
             this.ayt.removeChar();
         } else if (value.inputType === "insertText") {

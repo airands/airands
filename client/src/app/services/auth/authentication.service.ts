@@ -36,7 +36,7 @@ export class AuthenticationService {
                 },
                 (error) => {
                     resolve(false);
-                    this.logout();
+                    this.cleanUserGoToLogin();
                 }
             );
         })
@@ -47,7 +47,6 @@ export class AuthenticationService {
             this.sessionService.authenticate(phoneConfirmation).subscribe(
                 (userDto) => {
                     this.setUser(userDto);
-                    this.navController.navigateForward(['tabs'])
                     resolve(userDto);
                 },
                 (error) => reject(error),
@@ -56,8 +55,13 @@ export class AuthenticationService {
     }
 
     logout() {
+        this.sessionService.logout().toPromise().finally(() => {
+            this.cleanUserGoToLogin();
+        });
+    }
+
+    cleanUserGoToLogin() {
         this.setUser(null);
-        this.navController.navigateBack(['login']);
     }
 
     setUser(userDto: UserDto): void {

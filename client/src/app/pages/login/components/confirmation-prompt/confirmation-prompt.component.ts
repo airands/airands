@@ -1,16 +1,14 @@
 import {AfterViewInit, Component, QueryList, ViewChildren} from '@angular/core';
-import {IonInput} from "@ionic/angular";
+import {IonInput, NavController} from "@ionic/angular";
 import {Storage} from "@ionic/storage";
 import {ErrorDto, SessionService} from "../../../../../open_api";
 import {AuthenticationService} from "../../../../services/auth/authentication.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-confirmation-prompt',
     templateUrl: './confirmation-prompt.component.html',
-    styleUrls: [
-        './confirmation-prompt.component.scss',
-        '../../login.page.scss',
-    ],
+    styleUrls: ['./confirmation-prompt.component.scss'],
 })
 export class ConfirmationPromptComponent implements AfterViewInit {
 
@@ -25,10 +23,11 @@ export class ConfirmationPromptComponent implements AfterViewInit {
     constructor(
         private sessionService: SessionService,
         private authenticationService: AuthenticationService,
-        private storage: Storage,
+        private navController: NavController,
+        private route: ActivatedRoute,
     ) {
-        this.storage.get('PHONE_NUMBER').then((value) => {
-            this.phoneNumber = value;
+        this.route.queryParams.subscribe((params) => {
+            this.phoneNumber = params.phone_number;
         });
     }
 
@@ -37,14 +36,30 @@ export class ConfirmationPromptComponent implements AfterViewInit {
     }
 
     ionViewDidEnter(): void {
-        this.confirmationInputs.first.setFocus();
+        if (!this.phoneNumber) {
+            this.navController.pop();
+        } else {
+            this.confirmationInputs.first.setFocus();
+        }
+    }
+
+    logout() {
+        this.navController.navigateBack(['/login']);
     }
 
     submitConfirmation() {
         this.authenticationService.login({
             phone_number: this.phoneNumber,
             confirmation_pin: this.confirmationPin,
-        }).catch((error) => this.error = error.error);
+        })
+            .then(() => {
+                if (this.authenticationService.authUser.value.hasCompleteProfile) {
+                    this.navController.navigateForward(['/tabs']);
+                } else {
+                    this.navController.navigateForward(['/incomplete']);
+                }
+            })
+            .catch((error) => this.error = error.error);
     }
 
     handleInput(index: number, event: CustomEvent) {
