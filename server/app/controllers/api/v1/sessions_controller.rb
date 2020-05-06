@@ -12,7 +12,7 @@ class Api::V1::SessionsController < ApplicationController
       user = User.handle_login(phone_number, confirmation_pin)
 
       if user
-        cookies.signed[:jwt] = {value: user.generate_token, httponly: true}
+        cookies.signed[:jwt] = {value: user.generate_token, httponly: true, expires: Time.now + 1.month}
         render json: user.to_hash
       else
         render json: {message: "Unauthorized: Incorrect pin for #{phone_number}"}, status: :unauthorized

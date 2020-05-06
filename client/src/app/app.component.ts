@@ -13,8 +13,6 @@ import {Capacitor, KeyboardResize, Plugins} from "@capacitor/core";
 })
 export class AppComponent {
 
-    isRouting = false;
-
     constructor(
         private navController: NavController,
         private platform: Platform,
@@ -37,6 +35,8 @@ export class AppComponent {
             this.authenticationService.authUser.subscribe((state) => {
                 if (!state) {
                     this.navController.navigateBack(['/login']);
+                } else if (state.hasCompleteProfile) {
+                    this.navController.navigateForward(['/tabs']);
                 }
             });
         });
