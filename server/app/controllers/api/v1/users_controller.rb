@@ -11,9 +11,10 @@ class Api::V1::UsersController < ApplicationController
     if @user.save
       @user.generate_confirmation_pin
 
-      # TODO: Send SMS confirmation (twilio?)
       msg = "Airand confirmation code: #{@user.confirmation_pin}"
       Rails.logger.info("Sending SMS (+1#{@user.phone_number}): '#{msg}'")
+
+      Airands::Comm::SMS.send_confirmation_code(@user.phone_number, @user.confirmation_pin)
 
       render json: {phone_number: @user.phone_number}, status: :created
     else
