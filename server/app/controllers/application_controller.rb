@@ -3,11 +3,10 @@ class ApplicationController < ActionController::API
 
   def authenticate_cookie
     user = nil
-    token = cookies.signed[:jwt]
-    decoded_token = CoreModules::JsonWebToken.decode(token)
-    if decoded_token
-      user = User.find_by(id: decoded_token['user_id'])
-    end
+
+    user_id = cookies.signed[:user_id]
+
+    user = User.find_by(id: user_id)
 
     if user.nil?
       render json: {message: 'You are not logged in'}, status: :unauthorized
@@ -18,13 +17,8 @@ class ApplicationController < ActionController::API
 
   # @return [User]
   def current_user
-    user = nil
-    token = cookies.signed[:jwt]
-    decoded_token = CoreModules::JsonWebToken.decode(token)
-    if decoded_token
-      user = User.find_by(id: decoded_token["user_id"])
-    end
-
-    user
+    user_id = cookies.signed[:user_id]
+    User.find_by(id: user_id)
   end
+
 end

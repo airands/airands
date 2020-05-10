@@ -8,6 +8,7 @@ import {OrderPageRoutingModule} from './order-routing.module';
 
 import {OrderPage} from './order.page';
 import {ItemFieldComponent} from "../../components/item-field/item-field.component";
+import {OrderItemComponent} from "../../components/order-item/order-item.component";
 
 @NgModule({
     imports: [
@@ -16,7 +17,7 @@ import {ItemFieldComponent} from "../../components/item-field/item-field.compone
         IonicModule,
         OrderPageRoutingModule
     ],
-    declarations: [OrderPage, ItemFieldComponent]
+    declarations: [OrderPage, ItemFieldComponent, OrderItemComponent]
 })
 export class OrderPageModule {
 }

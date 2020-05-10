@@ -12,7 +12,7 @@ class Api::V1::SessionsController < ApplicationController
       user = User.handle_login(phone_number, confirmation_pin)
 
       if user
-        cookies.signed[:jwt] = {value: user.generate_token, httponly: true, expires: Time.now + 1.month}
+        cookies.signed[:user_id] = {value: user.id, httponly: true, expires: Time.now + 1.month}
         render json: user.to_hash
       else
         render json: {message: "Unauthorized: Incorrect pin for #{phone_number}"}, status: :unauthorized
@@ -30,7 +30,7 @@ class Api::V1::SessionsController < ApplicationController
   # DELETE /api/v1/sessions
   def destroy
     if current_user.present?
-      cookies.delete(:jwt)
+      cookies.delete(:user_id)
       render json: {message: 'OK'}, status: :ok
     else
       render json: {message: 'session not found'}, status: :not_found
