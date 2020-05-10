@@ -1,12 +1,25 @@
-.item-name {
-  width: 75%;
-}
+.order-item {
 
-.quantity {
-  width: 25%;
-  margin-left: 16px;
+  margin-bottom: 16px;
 
-  ion-input {
-    text-align: center;
+  .item-name {
+    width: 75%;
+
+    ion-input {
+      --padding-start: 8px;
+    }
   }
+
+  .quantity {
+    width: 25%;
+    margin-left: 16px;
+    --inner-padding-end: 0;
+
+    ion-input {
+      text-align: center;
+      --padding-end: 0;
+    }
+  }
+
 }
+

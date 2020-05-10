@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {OrderItem} from "../../interfaces/order";
-import {IonButton, IonContent} from "@ionic/angular";
+import {IonButton, IonContent, IonInput} from "@ionic/angular";
 import {Capacitor, Plugins} from "@capacitor/core";
 
 @Component({
@@ -17,6 +17,7 @@ export class OrderPage implements AfterViewInit {
         {
             name: '',
             quantity: 1,
+            isChecked: false,
         }
     ];
 
@@ -27,12 +28,32 @@ export class OrderPage implements AfterViewInit {
     }
 
     addItem(): void {
-        this.items.push({ name: '', quantity: 1});
-        this.scrollToBottom();
+        if (this.canCreateItem) {
+            this.items.push({ name: '', quantity: 1, isChecked: false});
+            this.scrollToBottom();
+        }
+    }
+
+    deleteItems() {
+        this.items = this.items.filter((item) => !item.isChecked);
+        this.setEditMode(false);
     }
 
     setEditMode(value: boolean): void {
         this._isEditMode = value;
+    }
+
+    handleItemChecked(index: number, isChecked: boolean) {
+        this.items[index].isChecked = isChecked;
+    }
+
+    async handleItemCreated(index: number, ionInput: IonInput) {
+        if (index > 0) {
+            const input = await ionInput.getInputElement();
+            setTimeout(() => {
+                input.focus();
+            }, 100);
+        }
     }
 
     private scrollToBottom(): void {
@@ -52,7 +73,7 @@ export class OrderPage implements AfterViewInit {
 
         if (Capacitor.isPluginAvailable("Keyboard")) {
             Plugins.Keyboard.addListener('keyboardWillShow', () => {
-                contentEl.style.setProperty('--keyboard-offset', '400px');
+                contentEl.style.setProperty('--keyboard-offset', '500px');
             });
 
             Plugins.Keyboard.addListener('keyboardWillHide', () => {
@@ -87,6 +108,10 @@ export class OrderPage implements AfterViewInit {
 
     get canPlaceOrder(): boolean {
         return this.orderItems.length > 1 || Boolean(this.lastItem) && Boolean(this.lastItem.name);
+    }
+
+    get deleteCount(): number {
+        return this.items.filter((item) => item.isChecked).length;
     }
 
 }

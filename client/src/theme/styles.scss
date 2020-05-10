@@ -1,3 +1,7 @@
+.ion-text-bold {
+  font-weight: bold;
+}
+
 ion-button {
   transition: transform 0.15s ease;
   --background-activated: var(--background);
@@ -18,6 +22,7 @@ ion-button {
   right: 0;
   top: 50%;
   transform: translateY(-80%);
+  --ion-color-contrast: white;
 
   .onboarding-text {
     margin-bottom: 32px;
@@ -59,13 +64,25 @@ ion-button {
 
 ion-tabs {
 
-  --ion-background-color: white;
+  //--ion-background-color: #e8f7f1;
+  //--ion-background-color-rgb: 232, 247, 241;
+  --ion-background-color: #ffffff;
   --ion-background-color-rgb: 255, 255, 255;
 
-  --ion-text-color: var(--ion-color-secondary);
-  --ion-text-color-rgb: var(--ion-color-secondary-rgb);
+  --ion-text-color: #151515;
+  --ion-text-color-rgb: 21, 21, 21;
+
+  ion-header {
+    ion-title {
+    }
+  }
+
+  ion-tab-bar {
+    --border: none;
+  }
 
   ion-tab-button {
+    --color: var(--ion-color-primary-tint);
     --color-selected: var(--ion-color-secondary-tint);
   }
 

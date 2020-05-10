@@ -1,27 +1,18 @@
 <ion-header class="ion-no-border" [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-button (click)="minusItem()">
-        <ion-icon slot="icon-only" name="remove-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>{{ numItems }}</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="plusItem()">
-        <ion-icon slot="icon-only" name="add-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+  <ion-toolbar color="secondary">
+    <ion-title>New Order</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" #content>
+
   <ion-header collapse="condense" class="ion-no-border">
     <ion-toolbar>
-      <ion-title size="large">New Order</ion-title>
+      <ion-title color="primary" size="large">New Order</ion-title>
       <ion-buttons slot="end">
-        <ion-button *ngIf="!isEditMode" (click)="setEditMode(true)">Edit</ion-button>
-        <ion-button *ngIf="isEditMode" (click)="setEditMode(false)">Cancel</ion-button>
-        <ion-button *ngIf="isEditMode" (click)="setEditMode(false)" color="danger">Delete (0)</ion-button>
+        <ion-button color="secondary" *ngIf="!isEditMode" (click)="setEditMode(true)">Edit</ion-button>
+        <ion-button color="secondary" *ngIf="isEditMode" (click)="setEditMode(false)">Cancel</ion-button>
+        <ion-button *ngIf="isEditMode" (click)="deleteItems()" color="danger">Delete ({{ deleteCount }})</ion-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
@@ -30,23 +21,35 @@
 
     <div class="order-items">
       <ion-item class="ion-no-padding" color="transparent" lines="none">
-        <ion-label slot="start">Item Name</ion-label>
-        <ion-label slot="end">Quantity</ion-label>
+        <ion-label color="light" slot="start">Item Name</ion-label>
+        <ion-label color="light" slot="end">Quantity</ion-label>
       </ion-item>
 
-      <app-order-item *ngFor="let item of items; index as i"
-                      [item]="item"
-      ></app-order-item>
+      <ion-list color="transparent">
+        <app-order-item *ngFor="let item of items; index as i"
+                        [item]="item"
+                        [isEditMode]="isEditMode"
+                        (checked)="handleItemChecked(i, $event)"
+                        (created)="handleItemCreated(i, $event)"
+                        (enter)="addItem()"
+        ></app-order-item>
+      </ion-list>
 
-      <ion-item color="transparent" lines="none">
-
+      <ion-item (click)="addItem()"
+                [disabled]="!canCreateItem"
+                button
+                class="ion-no-padding"
+                color="transparent"
+                lines="none"
+      >
+        <ion-icon slot="start" color="primary" name="add-outline"></ion-icon>
+        <ion-label color="primary">Add Item</ion-label>
       </ion-item>
     </div>
 
     <ion-button #submitBtn
                 [disabled]="!canPlaceOrder"
                 size="large"
-                color="secondary"
                 expand="block"
     >Place Order</ion-button>
 
