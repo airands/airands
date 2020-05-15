@@ -984,10 +984,24 @@
   dependencies:
     tslib "^1.9.0"
 
+"@capacitor/core@latest":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-2.1.0.tgz#11178b082c9f00bcff7c7f13f5cb68d07a85aad6"
+  integrity sha512-KIDj067PGaNSIODqzDp99vPs7CVpx+SRVrfgcQ9MNvpTUFsnDx/taRixbucizj8lLH2mhK12dH/4TjU7eqXQ4A==
+  dependencies:
+    tslib "^1.9.0"
+
 "@capacitor/ios@^2.0.1":
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-2.0.2.tgz#3736af5a444804686fc1bd98aaea59f33287c6ff"
   integrity sha512-z4erWGR0+ivZDDPXyM+qCTpcP7ewuIWEgBtyTn1xiV/favPsbnOdeUbWlKE+inZxvT7aAAT+rDH3kMbq1e0WSA==
+
+"@codetrix-studio/capacitor-google-auth@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@codetrix-studio/capacitor-google-auth/-/capacitor-google-auth-2.1.1.tgz#d8709e4547ea3b688f0ae45dc993ac57d508f4bb"
+  integrity sha512-lQfo/X/MzhlmFlvjSRvMsAS9WRUi6Oucs1Zu1OomM4WQCIEOqWzdFqGbznzjKnIfGN1pZeJ2bqmuGydjue3eSA==
+  dependencies:
+    "@capacitor/core" latest
 
 "@ionic-native/core@^5.0.7":
   version "5.24.0"
