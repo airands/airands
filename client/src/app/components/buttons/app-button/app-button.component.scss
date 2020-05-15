@@ -9,11 +9,6 @@ ion-button {
   text-transform: uppercase;
   margin-bottom: 8px;
 
-  ion-label {
-    position: relative;
-    top: 3px;
-  }
-
   @include ion-border-button(
           var(--ion-color-app-gray),
           var(--ion-color-app-gray),
