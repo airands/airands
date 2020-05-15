@@ -1,19 +1,7 @@
+@import "mixins";
+
 .ion-text-bold {
   font-weight: bold;
-}
-
-ion-button {
-  transition: transform 0.15s ease;
-  --background-activated: var(--background);
-  --background-hover: var(--background);
-
-  ion-icon {
-    color: white;
-  }
-
-  &:active {
-    transform: scale(1.09);
-  }
 }
 
 .onboarding-container {

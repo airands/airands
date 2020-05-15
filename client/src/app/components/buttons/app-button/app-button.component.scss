@@ -1,0 +1,32 @@
+@import "src/theme/mixins.scss";
+
+ion-button {
+  --background-activated: unset;
+  --background-focused: unset;
+  --background-hover: unset;
+
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+
+  ion-label {
+    position: relative;
+    top: 3px;
+  }
+
+  @include ion-border-button(
+          var(--ion-color-app-gray),
+          var(--ion-color-app-gray),
+          transparent,
+          var(--ion-color-dark),
+  );
+
+  &.primary {
+    @include solid-fill-button(
+            var(--ion-color-primary),
+            var(--ion-color-primary-shade),
+            var(--ion-color-primary),
+            white,
+    );
+  }
+}

@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {NavController} from "@ionic/angular";
+import {AuthService, FacebookLoginProvider, GoogleLoginProvider} from "angularx-social-login";
 
 @Component({
     selector: 'app-splash',
@@ -8,10 +9,28 @@ import {NavController} from "@ionic/angular";
 })
 export class SplashComponent implements OnInit {
 
-    constructor(private navCtrl: NavController) {
+    constructor(
+        private navCtrl: NavController,
+        private authService: AuthService,
+    ) {
     }
 
     ngOnInit() {
+        this.authService.authState.subscribe((user) => {
+            console.log(user);
+        })
+    }
+
+    signInGoogle() {
+        this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    }
+
+    signInFb() {
+        this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    }
+
+    signOut() {
+        this.authService.signOut();
     }
 
     public goNext() {

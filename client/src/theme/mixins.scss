@@ -1,0 +1,56 @@
+/* Box Shadow Offset */
+@mixin ion-solid-box-shadow($color, $offset: 3px) {
+  --box-shadow: 0px #{$offset} 0px 0px #{$color};
+}
+@mixin app-solid-box-shadow($color, $offset: 3px) {
+  @include ion-solid-box-shadow($color, $offset);
+  box-shadow: var(--box-shadow);
+}
+
+@mixin ion-border($border-color) {
+  --border-width: 2px;
+  --border-color: #{$border-color};
+  --border-style: solid;
+}
+
+@mixin ion-border-rad($border-color) {
+  @include ion-border($border-color);
+  --border-radius: 14px;
+}
+
+@mixin ion-border-rad-shadow {
+  @include ion-border-rad(var(--ion-color-app-gray));
+  @include ion-solid-box-shadow(var(--ion-color-app-gray));
+}
+
+@mixin ion-border-button($border-color, $shadow-color, $bg-color, $text-color) {
+  @include ion-border-rad($border-color);
+  @include ion-solid-box-shadow($shadow-color);
+
+  --background: #{$bg-color};
+  --color: #{$text-color};
+
+  position: relative;
+
+  &:active {
+    --box-shadow: none;
+    top: 3px;
+  }
+}
+
+@mixin solid-fill-button($border-color, $shadow-color, $bg-color, $text-color) {
+  @include ion-border-button($border-color, $shadow-color, $bg-color, $text-color);
+  --border-color: #{$border-color} #{$border-color} #{$shadow-color} #{$border-color};
+
+  &:active {
+    top: 3px;
+    --box-shadow: none;
+    --border-color: #{$border-color};
+  }
+}
+
+@mixin app-border {
+  border-width: var(--border-width);
+  border-color: var(--border-color);
+  border-style: var(--border-style);
+}
