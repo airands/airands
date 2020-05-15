@@ -2,10 +2,7 @@ class ApplicationController < ActionController::API
   include ActionController::Cookies
 
   def authenticate_cookie
-    user = nil
-
     user_id = cookies.signed[:user_id]
-
     user = User.find_by(id: user_id)
 
     if user.nil?
