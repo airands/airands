@@ -1,13 +1,12 @@
 <ion-content [scrollY]="false">
 
-  <div class="splash-content ion-padding-horizontal">
-    <img src="assets/name-logo-inverted.svg" alt="">
-    <app-button (click)="signInGoogle()" icon="logo-google" iconColor="#DB4437">
-      Sign In With Google
-    </app-button>
-    <app-button (click)="signInFb()" icon="logo-facebook" iconColor="var(--ion-color-primary-shade)">
-      Sign In With Facebook
-    </app-button>
+  <div slot="fixed" class="splash-content">
+    <h1>airands</h1>
+  </div>
+
+  <div slot="fixed" class="splash-onboard-buttons ion-padding-horizontal">
+    <app-button (click)="getStarted()" bottom="16" color="primary">Get Started</app-button>
+    <app-button>I Already Have An Account</app-button>
   </div>
 
 </ion-content>

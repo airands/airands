@@ -29,7 +29,6 @@
     "@ionic/angular": "^5.1.0",
     "@ionic/storage": "^2.2.0",
     "@types/googlemaps": "^3.39.4",
-    "angularx-social-login": "2.2.1",
     "awesome-phonenumber": "^2.31.0",
     "core-js": "^2.5.4",
     "rxjs": "~6.5.1",

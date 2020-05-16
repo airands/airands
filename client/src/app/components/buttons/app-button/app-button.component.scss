@@ -7,7 +7,7 @@ ion-button {
 
   font-weight: bold;
   text-transform: uppercase;
-  margin-bottom: 8px;
+  letter-spacing: var(--app-letter-spacing);
 
   @include ion-border-button(
           var(--ion-color-app-gray),

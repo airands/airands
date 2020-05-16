@@ -17,28 +17,12 @@ import {IonicStorageModule} from "@ionic/storage";
 import {ApiModule, Configuration, ConfigurationParameters} from "../open_api";
 import {AllGuard} from "./guards/all.guard";
 import {ProfileService} from "./services/user/profile.service";
-import {AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider, SocialLoginModule} from "angularx-social-login";
 
 export function apiConfigFactory(): Configuration {
     const params: ConfigurationParameters = {
         withCredentials: true,
     }
     return new Configuration(params);
-}
-
-const config = new AuthServiceConfig([
-    {
-        id: GoogleLoginProvider.PROVIDER_ID,
-        provider: new GoogleLoginProvider('424350226564-jahvnim5fss1b13i9qrm6tam67p63582.apps.googleusercontent.com'),
-    },
-    {
-        id: FacebookLoginProvider.PROVIDER_ID,
-        provider: new FacebookLoginProvider('1009434502787454'),
-    }
-]);
-
-export function provideConfig() {
-    return config;
 }
 
 @NgModule({
@@ -51,7 +35,6 @@ export function provideConfig() {
         IonicModule.forRoot(),
         AppRoutingModule,
         IonicStorageModule.forRoot(),
-        SocialLoginModule,
     ],
     providers: [
         StatusBar,
@@ -62,7 +45,6 @@ export function provideConfig() {
         AuthenticationService,
         ProfileService,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
-        {provide: AuthServiceConfig, useFactory: provideConfig},
     ],
     bootstrap: [AppComponent]
 })

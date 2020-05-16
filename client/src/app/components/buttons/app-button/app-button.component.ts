@@ -10,6 +10,7 @@ export class AppButtonComponent implements OnInit {
   @Input() color: "primary";
   @Input() icon: string;
   @Input() iconColor: string;
+  @Input() bottom: string;
 
   constructor() { }
 
@@ -22,6 +23,12 @@ export class AppButtonComponent implements OnInit {
   get iconStyle() {
     return {
       color: this.iconColor,
+    };
+  }
+
+  get buttonStyle() {
+    return {
+      marginBottom: `${this.bottom || '8'}px`,
     };
   }
 

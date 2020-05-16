@@ -1,5 +1,19 @@
 @import "mixins";
 
+* {
+  font-family: skolar-sans-latin, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: serenity, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: initial;
+}
+
 .ion-text-bold {
   font-weight: bold;
 }

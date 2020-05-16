@@ -49,8 +49,35 @@
   }
 }
 
-@mixin app-border {
+@mixin app-border-button($border-color, $shadow-color, $bg-color, $text-color) {
+  @include ion-border-button($border-color, $shadow-color, $bg-color, $text-color);
+  @include apply-border;
+
+  background: var(--background);
+  color: var(--color);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+}
+
+@mixin app-fill-button($border-color, $shadow-color, $bg-color, $text-color) {
+  @include app-border-button($border-color, $shadow-color, $bg-color, $text-color);
+  border-color: #{$border-color} #{$border-color} #{$shadow-color} #{$border-color};
+
+  &:active {
+    top: 3px;
+    box-shadow: none;
+    border-color: #{$border-color};
+  }
+}
+
+@mixin app-border($border-color: var(--ion-color-app-gray)) {
+  @include ion-border-rad($border-color);
+  @include apply-border;
+}
+
+@mixin apply-border {
   border-width: var(--border-width);
   border-color: var(--border-color);
   border-style: var(--border-style);
+  border-radius: var(--border-radius);
 }

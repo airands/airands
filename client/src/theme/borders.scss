@@ -1,0 +1,23 @@
+@import './mixins';
+
+.app-border {
+  @include app-border;
+}
+
+.app-border-button {
+  @include app-border-button(
+          var(--ion-color-app-gray),
+          var(--ion-color-app-gray),
+          transparent,
+          var(--ion-color-dark),
+  );
+}
+
+.app-fill-button {
+  @include app-fill-button(
+          var(--ion-color-primary),
+          var(--ion-color-primary-shade),
+          var(--ion-color-primary),
+          white,
+  );
+}

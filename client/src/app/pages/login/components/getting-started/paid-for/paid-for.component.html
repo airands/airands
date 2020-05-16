@@ -1,0 +1,14 @@
+<ion-content [scrollY]="false">
+
+  <app-workflow-header>The pick up is...</app-workflow-header>
+
+  <div class="ion-padding-horizontal">
+    <app-card-button (click)="goPaid()">
+      Already Paid For
+    </app-card-button>
+    <app-card-button (click)="goNotPaid()">
+      Not Paid For
+    </app-card-button>
+  </div>
+
+</ion-content>

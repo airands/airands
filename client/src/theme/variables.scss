@@ -3,6 +3,8 @@
 
 /** Ionic CSS Variables **/
 :root {
+  --app-letter-spacing: 0.075rem;
+
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -155,7 +157,7 @@
    */
 
   .ios body {
-    --ion-background-color: #152321;
+    --ion-background-color: #161e23;
     --ion-background-color-rgb: 0,0,0;
 
     --ion-text-color: #ffffff;
