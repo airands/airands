@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import AutocompleteOptions = google.maps.places.AutocompleteOptions;
 import {BasicInputComponent} from "../../../../../components/inputs/basic-input/basic-input.component";
+import {NavController} from "@ionic/angular";
 
 @Component({
     selector: 'app-order-location',
@@ -16,7 +17,7 @@ export class OrderLocationComponent implements OnInit, AfterViewInit {
         componentRestrictions: {country: 'CA'},
     };
 
-    constructor() {
+    constructor(private navController: NavController) {
     }
 
     ngOnInit() {
@@ -28,6 +29,10 @@ export class OrderLocationComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
         this.initializeAutocomplete();
+    }
+
+    goNext() {
+        this.navController.navigateForward(['/login/getting-started/order-description']);
     }
 
     private initializeAutocomplete() {

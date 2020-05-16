@@ -11,6 +11,7 @@ export class AppButtonComponent implements OnInit {
   @Input() icon: string;
   @Input() iconColor: string;
   @Input() bottom: string;
+  @Input() top: string;
 
   constructor() { }
 
@@ -27,8 +28,11 @@ export class AppButtonComponent implements OnInit {
   }
 
   get buttonStyle() {
+    const bottom = this.bottom || '8';
+    const top = this.top || '0';
     return {
-      marginBottom: `${this.bottom || '8'}px`,
+      marginBottom: `${bottom.replace('px', '')}px`,
+      marginTop: `${top.replace('px', '')}px`,
     };
   }
 

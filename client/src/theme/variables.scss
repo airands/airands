@@ -4,6 +4,9 @@
 /** Ionic CSS Variables **/
 :root {
   --app-letter-spacing: 0.075rem;
+  --app-input-background-color: #f4f4f4;
+  --app-input-background-color-shade: #e6e6e6;
+  --ion-color-app-gray: rgba(var(--ion-color-medium-rgb), 0.3);
 
   /** primary **/
   --ion-color-primary: #3880ff;
@@ -69,8 +72,6 @@
   --ion-color-medium-shade: #808289;
   --ion-color-medium-tint: #9d9fa6;
 
-  --ion-color-app-gray: rgba(var(--ion-color-medium-rgb), 0.3);
-
   /** light **/
   --ion-color-light: #f4f5f8;
   --ion-color-light-rgb: 244, 245, 248;
@@ -87,6 +88,9 @@
    */
 
   body {
+    --app-input-background-color: #393f43;
+    --app-input-background-color-shade: #33383c;
+
     --ion-color-primary: #428cff;
     --ion-color-primary-rgb: 66,140,255;
     --ion-color-primary-contrast: #ffffff;

@@ -20,6 +20,9 @@ import {CardButtonComponent} from "../../components/buttons/card-button/card-but
 import {UnsupportedComponent} from "./components/getting-started/unsupported/unsupported.component";
 import {BasicInputComponent} from "../../components/inputs/basic-input/basic-input.component";
 import {OrderLocationComponent} from "./components/getting-started/order-location/order-location.component";
+import {OrderDescriptionComponent} from "./components/getting-started/order-description/order-description.component";
+import {DropoffLocationComponent} from "./components/getting-started/dropoff-location/dropoff-location.component";
+import {OrderSummaryComponent} from "./components/getting-started/order-summary/order-summary.component";
 
 @NgModule({
     imports: [
@@ -40,6 +43,9 @@ import {OrderLocationComponent} from "./components/getting-started/order-locatio
         OrderTypeSelectionComponent,
         PaidForComponent,
         OrderLocationComponent,
+        OrderDescriptionComponent,
+        OrderSummaryComponent,
+        DropoffLocationComponent,
         UnsupportedComponent,
         CardButtonComponent,
         BasicInputComponent,

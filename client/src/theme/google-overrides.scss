@@ -1,0 +1,36 @@
+@import './mixins';
+
+.pac-container {
+  @include app-border;
+  border-radius: 8px;
+  margin-top: 16px;
+  margin-left: 2px;
+  letter-spacing: var(--app-letter-spacing);
+  color: var(--ion-text-color);
+  font-size: 1.15em;
+  background-color: var(--app-input-background-color);
+  box-shadow: none;
+
+  .pac-item {
+    padding: 8px;
+    border-top: 1px solid var(--ion-color-app-gray);
+
+    &:first-child {
+      border-top: none;
+    }
+
+    &:active, &:hover {
+      background-color: var(--app-input-background-color-shade);
+    }
+
+    .pac-item-query {
+      color: var(--ion-text-color, black);
+      font-size: 1.25em;
+    }
+  }
+
+  &.hdpi.pac-logo:after {
+    margin-right: 12px;
+    margin-bottom: 8px;
+  }
+}
