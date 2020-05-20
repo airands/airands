@@ -1,1 +1,7 @@
-<input #inputEl class="basic-input app-border" [placeholder]="placeholder" type="text">
+<input #inputEl
+       class="basic-input app-border"
+       [ngStyle]="inputStyles"
+       [placeholder]="placeholder"
+       [ngModel]="value"
+       type="text"
+>

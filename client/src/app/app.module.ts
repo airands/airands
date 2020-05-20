@@ -21,6 +21,7 @@ import {LoginService} from "./services/auth/login.service";
 import {FacebookService} from "./services/auth/facebook.service";
 import {GoogleService} from "./services/auth/google.service";
 import {AppleService} from "./services/auth/apple.service";
+import {SharedModule} from "./modules/shared/shared.module";
 
 export function apiConfigFactory(): Configuration {
     const params: ConfigurationParameters = {
@@ -39,6 +40,7 @@ export function apiConfigFactory(): Configuration {
         IonicModule.forRoot(),
         AppRoutingModule,
         IonicStorageModule.forRoot(),
+        SharedModule,
     ],
     providers: [
         StatusBar,

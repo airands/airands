@@ -66,26 +66,19 @@ h1, h2, h3, h4, h5, h6 {
 
 ion-tabs {
 
-  //--ion-background-color: #e8f7f1;
-  //--ion-background-color-rgb: 232, 247, 241;
-  --ion-background-color: #ffffff;
-  --ion-background-color-rgb: 255, 255, 255;
-
-  --ion-text-color: #151515;
-  --ion-text-color-rgb: 21, 21, 21;
-
-  ion-header {
-    ion-title {
-    }
-  }
-
   ion-tab-bar {
     --border: none;
   }
 
-  ion-tab-button {
-    --color: var(--ion-color-primary-tint);
-    --color-selected: var(--ion-color-secondary-tint);
+  ion-header {
+    ion-toolbar {
+      --background: var(--ion-background-color);
+      --border-style: none;
+
+      ion-title {
+        letter-spacing: var(--app-letter-spacing);
+      }
+    }
   }
 
 }

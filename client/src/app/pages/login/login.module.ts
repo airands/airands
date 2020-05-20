@@ -24,6 +24,7 @@ import {OrderDescriptionComponent} from "./components/getting-started/order-desc
 import {DropoffLocationComponent} from "./components/getting-started/dropoff-location/dropoff-location.component";
 import {OrderSummaryComponent} from "./components/getting-started/order-summary/order-summary.component";
 import {InputDisplayComponent} from "../../components/inputs/input-display/input-display.component";
+import {SharedModule} from "../../modules/shared/shared.module";
 
 @NgModule({
     imports: [
@@ -31,6 +32,7 @@ import {InputDisplayComponent} from "../../components/inputs/input-display/input
         FormsModule,
         IonicModule,
         LoginPageRoutingModule,
+        SharedModule,
     ],
     declarations: [
         LoginPage,
@@ -48,9 +50,6 @@ import {InputDisplayComponent} from "../../components/inputs/input-display/input
         OrderSummaryComponent,
         DropoffLocationComponent,
         UnsupportedComponent,
-        CardButtonComponent,
-        BasicInputComponent,
-        InputDisplayComponent,
     ],
 })
 export class LoginPageModule {

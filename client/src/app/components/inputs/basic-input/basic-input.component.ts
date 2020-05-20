@@ -7,7 +7,10 @@ import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 })
 export class BasicInputComponent implements OnInit {
 
-  @Input() placeholder: string;
+  @Input() placeholder: string = '';
+  @Input() top: string = '8';
+  @Input() bottom: string = '0';
+  @Input() value: string = '';
 
   @ViewChild('inputEl', {static: false}) inputEl: ElementRef<HTMLInputElement>;
 
@@ -17,6 +20,13 @@ export class BasicInputComponent implements OnInit {
 
   getInputElement(): HTMLInputElement {
     return this.inputEl.nativeElement;
+  }
+
+  get inputStyles(): Partial<CSSStyleDeclaration> {
+    return {
+      marginTop: this.top + 'px',
+      marginBottom: this.bottom + 'px',
+    }
   }
 
 }

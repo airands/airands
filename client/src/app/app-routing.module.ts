@@ -9,8 +9,14 @@ import {AllGuard} from "./guards/all.guard";
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'login',
+        redirectTo: 'home',
         pathMatch: 'full',
+    },
+    {
+        path: 'home',
+        loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
+        data: {guards: [AuthGuard, CompleteProfileGuard]},
+        canActivate: [AllGuard],
     },
     {
         path: 'login',

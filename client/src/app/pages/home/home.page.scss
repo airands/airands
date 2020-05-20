@@ -1,0 +1,21 @@
+ion-tab-bar {
+
+  ion-tab-button {
+
+    ion-icon {
+      position: absolute;
+      font-size: 32px;
+
+      &.left {
+        left: 32px;
+        font-size: 24px;
+      }
+
+      &.right {
+        right: 32px;
+      }
+    }
+
+  }
+
+}

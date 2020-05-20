@@ -19,6 +19,7 @@ export class CompleteProfileGuard implements CanActivate {
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+        return true;
         const user: User = this.authenticationService.authUser.value;
         if (user.hasCompleteProfile) {
             return true;
