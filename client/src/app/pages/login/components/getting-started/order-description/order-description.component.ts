@@ -13,6 +13,7 @@ export class OrderDescriptionComponent implements OnInit {
   ngOnInit() {}
 
   goNext() {
+    this.navController.navigateForward(['/login/getting-started/order-summary']);
   }
 
 }

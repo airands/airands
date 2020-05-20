@@ -24,4 +24,31 @@ ion-button {
             white,
     );
   }
+
+  &.facebook {
+    @include solid-fill-button(
+            #3B5998,
+            #274177,
+            #3B5998,
+            white,
+    );
+  }
+
+  &.google {
+    @include solid-fill-button(
+            #DB4437,
+            #AD271C,
+            #DB4437,
+            white,
+    );
+  }
+
+  &.apple {
+    @include solid-fill-button(
+            #242424,
+            black,
+            #242424,
+            white,
+    );
+  }
 }

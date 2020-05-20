@@ -5,8 +5,9 @@
   </div>
 
   <div slot="fixed" class="splash-onboard-buttons ion-padding-horizontal">
-    <app-button (click)="getStarted()" bottom="16" color="primary">Get Started</app-button>
-    <app-button>I Already Have An Account</app-button>
+    <app-button *ngIf="isIos" (click)="loginApple()" icon="logo-apple" bottom="8" color="apple">Continue With Apple</app-button>
+    <app-button (click)="loginGoogle()" icon="logo-google" bottom="8" color="google">Continue With Google</app-button>
+    <app-button (click)="loginFacebook()" icon="logo-facebook" bottom="8" color="facebook">Continue With Facebook</app-button>
   </div>
 
 </ion-content>

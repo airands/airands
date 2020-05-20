@@ -23,6 +23,7 @@ import {OrderLocationComponent} from "./components/getting-started/order-locatio
 import {OrderDescriptionComponent} from "./components/getting-started/order-description/order-description.component";
 import {DropoffLocationComponent} from "./components/getting-started/dropoff-location/dropoff-location.component";
 import {OrderSummaryComponent} from "./components/getting-started/order-summary/order-summary.component";
+import {InputDisplayComponent} from "../../components/inputs/input-display/input-display.component";
 
 @NgModule({
     imports: [
@@ -49,6 +50,7 @@ import {OrderSummaryComponent} from "./components/getting-started/order-summary/
         UnsupportedComponent,
         CardButtonComponent,
         BasicInputComponent,
+        InputDisplayComponent,
     ],
 })
 export class LoginPageModule {

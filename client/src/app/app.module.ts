@@ -17,6 +17,10 @@ import {IonicStorageModule} from "@ionic/storage";
 import {ApiModule, Configuration, ConfigurationParameters} from "../open_api";
 import {AllGuard} from "./guards/all.guard";
 import {ProfileService} from "./services/user/profile.service";
+import {LoginService} from "./services/auth/login.service";
+import {FacebookService} from "./services/auth/facebook.service";
+import {GoogleService} from "./services/auth/google.service";
+import {AppleService} from "./services/auth/apple.service";
 
 export function apiConfigFactory(): Configuration {
     const params: ConfigurationParameters = {
@@ -29,9 +33,9 @@ export function apiConfigFactory(): Configuration {
     declarations: [AppComponent],
     entryComponents: [],
     imports: [
-        HttpClientModule,
         ApiModule.forRoot(apiConfigFactory),
         BrowserModule,
+        HttpClientModule,
         IonicModule.forRoot(),
         AppRoutingModule,
         IonicStorageModule.forRoot(),
@@ -43,6 +47,10 @@ export function apiConfigFactory(): Configuration {
         NoAuthGuard,
         AllGuard,
         AuthenticationService,
+        LoginService,
+        FacebookService,
+        GoogleService,
+        AppleService,
         ProfileService,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     ],
