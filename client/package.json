@@ -31,6 +31,7 @@
     "@rdlabo/capacitor-facebook-login": "^2.0.3",
     "@types/googlemaps": "^3.39.4",
     "awesome-phonenumber": "^2.31.0",
+    "capacitor-apple-login": "https://github.com/rlfrahm/capacitor-apple-login",
     "core-js": "^2.5.4",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
