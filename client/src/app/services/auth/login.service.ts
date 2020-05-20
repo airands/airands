@@ -2,7 +2,6 @@ import {Injectable} from "@angular/core";
 import {FacebookService} from "./facebook.service";
 import {GoogleService} from "./google.service";
 import {AppleService} from "./apple.service";
-import {Plugins} from "@capacitor/core";
 
 enum SocialLoginType {
     Google,
@@ -21,16 +20,19 @@ export class LoginService {
     }
 
     async loginGoogle() {
-        await this.googleService.login();
+        const response = await this.googleService.login();
+        console.log(response);
     }
 
     async loginFacebook() {
         await this.facebookService.login();
-        await this.facebookService.getProfile();
+        const response = await this.facebookService.getProfile();
+        console.log(response);
     }
 
     async loginApple() {
-        await this.appleService.login();
+        const response = await this.appleService.login();
+        console.log(response.response);
     }
 
 }

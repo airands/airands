@@ -10,8 +10,8 @@ export class AppButtonComponent implements OnInit {
   @Input() color: 'primary' | 'facebook' | 'google' | 'apple';
   @Input() icon: string;
   @Input() iconColor: string;
-  @Input() bottom: string;
-  @Input() top: string;
+  @Input() bottom: string = '8';
+  @Input() top: string = '0';
 
   constructor() { }
 
@@ -28,8 +28,8 @@ export class AppButtonComponent implements OnInit {
   }
 
   get buttonStyle() {
-    const bottom = this.bottom || '8';
-    const top = this.top || '0';
+    const bottom = this.bottom;
+    const top = this.top;
     return {
       marginBottom: `${bottom.replace('px', '')}px`,
       marginTop: `${top.replace('px', '')}px`,
