@@ -1003,6 +1003,11 @@
   dependencies:
     "@capacitor/core" latest
 
+"@googlemaps/js-api-loader@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@googlemaps/js-api-loader/-/js-api-loader-1.0.1.tgz#eb88a1e18841cb95d50e959acd2d1ba8b0ae1c37"
+  integrity sha512-L4JvFkbGZ7AU2pcs43kBptu7C++FSysHPbHnBogjVlsJx3C6AtNMg51niBNNnBGulaTVEBQFMiZExhUoJ1GkPA==
+
 "@ionic-native/core@^5.0.7":
   version "5.24.0"
   resolved "https://registry.yarnpkg.com/@ionic-native/core/-/core-5.24.0.tgz#538e2623f3290982a9b1891a365d69ad83a9b481"

@@ -5,8 +5,7 @@ class Customer < ApplicationRecord
   has_one :location_drop_off, class_name: 'Location::DropOff'
 
   def update_trackable(request_ip)
-    update_attribute(:sign_in_count, sign_in_count + 1)
-    update_attributes(
+    update(
       {
         sign_in_count: sign_in_count + 1,
         current_sign_in_at: DateTime.now.to_s,

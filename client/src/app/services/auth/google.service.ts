@@ -25,4 +25,8 @@ export class GoogleService {
         return (await Plugins.GoogleAuth.signIn()) as GoogleLoginResponse;
     }
 
+    async logout(): Promise<void> {
+        return await Plugins.GoogleAuth.signOut();
+    }
+
 }

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MyOrdersPageRoutingModule } from './my-orders-routing.module';
 
 import { MyOrdersPage } from './my-orders.page';
+import {MapViewComponent} from "../../../../components/maps/map-view/map-view.component";
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { MyOrdersPage } from './my-orders.page';
   ],
   declarations: [
       MyOrdersPage,
+      MapViewComponent,
   ]
 })
 export class MyOrdersPageModule {}
