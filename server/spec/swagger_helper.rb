@@ -59,14 +59,29 @@ RSpec.configure do |config|
             required: %w[id phone_number complete_profile complete_name complete_address complete_billing, profile],
           },
 
-          # Request Payloads
-
-          register_dto: {
+          customer_dto: {
             type: :object,
             properties: {
-              phone_number: {type: :string},
+              email: {type: :string},
+              first_name: {type: :string},
+              last_name: {type: :string},
+              auth_provider: {type: :string},
+              auth_provider_uid: {type: :string},
+              avatar_url: {type: :string},
             },
-            required: %w[phone_number],
+            required: %w[email first_name last_name auth_provider, auth_provider_uid],
+          },
+
+          # Request Payloads
+
+          customer_registration: {
+            type: :object,
+            properties: {
+              user_data: {'$ref': '#/components/schemas/customer_dto'},
+              auth_provider_token: {type: :string},
+              app_platform: {'$ref': '#/components/schemas/app_platform'},
+            },
+            required: %w[user_data auth_provider_token app_platform],
           },
 
           phone_confirmation: {
@@ -78,9 +93,6 @@ RSpec.configure do |config|
             required: %w[phone_number confirmation_pin],
           },
 
-
-          # Enums
-
           profile: {
             type: :object,
             properties: {
@@ -89,7 +101,7 @@ RSpec.configure do |config|
               address: {'$ref': '#/components/schemas/profile_address'},
             },
             required: %w[first_name last_name address],
-        },
+          },
 
           profile_address: {
             type: :object,
@@ -102,7 +114,20 @@ RSpec.configure do |config|
               postal_code: {type: :string},
             },
             required: %w[street_number, street_name, unit_number, city, province, postal_code],
+          },
+
+          # Enums
+
+          social_platform: {
+            type: :string,
+            enum: %w[google facebook apple],
+          },
+
+          app_platform: {
+            type: :string,
+            enum: %w[android ios web],
           }
+
         }
       }
     }

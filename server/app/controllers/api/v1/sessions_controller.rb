@@ -30,7 +30,7 @@ class Api::V1::SessionsController < ApplicationController
   # DELETE /api/v1/sessions
   def destroy
     if current_user.present?
-      cookies.delete(:user_id)
+      cookies.delete(:customer_id)
       render json: {message: 'OK'}, status: :ok
     else
       render json: {message: 'session not found'}, status: :not_found

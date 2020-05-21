@@ -6,10 +6,13 @@
 
 <ion-content>
   <div class="ion-padding-horizontal">
-    <app-user-avatar></app-user-avatar>
+    <app-user-avatar [src]="customer?.avatarUrl"></app-user-avatar>
     <br>
-    <app-basic-input value="Levi Murray"></app-basic-input>
-    <app-basic-input value="levi@airands.ca"></app-basic-input>
+    <app-basic-input [value]="customer?.firstName"></app-basic-input>
+    <app-basic-input [value]="customer?.lastName"></app-basic-input>
+    <app-basic-input [value]="customer?.email"></app-basic-input>
     <app-basic-input value="211-562 Simcoe Street, Victoria, BC, V8V 1L8"></app-basic-input>
+    <br>
+    <app-button (click)="logout()">Sign Out</app-button>
   </div>
 </ion-content>

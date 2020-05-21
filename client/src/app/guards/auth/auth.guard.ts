@@ -15,7 +15,6 @@ export class AuthGuard implements CanActivate {
     }
 
     async canActivate(route, state): Promise<boolean> {
-        return true;
         if (this.authenticationService.isAuthenticated()) {
             return true;
         } else if (await this.authenticationService.verifyLogin()) {

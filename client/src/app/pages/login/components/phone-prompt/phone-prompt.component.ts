@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import PhoneNumber from 'awesome-phonenumber';
 import {IonInput, NavController} from "@ionic/angular";
-import {RegisterDto, UserService} from "../../../../../open_api";
 import {AuthenticationService} from "../../../../services/auth/authentication.service";
 
 @Component({
@@ -21,7 +20,7 @@ export class PhonePromptComponent implements AfterViewInit {
 
     constructor(
         private navController: NavController,
-        private userService: UserService,
+        // private userService: UserService,
         private authenticationService: AuthenticationService,
     ) {
     }
@@ -38,15 +37,15 @@ export class PhonePromptComponent implements AfterViewInit {
     }
 
     goNext() {
-        const registerDto: RegisterDto = {phone_number: this.phoneNumber};
-        this.userService.sendConfirmation(registerDto).subscribe(({phone_number}) => {
-            this.navController.navigateForward(
-                ['/login/confirmation'],
-                {
-                    queryParams: { phone_number },
-                },
-            );
-        });
+        // const registerDto: RegisterDto = {phone_number: this.phoneNumber};
+        // this.userService.sendConfirmation(registerDto).subscribe(({phone_number}) => {
+        //     this.navController.navigateForward(
+        //         ['/login/confirmation'],
+        //         {
+        //             queryParams: { phone_number },
+        //         },
+        //     );
+        // });
     }
 
     // TODO: Format phone input

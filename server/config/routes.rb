@@ -12,7 +12,8 @@ Rails.application.routes.draw do
       post '/sessions', to: 'sessions#create'
       delete '/sessions', to: 'sessions#destroy'
 
-      resources :users
+      post '/customers', to: 'customers#create'
+      get '/customers', to: 'customers#show'
 
       put '/profiles', to: 'profiles#update'
       put '/profile/name', to: 'profiles#update_name'

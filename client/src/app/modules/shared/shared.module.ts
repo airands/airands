@@ -6,6 +6,7 @@ import {InputDisplayComponent} from "../../components/inputs/input-display/input
 import {UserAvatarComponent} from "../../components/user-avatar/user-avatar.component";
 import {IonicModule} from "@ionic/angular";
 import {FormsModule} from "@angular/forms";
+import {AppButtonComponent} from "../../components/buttons/app-button/app-button.component";
 
 
 @NgModule({
@@ -19,12 +20,14 @@ import {FormsModule} from "@angular/forms";
         BasicInputComponent,
         InputDisplayComponent,
         UserAvatarComponent,
+        AppButtonComponent,
     ],
     exports: [
         CardButtonComponent,
         BasicInputComponent,
         InputDisplayComponent,
         UserAvatarComponent,
+        AppButtonComponent,
     ],
 })
 export class SharedModule {

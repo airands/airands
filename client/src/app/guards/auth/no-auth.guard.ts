@@ -16,7 +16,7 @@ export class NoAuthGuard implements CanActivate {
 
     async canActivate(route, state): Promise<boolean> {
         if (this.authenticationService.isAuthenticated()) {
-            this.navController.navigateForward(['/tabs']);
+            this.navController.navigateForward(['/home']);
             return false;
         } else {
             return true;

@@ -4,6 +4,40 @@ info:
   title: API V1
   version: v1
 paths:
+  "/customers":
+    post:
+      summary: Create new customer user
+      tags:
+      - Customers
+      operationId: createUser
+      parameters: []
+      responses:
+        '201':
+          description: sms confirmation sent
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/customer_registration"
+        '422':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/customer_registration"
+    get:
+      summary: Get authenticated customer
+      tags:
+      - Customers
+      operationId: getUser
+      responses:
+        '200':
+          description: authenticated customer user
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/customer_dto"
   "/profiles":
     put:
       summary: Update user profile
@@ -133,28 +167,6 @@ paths:
         '401':
           description: unauthorized
           content: {}
-  "/users":
-    post:
-      summary: SMS confirmation for new/existing phone user
-      tags:
-      - User
-      operationId: sendConfirmation
-      parameters: []
-      responses:
-        '201':
-          description: sms confirmation sent
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/register_dto"
-        '422':
-          description: invalid request
-          content: {}
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/register_dto"
 servers:
 - url: https://{defaultHost}/api/v1
   variables:
@@ -192,13 +204,40 @@ components:
       - complete_address
       - complete_billing,
       - profile
-    register_dto:
+    customer_dto:
       type: object
       properties:
-        phone_number:
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        auth_provider:
+          type: string
+        auth_provider_uid:
+          type: string
+        avatar_url:
           type: string
       required:
-      - phone_number
+      - email
+      - first_name
+      - last_name
+      - auth_provider,
+      - auth_provider_uid
+    customer_registration:
+      type: object
+      properties:
+        user_data:
+          "$ref": "#/components/schemas/customer_dto"
+        auth_provider_token:
+          type: string
+        app_platform:
+          "$ref": "#/components/schemas/app_platform"
+      required:
+      - user_data
+      - auth_provider_token
+      - app_platform
     phone_confirmation:
       type: object
       properties:
@@ -244,3 +283,15 @@ components:
       - city,
       - province,
       - postal_code
+    social_platform:
+      type: string
+      enum:
+      - google
+      - facebook
+      - apple
+    app_platform:
+      type: string
+      enum:
+      - android
+      - ios
+      - web

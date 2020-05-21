@@ -1,6 +1,6 @@
 class User::Profile < ApplicationRecord
 
-  belongs_to :user
+  belongs_to :customer
 
   def self.validate_postal_code(params)
     if params[:address_postal_code].present?

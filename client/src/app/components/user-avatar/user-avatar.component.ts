@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-user-avatar',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-avatar.component.scss'],
 })
 export class UserAvatarComponent implements OnInit {
+
+  @Input() src: string;
 
   constructor() { }
 

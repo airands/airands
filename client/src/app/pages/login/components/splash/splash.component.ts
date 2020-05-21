@@ -25,20 +25,23 @@ export class SplashComponent implements OnInit {
     ngOnInit() {
     }
 
-    getStarted() {
-        this.navCtrl.navigateForward('/login/getting-started')
+    goHome() {
+        this.navCtrl.navigateForward('/home');
     }
 
-    loginGoogle() {
-        this.loginService.loginGoogle();
+    async loginGoogle() {
+        await this.loginService.loginGoogle();
+        this.goHome();
     }
 
     loginFacebook() {
         this.loginService.loginFacebook();
+        this.goHome();
     }
 
     loginApple() {
         this.loginService.loginApple();
+        this.goHome();
     }
 
     get isIos(): boolean {
