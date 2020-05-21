@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [scrollY]="false">
   <div class="ion-padding-horizontal">
     <app-user-avatar [src]="customer?.avatarUrl"></app-user-avatar>
     <br>
@@ -14,5 +14,8 @@
     <app-basic-input value="211-562 Simcoe Street, Victoria, BC, V8V 1L8"></app-basic-input>
     <br>
     <app-button (click)="logout()">Sign Out</app-button>
+    <ion-text class="ion-text-right" color="medium">
+      <p>{{ appInfo }}</p>
+    </ion-text>
   </div>
 </ion-content>

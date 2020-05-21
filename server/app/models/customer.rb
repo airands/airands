@@ -2,6 +2,21 @@ class Customer < ApplicationRecord
 
   has_one_attached :avatar
 
+  has_one :location_drop_off, class_name: 'Location::DropOff'
+
+  def update_trackable(request_ip)
+    update_attribute(:sign_in_count, sign_in_count + 1)
+    update_attributes(
+      {
+        sign_in_count: sign_in_count + 1,
+        current_sign_in_at: DateTime.now.to_s,
+        last_sign_in_at: current_sign_in_at,
+        current_sign_in_ip: request_ip,
+        last_sign_in_ip: current_sign_in_ip,
+      }
+    )
+  end
+
   def to_hash
     ret = {
       email: email,

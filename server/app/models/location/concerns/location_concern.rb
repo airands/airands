@@ -1,15 +1,15 @@
 module LocationConcern
 
   def self.validate_postal_code(params)
-    if params[:address_postal_code].present?
-      if params[:address_postal_code].length < 6
+    if params[:postal_code].present?
+      if params[:postal_code].length < 6
         raise Airands::Exception::ValidationException.new([:postal_code])
       end
     end
   end
 
   def self.validate_address(params)
-    non_required = [:first_name, :last_name, :address_unit_number]
+    non_required = [:first_name, :last_name, :unit_number]
     blank_keys = params.select {|k, v| v.blank? && !non_required.include?(k) }.keys
 
     unless blank_keys.empty?
@@ -18,9 +18,8 @@ module LocationConcern
   end
 
   # @return [Boolean]
-  def address_complete?
-    street_number.present? && street_name.present? && city.present? &&
-      province.present? && postal_code.present?
+  def complete?
+    street_number.present? && street_name.present? && city.present? && province.present? && postal_code.present?
   end
 
 end

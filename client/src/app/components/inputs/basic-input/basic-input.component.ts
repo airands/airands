@@ -8,6 +8,7 @@ import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 export class BasicInputComponent implements OnInit {
 
   @Input() placeholder: string = '';
+  @Input() disabled: boolean;
   @Input() top: string = '8';
   @Input() bottom: string = '0';
   @Input() value: string = '';

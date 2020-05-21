@@ -1,4 +1,9 @@
 .basic-input {
+  /* Remove First */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
   display: block;
   width: 100%;
   height: 48px;

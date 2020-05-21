@@ -37,8 +37,9 @@ class Api::V1::CustomersController < ApplicationController
         File.delete(file_path)
       end
 
-
       cookies.signed[:customer_id] = {value: @customer.id, httponly: true, expires: Time.now + 3.months}
+      @customer.update_trackable(request.remote_ip)
+
       render json: @customer.to_hash, status: :created
     else
       render json: @customer.errors, status: :unprocessable_entity
