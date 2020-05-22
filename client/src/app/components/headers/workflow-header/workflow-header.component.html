@@ -1,8 +1,13 @@
 <ion-header class="ion-no-border workflow-header">
   <ion-toolbar color="transparent">
-    <ion-buttons slot="start">
+    <ion-buttons *ngIf="hasBack" slot="start">
       <ion-button (click)="handleClick()">
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons *ngIf="hasClose" slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close-sharp"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

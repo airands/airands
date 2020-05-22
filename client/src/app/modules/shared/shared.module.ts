@@ -7,6 +7,7 @@ import {UserAvatarComponent} from "../../components/user-avatar/user-avatar.comp
 import {IonicModule} from "@ionic/angular";
 import {FormsModule} from "@angular/forms";
 import {AppButtonComponent} from "../../components/buttons/app-button/app-button.component";
+import {WorkflowHeaderComponent} from "../../components/headers/workflow-header/workflow-header.component";
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import {AppButtonComponent} from "../../components/buttons/app-button/app-button
         InputDisplayComponent,
         UserAvatarComponent,
         AppButtonComponent,
+        WorkflowHeaderComponent,
     ],
     exports: [
         CardButtonComponent,
@@ -28,6 +30,7 @@ import {AppButtonComponent} from "../../components/buttons/app-button/app-button
         InputDisplayComponent,
         UserAvatarComponent,
         AppButtonComponent,
+        WorkflowHeaderComponent,
     ],
 })
 export class SharedModule {

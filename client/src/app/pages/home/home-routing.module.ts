@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 
-const defaultRedirect = 'my-account';
+const defaultRedirect = 'my-orders';
 
 const routes: Routes = [
   {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NavController} from "@ionic/angular";
+import {OrderDescriptionComponent} from "../order-description/order-description.component";
 
 @Component({
   selector: 'app-dropoff-location',
@@ -8,12 +9,16 @@ import {NavController} from "@ionic/angular";
 })
 export class DropoffLocationComponent implements OnInit {
 
-  constructor(private navController: NavController) { }
+  constructor() { }
 
   ngOnInit() {}
 
   goNext() {
+    this.modalNav().push(OrderDescriptionComponent);
+  }
 
+  modalNav(): HTMLIonNavElement {
+    return document.querySelector('ion-nav') as HTMLIonNavElement;
   }
 
 }

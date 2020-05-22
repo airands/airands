@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {NavController} from "@ionic/angular";
+import {ModalController} from "@ionic/angular";
 
 @Component({
     selector: 'app-workflow-header',
@@ -9,15 +9,25 @@ import {NavController} from "@ionic/angular";
 export class WorkflowHeaderComponent implements OnInit {
 
     @Input() handler: () => void;
+    @Input() hasBack: boolean = true;
+    @Input() hasClose: boolean = true;
 
-    constructor(private navController: NavController) {
+    constructor(private modalController: ModalController) {
     }
 
     ngOnInit() {
     }
 
     handleClick() {
-        this.handler ? this.handler() : this.navController.pop();
+        this.handler ? this.handler() : this.modalNav().pop();
+    }
+
+    closeModal() {
+        this.modalController.dismiss();
+    }
+
+    modalNav(): HTMLIonNavElement {
+        return document.querySelector('ion-nav') as HTMLIonNavElement;
     }
 
 }

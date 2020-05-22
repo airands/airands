@@ -1,7 +1,9 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import AutocompleteOptions = google.maps.places.AutocompleteOptions;
-import {BasicInputComponent} from "../../../../../components/inputs/basic-input/basic-input.component";
 import {NavController} from "@ionic/angular";
+import {BasicInputComponent} from "../../../../components/inputs/basic-input/basic-input.component";
+import {OrderDescriptionComponent} from "../order-description/order-description.component";
+import {Plugins} from "@capacitor/core";
 
 @Component({
     selector: 'app-order-location',
@@ -13,11 +15,10 @@ export class OrderLocationComponent implements OnInit, AfterViewInit {
     @ViewChild(BasicInputComponent, {static: false}) input: BasicInputComponent;
 
     options: AutocompleteOptions = {
-        types: ['address'],
         componentRestrictions: {country: 'CA'},
     };
 
-    constructor(private navController: NavController) {
+    constructor() {
     }
 
     ngOnInit() {
@@ -32,10 +33,18 @@ export class OrderLocationComponent implements OnInit, AfterViewInit {
     }
 
     goNext() {
-        this.navController.navigateForward(['/login/getting-started/order-description']);
+        this.modalNav().push(OrderDescriptionComponent);
     }
 
-    private initializeAutocomplete() {
+    private async initializeAutocomplete() {
+        const userLocation = await Plugins.Geolocation.getCurrentPosition();
+        const {latitude, longitude} = userLocation.coords;
+
+        this.options.bounds = new google.maps.LatLngBounds(
+            new google.maps.LatLng(latitude, longitude),
+            new google.maps.LatLng(latitude, longitude),
+        )
+
         const inputEl = this.input.getInputElement();
         const autocomplete = new google.maps.places.Autocomplete(inputEl, this.options);
         google.maps.event.addListener(autocomplete, 'place_changed', () => {
@@ -44,6 +53,10 @@ export class OrderLocationComponent implements OnInit, AfterViewInit {
             // place.address_components.forEach(this.handleAddressComponent.bind(this));
             inputEl.value = place.formatted_address;
         });
+    }
+
+    modalNav(): HTMLIonNavElement {
+        return document.querySelector('ion-nav') as HTMLIonNavElement;
     }
 
 }

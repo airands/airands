@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { AccountPage } from './account.page';
-import {ExploreContainerComponentModule} from "../explore-container/explore-container.module";
 import {RouterModule} from "@angular/router";
 
 @NgModule({
@@ -13,7 +12,6 @@ import {RouterModule} from "@angular/router";
     CommonModule,
     FormsModule,
     IonicModule,
-    ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: AccountPage }]),
   ],
   declarations: [AccountPage]

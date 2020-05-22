@@ -4,5 +4,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [scrollY]="false">
+  <div class="ion-padding-horizontal">
+    <app-button (click)="createOrder()">New Order</app-button>
+  </div>
 </ion-content>
