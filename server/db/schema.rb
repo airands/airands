@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_21_020023) do
+ActiveRecord::Schema.define(version: 2020_05_23_194619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -37,17 +37,6 @@ ActiveRecord::Schema.define(version: 2020_05_21_020023) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "customer_profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "customer_id", null: false
-    t.string "first_name"
-    t.string "last_name"
-    t.uuid "location_drop_off_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id"], name: "index_customer_profiles_on_customer_id"
-    t.index ["location_drop_off_id"], name: "index_customer_profiles_on_location_drop_off_id"
-  end
-
   create_table "customers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", null: false
     t.string "first_name"
@@ -67,15 +56,6 @@ ActiveRecord::Schema.define(version: 2020_05_21_020023) do
     t.index ["location_drop_off_id"], name: "index_customers_on_location_drop_off_id"
   end
 
-  create_table "driver_profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "driver_id", null: false
-    t.string "first_name"
-    t.string "last_name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["driver_id"], name: "index_driver_profiles_on_driver_id"
-  end
-
   create_table "drivers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", null: false
     t.string "phone_number"
@@ -90,6 +70,8 @@ ActiveRecord::Schema.define(version: 2020_05_21_020023) do
   end
 
   create_table "location_drop_offs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "location_type", default: 0
+    t.string "location_name"
     t.string "street_number"
     t.string "street_name"
     t.string "unit_number"
@@ -101,6 +83,8 @@ ActiveRecord::Schema.define(version: 2020_05_21_020023) do
   end
 
   create_table "location_pick_ups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "location_type", default: 0
+    t.string "location_name"
     t.string "street_number"
     t.string "street_name"
     t.string "unit_number"
@@ -111,9 +95,25 @@ ActiveRecord::Schema.define(version: 2020_05_21_020023) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "order_type", default: 0
+    t.uuid "customer_id", null: false
+    t.uuid "driver_id", null: false
+    t.uuid "location_drop_off_id"
+    t.uuid "location_pick_up_id"
+    t.string "order_summary"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["driver_id"], name: "index_orders_on_driver_id"
+    t.index ["location_drop_off_id"], name: "index_orders_on_location_drop_off_id"
+    t.index ["location_pick_up_id"], name: "index_orders_on_location_pick_up_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "customer_profiles", "customers"
-  add_foreign_key "customer_profiles", "location_drop_offs"
   add_foreign_key "customers", "location_drop_offs"
-  add_foreign_key "driver_profiles", "drivers"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "orders", "drivers"
+  add_foreign_key "orders", "location_drop_offs"
+  add_foreign_key "orders", "location_pick_ups"
 end

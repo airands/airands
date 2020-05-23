@@ -7,7 +7,6 @@ module Airands
     AUTH_PROVIDERS = [PROVIDER_FACEBOOK, PROVIDER_GOOGLE, PROVIDER_APPLE]
 
     def self.authenticate(token, auth_provider, platform = :ios)
-      Rails.logger.info("AUTHENTICATE: #{auth_provider}, #{platform}")
       if auth_provider == PROVIDER_GOOGLE
         CoreModules::Google::Auth.validate(token, Airands::Credentials.google_client_id(platform)).symbolize_keys
       elsif auth_provider == PROVIDER_FACEBOOK

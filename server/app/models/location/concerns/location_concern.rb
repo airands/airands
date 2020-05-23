@@ -1,5 +1,10 @@
 module LocationConcern
 
+  enum location_type: {
+    commercial: 0,
+    residential: 1,
+  }
+
   def self.validate_postal_code(params)
     if params[:postal_code].present?
       if params[:postal_code].length < 6
