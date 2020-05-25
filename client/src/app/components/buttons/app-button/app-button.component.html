@@ -1,4 +1,4 @@
-<ion-button expand="block" [ngClass]="colorClass" [ngStyle]="buttonStyle">
+<ion-button expand="block" [ngClass]="colorClass" [ngStyle]="buttonStyle" [disabled]="disabled">
   <ion-icon [ngStyle]="iconStyle" *ngIf="hasIcon" [name]="icon" slot="start"></ion-icon>
   <ion-label>
     <ng-content></ng-content>

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ModalController} from "@ionic/angular";
 import {PaidForComponent} from "../paid-for/paid-for.component";
+import {NewOrderStore} from "../../../../store/orders/new-order.store";
+import {OrderType} from "../../../../../open_api";
 
 @Component({
     selector: 'app-order-type',
@@ -9,17 +10,19 @@ import {PaidForComponent} from "../paid-for/paid-for.component";
 })
 export class OrderTypeComponent implements OnInit {
 
-    constructor(private modalController: ModalController) {
+    constructor(private newOrderStore: NewOrderStore) {
     }
 
     ngOnInit() {
     }
 
     goCommercial() {
+        this.newOrderStore.setOrderType(OrderType.CommercialPickUp);
         this.modalNav().push(PaidForComponent);
     }
 
     goPrivate() {
+        this.newOrderStore.setOrderType(OrderType.PrivatePickUp);
         this.modalNav().push(PaidForComponent);
     }
 

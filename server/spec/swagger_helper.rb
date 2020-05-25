@@ -45,31 +45,19 @@ RSpec.configure do |config|
 
           # Application DTOs
 
-          user_dto: {
-            type: :object,
-            properties: {
-              id: {type: :string},
-              phone_number: {type: :string},
-              profile: {'$ref': '#/components/schemas/profile'},
-              complete_profile: {type: :boolean},
-              complete_name: {type: :boolean},
-              complete_address: {type: :boolean},
-              complete_billing: {type: :boolean},
-            },
-            required: %w[id phone_number complete_profile complete_name complete_address complete_billing, profile],
-          },
-
           customer_dto: {
             type: :object,
             properties: {
               email: {type: :string},
               first_name: {type: :string},
               last_name: {type: :string},
+              phone_number: {type: :string},
               auth_provider: {type: :string},
               auth_provider_uid: {type: :string},
               avatar_url: {type: :string},
+              address: {'$ref': '#/components/schemas/location_address'},
             },
-            required: %w[email first_name last_name auth_provider, auth_provider_uid],
+            required: %w[email first_name last_name auth_provider],
           },
 
           # Request Payloads
@@ -93,17 +81,7 @@ RSpec.configure do |config|
             required: %w[phone_number confirmation_pin],
           },
 
-          profile: {
-            type: :object,
-            properties: {
-              first_name: {type: :string},
-              last_name: {type: :string},
-              address: {'$ref': '#/components/schemas/profile_address'},
-            },
-            required: %w[first_name last_name address],
-          },
-
-          profile_address: {
+          location_address: {
             type: :object,
             properties: {
               street_number: {type: :string},
@@ -112,8 +90,39 @@ RSpec.configure do |config|
               city: {type: :string},
               province: {type: :string},
               postal_code: {type: :string},
+              location_name: {type: :string},
+              location_type: {'$ref': '#/components/schemas/location_type'},
             },
-            required: %w[street_number, street_name, unit_number, city, province, postal_code],
+            required: %w[street_number street_name city province postal_code],
+          },
+
+          order: {
+            type: :object,
+            properties: {
+                order_type: {'$ref': '#/components/schemas/order_type'},
+                order_summary: {type: :string},
+                locations: {'$ref': '#/components/schemas/new_order_locations'},
+            },
+            required: %w[],
+          },
+
+          new_order: {
+            type: :object,
+            properties: {
+              order_type: {'$ref': '#/components/schemas/order_type'},
+              order_summary: {type: :string},
+              locations: {'$ref': '#/components/schemas/new_order_locations'},
+            },
+            required: %w[order_type order_summary locations],
+          },
+
+          new_order_locations: {
+            type: :object,
+            properties: {
+              pick_up: {'$ref': '#/components/schemas/location_address'},
+              drop_off: {'$ref': '#/components/schemas/location_address'},
+            },
+            required: %w[pick_up drop_off],
           },
 
           # Enums
@@ -126,6 +135,16 @@ RSpec.configure do |config|
           app_platform: {
             type: :string,
             enum: %w[android ios web],
+          },
+
+          order_type: {
+            type: :string,
+            enum: %w[commercial_pick_up private_pick_up],
+          },
+
+          location_type: {
+            type: :string,
+            enum: %w[commercial residential],
           }
 
         }

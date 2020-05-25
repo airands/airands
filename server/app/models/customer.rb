@@ -2,7 +2,8 @@ class Customer < ApplicationRecord
 
   has_one_attached :avatar
 
-  has_one :location_drop_off, class_name: 'Location::DropOff'
+  belongs_to :location_drop_off, class_name: 'Location::DropOff'
+  has_many :orders
 
   def update_trackable(request_ip)
     update(
@@ -17,19 +18,20 @@ class Customer < ApplicationRecord
   end
 
   def to_hash
-    ret = {
+    customer_hash = {
       email: email,
       first_name: first_name,
       last_name: last_name,
+      phone_number: phone_number,
       auth_provider: auth_provider,
-      auth_provider_uid: auth_provider_uid,
+      address: self.location_drop_off&.to_hash,
     }
 
     if avatar.attached?
-      ret[:avatar_url] = Rails.application.routes.url_helpers.rails_blob_path(avatar, only_path: true)
+      customer_hash[:avatar_url] = Rails.application.routes.url_helpers.rails_blob_path(avatar, only_path: true)
     end
 
-    ret
+    customer_hash
   end
 
 end

@@ -38,20 +38,20 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/customer_dto"
-  "/profiles":
-    put:
-      summary: Update user profile
+  "/orders":
+    post:
+      summary: Create new order
       tags:
-      - Profile
-      operationId: updateProfile
+      - Orders
+      operationId: createOrder
       parameters: []
       responses:
-        '200':
-          description: user profile updated
+        '201':
+          description: order created
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/user_dto"
+                "$ref": "#/components/schemas/order"
         '422':
           description: invalid request
           content: {}
@@ -59,59 +59,40 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/profile"
-  "/profile/name":
-    put:
-      summary: Update user profile name
+              "$ref": "#/components/schemas/new_order"
+    get:
+      summary: Get all customer orders
       tags:
-      - Profile
-      operationId: updateProfileName
-      parameters: []
+      - Orders
+      operationId: getAllOrders
       responses:
         '200':
-          description: user profile updated
+          description: All customer orders
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/user_dto"
-        '422':
-          description: invalid request
-          content: {}
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                first_name:
-                  type: string
-                last_name:
-                  type: string
-              required:
-              - first_name
-              - last_name
-  "/profile/address":
-    put:
-      summary: Update user profile address
+                type: array
+                items:
+                  "$ref": "#/components/schemas/order"
+  "/orders/{order_id}":
+    get:
+      summary: Get specific customer order
       tags:
-      - Profile
-      operationId: updateProfileAddress
-      parameters: []
+      - Orders
+      operationId: getOrder
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
-          description: user profile updated
+          description: Specified customer order
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/user_dto"
-        '422':
-          description: invalid request
-          content: {}
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/profile_address"
+                "$ref": "#/components/schemas/order"
   "/sessions":
     post:
       summary: Creates an authenticated session
@@ -125,7 +106,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/user_dto"
+                "$ref": "#/components/schemas/customer_dto"
         '422':
           description: invalid request
           content:
@@ -148,7 +129,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/user_dto"
+                "$ref": "#/components/schemas/customer_dto"
         '401':
           description: unauthorized
           content:
@@ -179,31 +160,6 @@ components:
       properties:
         message:
           type: string
-    user_dto:
-      type: object
-      properties:
-        id:
-          type: string
-        phone_number:
-          type: string
-        profile:
-          "$ref": "#/components/schemas/profile"
-        complete_profile:
-          type: boolean
-        complete_name:
-          type: boolean
-        complete_address:
-          type: boolean
-        complete_billing:
-          type: boolean
-      required:
-      - id
-      - phone_number
-      - complete_profile
-      - complete_name
-      - complete_address
-      - complete_billing,
-      - profile
     customer_dto:
       type: object
       properties:
@@ -213,18 +169,21 @@ components:
           type: string
         last_name:
           type: string
+        phone_number:
+          type: string
         auth_provider:
           type: string
         auth_provider_uid:
           type: string
         avatar_url:
           type: string
+        address:
+          "$ref": "#/components/schemas/location_address"
       required:
       - email
       - first_name
       - last_name
-      - auth_provider,
-      - auth_provider_uid
+      - auth_provider
     customer_registration:
       type: object
       properties:
@@ -248,20 +207,7 @@ components:
       required:
       - phone_number
       - confirmation_pin
-    profile:
-      type: object
-      properties:
-        first_name:
-          type: string
-        last_name:
-          type: string
-        address:
-          "$ref": "#/components/schemas/profile_address"
-      required:
-      - first_name
-      - last_name
-      - address
-    profile_address:
+    location_address:
       type: object
       properties:
         street_number:
@@ -276,13 +222,49 @@ components:
           type: string
         postal_code:
           type: string
+        location_name:
+          type: string
+        location_type:
+          "$ref": "#/components/schemas/location_type"
       required:
-      - street_number,
-      - street_name,
-      - unit_number,
-      - city,
-      - province,
+      - street_number
+      - street_name
+      - city
+      - province
       - postal_code
+    order:
+      type: object
+      properties:
+        order_type:
+          "$ref": "#/components/schemas/order_type"
+        order_summary:
+          type: string
+        locations:
+          "$ref": "#/components/schemas/new_order_locations"
+      required: []
+    new_order:
+      type: object
+      properties:
+        order_type:
+          "$ref": "#/components/schemas/order_type"
+        order_summary:
+          type: string
+        locations:
+          "$ref": "#/components/schemas/new_order_locations"
+      required:
+      - order_type
+      - order_summary
+      - locations
+    new_order_locations:
+      type: object
+      properties:
+        pick_up:
+          "$ref": "#/components/schemas/location_address"
+        drop_off:
+          "$ref": "#/components/schemas/location_address"
+      required:
+      - pick_up
+      - drop_off
     social_platform:
       type: string
       enum:
@@ -295,3 +277,13 @@ components:
       - android
       - ios
       - web
+    order_type:
+      type: string
+      enum:
+      - commercial_pick_up
+      - private_pick_up
+    location_type:
+      type: string
+      enum:
+      - commercial
+      - residential

@@ -18,7 +18,7 @@ describe 'Sessions API' do
       response 200, 'session authenticated' do
         let(:user_confirmation) { {phone_number: 7789869397, confirmation_pin: '7BFD6Y'} }
 
-        schema '$ref' => '#/components/schemas/user_dto'
+        schema '$ref' => '#/components/schemas/customer_dto'
         run_test!
       end
 
@@ -37,7 +37,7 @@ describe 'Sessions API' do
       produces 'application/json'
 
       response 200, 'session info' do
-        schema '$ref' => '#/components/schemas/user_dto'
+        schema '$ref' => '#/components/schemas/customer_dto'
         run_test!
       end
 

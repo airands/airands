@@ -27,4 +27,17 @@ module LocationConcern
     street_number.present? && street_name.present? && city.present? && province.present? && postal_code.present?
   end
 
+  def to_hash
+    {
+      location_type: location_type,
+      location_name: location_name,
+      street_number: street_number,
+      street_name: street_name,
+      unit_number: unit_number,
+      city: city,
+      province: province,
+      postal_code: postal_code,
+    }
+  end
+
 end

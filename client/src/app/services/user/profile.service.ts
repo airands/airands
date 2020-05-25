@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Profile, ProfileAddress, ProfileService as ProfileApi, UserDto} from "../../../open_api";
 import {AuthenticationService} from "../auth/authentication.service";
 import {Observable} from "rxjs";
 
@@ -8,7 +7,7 @@ import {Observable} from "rxjs";
 })
 export class ProfileService {
 
-    profile: Profile = {
+    profile = {
         first_name: null,
         last_name: null,
         address: {
@@ -22,21 +21,21 @@ export class ProfileService {
     };
 
     constructor(
-        private profileApi: ProfileApi,
+        // private profileApi: ProfileApi,
         private authenticationService: AuthenticationService,
     ) {
     }
 
     public async updateProfileName() {
         const params = {first_name: this.firstName, last_name: this.lastName};
-        return await this.updateProfile(this.profileApi.updateProfileName(params));
+        // return await this.updateProfile(this.profileApi.updateProfileName(params));
     }
 
     public async updateProfileAddress() {
-        return await this.updateProfile(this.profileApi.updateProfileAddress(this.profile.address));
+        // return await this.updateProfile(this.profileApi.updateProfileAddress(this.profile.address));
     }
 
-    private updateProfile(observer: Observable<UserDto>) {
+    private updateProfile(observer) {
         return new Promise((resolve, reject) => {
             observer.subscribe(
                 (userDto) => {
@@ -54,14 +53,14 @@ export class ProfileService {
     public clean() {
         this.setFirstName(null);
         this.setLastName(null);
-        this.setAddress({
-            street_number: null,
-            street_name: null,
-            unit_number: null,
-            city: null,
-            province: null,
-            postal_code: null,
-        });
+        // this.setAddress({
+        //     street_number: null,
+        //     street_name: null,
+        //     unit_number: null,
+        //     city: null,
+        //     province: null,
+        //     postal_code: null,
+        // });
     }
 
     public setFirstName(value: string) {
@@ -72,7 +71,7 @@ export class ProfileService {
         this.profile.last_name = value;
     }
 
-    public setAddress(value: ProfileAddress) {
+    public setAddress(value) {
         this.profile.address = value;
     }
 

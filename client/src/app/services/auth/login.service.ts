@@ -24,8 +24,6 @@ export class LoginService {
 
     async loginGoogle() {
         const response = await this.googleService.login();
-        console.log("POSTING REGISTRATION");
-        console.log(response.givenName, response.familyName);
         const userResponse = await this.postRegistration(response.authentication.idToken, {
             auth_provider: 'google',
             auth_provider_uid: response.id,

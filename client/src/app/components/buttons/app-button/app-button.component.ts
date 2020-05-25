@@ -7,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class AppButtonComponent implements OnInit {
 
+  @Input() disabled: boolean;
   @Input() color: 'primary' | 'facebook' | 'google' | 'apple';
   @Input() icon: string;
   @Input() iconColor: string;

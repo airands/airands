@@ -22,6 +22,7 @@ import {FacebookService} from "./services/auth/facebook.service";
 import {GoogleService} from "./services/auth/google.service";
 import {AppleService} from "./services/auth/apple.service";
 import {SharedModule} from "./modules/shared/shared.module";
+import {NewOrderStore} from "./store/orders/new-order.store";
 
 export function apiConfigFactory(): Configuration {
     const params: ConfigurationParameters = {
@@ -54,6 +55,7 @@ export function apiConfigFactory(): Configuration {
         GoogleService,
         AppleService,
         ProfileService,
+        NewOrderStore,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     ],
     bootstrap: [AppComponent]

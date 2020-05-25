@@ -9,17 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { LocationAddress } from './locationAddress';
+import { NewOrderLocations } from './newOrderLocations';
+import { OrderType } from './orderType';
 
 
-export interface CustomerDto { 
-    email: string;
-    first_name: string;
-    last_name: string;
-    phone_number?: string;
-    auth_provider: string;
-    auth_provider_uid?: string;
-    avatar_url?: string;
-    address?: LocationAddress;
+export interface NewOrder { 
+    order_type: OrderType;
+    order_summary: string;
+    locations: NewOrderLocations;
 }
 

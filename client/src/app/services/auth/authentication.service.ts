@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Storage} from "@ionic/storage";
 import {NavController, Platform} from "@ionic/angular";
 import {BehaviorSubject} from "rxjs";
-import {CustomerDto, CustomersService, PhoneConfirmation, SessionService, UserDto} from "../../../open_api";
+import {CustomerDto, CustomersService, PhoneConfirmation, SessionService} from "../../../open_api";
 import {User} from "../../models/user/user.model";
 import {Customer} from "../../models/customer/customer.model";
 import {LoginService} from "./login.service";
@@ -53,7 +53,7 @@ export class AuthenticationService {
         }
     }
 
-    async login(phoneConfirmation: PhoneConfirmation): Promise<UserDto> {
+    async login(phoneConfirmation: PhoneConfirmation) {
         return new Promise((resolve, reject) => {
             this.sessionService.authenticate(phoneConfirmation).subscribe(
                 (userDto) => {
@@ -65,7 +65,7 @@ export class AuthenticationService {
         });
     }
 
-    setUser(userDto: UserDto): void {
+    setUser(userDto): void {
         if (!userDto) {
             this.authUser.next(null);
         } else {

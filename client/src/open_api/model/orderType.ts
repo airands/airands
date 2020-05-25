@@ -9,17 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { LocationAddress } from './locationAddress';
 
 
-export interface CustomerDto { 
-    email: string;
-    first_name: string;
-    last_name: string;
-    phone_number?: string;
-    auth_provider: string;
-    auth_provider_uid?: string;
-    avatar_url?: string;
-    address?: LocationAddress;
-}
+export type OrderType = 'commercial_pick_up' | 'private_pick_up';
+
+export const OrderType = {
+    CommercialPickUp: 'commercial_pick_up' as OrderType,
+    PrivatePickUp: 'private_pick_up' as OrderType
+};
 

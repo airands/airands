@@ -17,10 +17,8 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
-import { InlineObject } from '../model/models';
-import { Profile } from '../model/models';
-import { ProfileAddress } from '../model/models';
-import { UserDto } from '../model/models';
+import { NewOrder } from '../model/models';
+import { Order } from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -30,7 +28,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class ProfileService {
+export class OrdersService {
 
     protected basePath = 'https://api.levimurray.dev/api/v1';
     public defaultHeaders = new HttpHeaders();
@@ -89,15 +87,15 @@ export class ProfileService {
     }
 
     /**
-     * Update user profile
-     * @param profile 
+     * Create new order
+     * @param newOrder 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updateProfile(profile?: Profile, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<UserDto>;
-    public updateProfile(profile?: Profile, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<UserDto>>;
-    public updateProfile(profile?: Profile, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<UserDto>>;
-    public updateProfile(profile?: Profile, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public createOrder(newOrder?: NewOrder, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Order>;
+    public createOrder(newOrder?: NewOrder, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Order>>;
+    public createOrder(newOrder?: NewOrder, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Order>>;
+    public createOrder(newOrder?: NewOrder, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -128,8 +126,8 @@ export class ProfileService {
             responseType = 'text';
         }
 
-        return this.httpClient.put<UserDto>(`${this.configuration.basePath}/profiles`,
-            profile,
+        return this.httpClient.post<Order>(`${this.configuration.basePath}/orders`,
+            newOrder,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,
@@ -141,15 +139,14 @@ export class ProfileService {
     }
 
     /**
-     * Update user profile address
-     * @param profileAddress 
+     * Get all customer orders
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updateProfileAddress(profileAddress?: ProfileAddress, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<UserDto>;
-    public updateProfileAddress(profileAddress?: ProfileAddress, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<UserDto>>;
-    public updateProfileAddress(profileAddress?: ProfileAddress, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<UserDto>>;
-    public updateProfileAddress(profileAddress?: ProfileAddress, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public getAllOrders(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<Order>>;
+    public getAllOrders(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<Order>>>;
+    public getAllOrders(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<Order>>>;
+    public getAllOrders(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -166,22 +163,12 @@ export class ProfileService {
         }
 
 
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected !== undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
         let responseType: 'text' | 'json' = 'json';
         if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
             responseType = 'text';
         }
 
-        return this.httpClient.put<UserDto>(`${this.configuration.basePath}/profile/address`,
-            profileAddress,
+        return this.httpClient.get<Array<Order>>(`${this.configuration.basePath}/orders`,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,
@@ -193,15 +180,18 @@ export class ProfileService {
     }
 
     /**
-     * Update user profile name
-     * @param inlineObject 
+     * Get specific customer order
+     * @param orderId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updateProfileName(inlineObject?: InlineObject, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<UserDto>;
-    public updateProfileName(inlineObject?: InlineObject, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<UserDto>>;
-    public updateProfileName(inlineObject?: InlineObject, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<UserDto>>;
-    public updateProfileName(inlineObject?: InlineObject, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public getOrder(orderId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Order>;
+    public getOrder(orderId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Order>>;
+    public getOrder(orderId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Order>>;
+    public getOrder(orderId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+        if (orderId === null || orderId === undefined) {
+            throw new Error('Required parameter orderId was null or undefined when calling getOrder.');
+        }
 
         let headers = this.defaultHeaders;
 
@@ -218,22 +208,12 @@ export class ProfileService {
         }
 
 
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected !== undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
         let responseType: 'text' | 'json' = 'json';
         if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
             responseType = 'text';
         }
 
-        return this.httpClient.put<UserDto>(`${this.configuration.basePath}/profile/name`,
-            inlineObject,
+        return this.httpClient.get<Order>(`${this.configuration.basePath}/orders/${encodeURIComponent(String(orderId))}`,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,

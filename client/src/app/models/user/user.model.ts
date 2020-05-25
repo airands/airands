@@ -1,17 +1,15 @@
-import {Profile, ProfileAddress, UserDto} from "../../../open_api";
-
 export class User {
 
     private readonly _id: string;
     private readonly _phoneNumber: string;
-    private readonly _profile: Profile;
+    private readonly _profile;
 
     private readonly _hasCompleteProfile: boolean;
     private readonly _hasCompleteName: boolean;
     private readonly _hasCompleteAddress: boolean;
     private readonly _hasCompleteBilling: boolean;
 
-    constructor(userDto: UserDto) {
+    constructor(userDto) {
         this._id = userDto.id;
         this._phoneNumber = userDto.phone_number;
         this._profile = userDto.profile;
@@ -47,11 +45,11 @@ export class User {
         return this.profile.first_name;
     }
 
-    get profile(): Profile {
+    get profile() {
         return this._profile;
     }
 
-    get address(): ProfileAddress {
+    get address() {
         return this.profile.address;
     }
 

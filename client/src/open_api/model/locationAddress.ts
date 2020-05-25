@@ -9,17 +9,17 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { LocationAddress } from './locationAddress';
+import { LocationType } from './locationType';
 
 
-export interface CustomerDto { 
-    email: string;
-    first_name: string;
-    last_name: string;
-    phone_number?: string;
-    auth_provider: string;
-    auth_provider_uid?: string;
-    avatar_url?: string;
-    address?: LocationAddress;
+export interface LocationAddress { 
+    street_number: string;
+    street_name: string;
+    unit_number?: string;
+    city: string;
+    province: string;
+    postal_code: string;
+    location_name?: string;
+    location_type?: LocationType;
 }
 

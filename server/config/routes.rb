@@ -15,9 +15,11 @@ Rails.application.routes.draw do
       post '/customers', to: 'customers#create'
       get '/customers', to: 'customers#show'
 
-      put '/profiles', to: 'profiles#update'
-      put '/profile/name', to: 'profiles#update_name'
-      put '/profile/address', to: 'profiles#update_address'
+      post '/orders', to: 'orders#create'
+      get '/orders', to: 'orders#show_all'
+      get '/orders/:order_id', to: 'orders#show'
+      put '/orders/:order_id', to: 'orders#update'
+      delete '/orders/:order_id', to: 'orders#destroy'
 
     end
   end

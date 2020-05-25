@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 
 import { CustomersService } from './api/customers.service';
-import { ProfileService } from './api/profile.service';
+import { OrdersService } from './api/orders.service';
 import { SessionService } from './api/session.service';
 
 @NgModule({

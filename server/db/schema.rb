@@ -98,9 +98,9 @@ ActiveRecord::Schema.define(version: 2020_05_23_194619) do
   create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "order_type", default: 0
     t.uuid "customer_id", null: false
-    t.uuid "driver_id", null: false
-    t.uuid "location_drop_off_id"
-    t.uuid "location_pick_up_id"
+    t.uuid "location_drop_off_id", null: false
+    t.uuid "location_pick_up_id", null: false
+    t.uuid "driver_id"
     t.string "order_summary"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

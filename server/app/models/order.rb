@@ -7,7 +7,18 @@ class Order < ApplicationRecord
 
   belongs_to :customer
 
-  has_one :location_pick_up, class_name: 'Location::PickUp'
-  has_one :location_drop_off, class_name: 'Location::DropOff'
+  belongs_to :location_pick_up, class_name: 'Location::PickUp'
+  belongs_to :location_drop_off, class_name: 'Location::DropOff'
+
+  def to_hash
+    {
+      order_type: order_type,
+      order_summary: order_summary,
+      locations: {
+        pick_up: location_pick_up&.to_hash,
+        drop_off: location_drop_off&.to_hash,
+      },
+    }
+  end
 
 end

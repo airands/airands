@@ -12,14 +12,8 @@
 import { LocationAddress } from './locationAddress';
 
 
-export interface CustomerDto { 
-    email: string;
-    first_name: string;
-    last_name: string;
-    phone_number?: string;
-    auth_provider: string;
-    auth_provider_uid?: string;
-    avatar_url?: string;
-    address?: LocationAddress;
+export interface NewOrderLocations { 
+    pick_up: LocationAddress;
+    drop_off: LocationAddress;
 }
 

@@ -3,7 +3,7 @@ import {IonInput, NavController} from "@ionic/angular";
 // @ts-ignore
 import {} from '@types/googlemaps';
 import {ProfileService} from "../../../../services/user/profile.service";
-import {ProfileAddress} from "../../../../../open_api";
+// import {ProfileAddress} from "../../../../../open_api";
 import GeocoderAddressComponent = google.maps.GeocoderAddressComponent;
 import AutocompleteOptions = google.maps.places.AutocompleteOptions;
 import {AuthenticationService} from "../../../../services/auth/authentication.service";
@@ -23,7 +23,7 @@ export class AddressPromptComponent implements AfterViewInit {
         componentRestrictions: {country: 'CA'},
     };
 
-    profileAddress: ProfileAddress = {
+    profileAddress = {
         street_number: null,
         street_name: null,
         unit_number: null,
@@ -53,11 +53,11 @@ export class AddressPromptComponent implements AfterViewInit {
     }
 
     goNext() {
-        this.profileService.setAddress(this.profileAddress);
-        this.profileService.updateProfileAddress()
-            .then(() => {
-                this.navController.navigateForward(['/tabs']);
-            });
+        // this.profileService.setAddress(this.profileAddress);
+        // this.profileService.updateProfileAddress()
+        //     .then(() => {
+        //         this.navController.navigateForward(['/tabs']);
+        //     });
     }
 
     private initializeAutocomplete() {
