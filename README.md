@@ -1,4 +1,4 @@
-<img src="https://github.com/airands/airands/blob/master/assets/banner/banner.png" alt="">
+<img src="https://github.com/airands/airands-assets/blob/master/1x/name-banner-green%401x.png" alt="">
 
 ## Setup
 
