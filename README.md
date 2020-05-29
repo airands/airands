@@ -4,6 +4,8 @@
 
 #### 0. Add host entries OR DNS entries for dev servers
 
+*DNS entry is only required if you need to connect devices other than your main workstation. You'll want to install dnsmasq on your host machine and add the host machine's IP to your external devices' DNS resolver entries*
+
 Server | Domain
 --- | ---
 **Client** | [dev1.airands.ca](https://dev1.airands.ca)
@@ -18,7 +20,6 @@ sudo vi /etc/hosts
 ```
 ###### DNS Entry (dnsmasq)
 
-*Required if connecting devices other than your main workstation*
 ```bash
 sudo vi /etc/dnsmasq.conf
 
