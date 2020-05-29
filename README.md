@@ -7,8 +7,7 @@
 2. Set `CLIENT_PROXY` & `API_PROXY` environment variables
 
 ```bash
-cd ./server
-vi ./.env
+vi server/.env
 
 # .env
 CLIENT_PROXY=<HOST_IP>:8100 # client dev server
@@ -18,13 +17,14 @@ API_PROXY=<HOST_IP>:3000    # rails api server
 3. Start nginx, rails & postgres containers
 
 ```bash
+cd server
 docker-compose up --build
 ```
 
-4. [New Terminal] Start webpack dev server
+4. **[New Terminal]** Start webpack dev server
 
 ```bash
-cd ./client
+cd client
 yarn install
 yarn start
 ```
@@ -34,7 +34,6 @@ yarn start
 #### Connect to Rails container
 Needed for running rails/rake commands
 ```bash
-# Connect to interactive shell with <server_web> container id
 docker exec -it airands_api sh
 ```
 
