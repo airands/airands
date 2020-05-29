@@ -2,6 +2,24 @@
 
 ## Setup
 
+0. Add host or dns entries for dev servers
+- Host Entry
+```bash
+sudo vi /etc/hosts
+
+# /etc/hosts
+127.0.0.1 localhost dev1.airands.ca dev2.airands.ca
+```
+- DNS Entry (dnsmasq)
+Required if connecting devices other than your main workstation
+```bash
+sudo vi /etc/dnsmasq.conf
+
+# /etc/dnsmasq.conf
+address=/dev1.airands.ca/<HOST_IP>
+address=/dev2.airands.ca/<HOST_IP>
+```
+
 1. Install docker & docker-compose
 
 2. Set `CLIENT_PROXY` & `API_PROXY` environment variables
