@@ -4,7 +4,6 @@ class Api::V1::OrdersController < ApplicationController
 
   # POST /api/v1/orders
   def create
-    Rails.logger.info("CREATING ORDER\n #{create_params}")
     @order = current_user.orders.new(create_params)
 
     if @order.save
@@ -16,7 +15,8 @@ class Api::V1::OrdersController < ApplicationController
 
   # GET /api/v1/orders
   def show_all
-
+    @orders = current_user.orders
+    render json: @orders.map(&:to_hash), status: :ok
   end
 
   # GET /api/v1/orders/:order_id

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {IonRouterOutlet, ModalController} from "@ionic/angular";
 import {OrderWorkflowModalPage} from "../../../order-workflow-modal/order-workflow-modal.page";
+import {Order, OrdersService} from "../../../../../open_api";
 
 @Component({
     selector: 'app-my-orders',
@@ -11,11 +12,19 @@ export class MyOrdersPage implements OnInit {
 
     constructor(
         private modalController: ModalController,
-        private routerOutlet: IonRouterOutlet
+        private routerOutlet: IonRouterOutlet,
+        private ordersService: OrdersService,
     ) {
     }
 
+    orders: Order[] = [];
+
     ngOnInit() {
+        this.ordersService.getAllOrders().subscribe((orders) =>
+        {
+            this.orders = orders;
+            console.log(this.orders);
+        });
     }
 
     async createOrder() {
