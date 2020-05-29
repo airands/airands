@@ -2,16 +2,23 @@
 
 ## Setup
 
-### 0. Add host or dns entries for dev servers
-- Host Entry
+#### 0. Add host entries OR DNS entries for dev servers
+
+Server | Domain
+--- | ---
+**Client** | [dev1.airands.ca](https://dev1.airands.ca)
+**API** | [dev2.airands.ca](https://dev2.airands.ca)
+
+###### Host Entry
 ```bash
 sudo vi /etc/hosts
 
 # /etc/hosts
 127.0.0.1 localhost dev1.airands.ca dev2.airands.ca
 ```
-- DNS Entry (dnsmasq)
-Required if connecting devices other than your main workstation
+###### DNS Entry (dnsmasq)
+
+*Required if connecting devices other than your main workstation*
 ```bash
 sudo vi /etc/dnsmasq.conf
 
@@ -20,9 +27,9 @@ address=/dev1.airands.ca/<HOST_IP>
 address=/dev2.airands.ca/<HOST_IP>
 ```
 
-### 1. Install docker & docker-compose
+#### 1. Install docker & docker-compose
 
-### 2. Set `CLIENT_PROXY` & `API_PROXY` environment variables
+#### 2. Set `CLIENT_PROXY` & `API_PROXY` environment variables
 
 ```bash
 vi server/.env
@@ -32,14 +39,14 @@ CLIENT_PROXY=<HOST_IP>:8100 # client dev server
 API_PROXY=<HOST_IP>:3000    # rails api server
 ```
 
-### 3. Start nginx, rails & postgres containers
+#### 3. Start nginx, rails & postgres containers
 
 ```bash
 cd server
 docker-compose up --build
 ```
 
-### 4. **[New Terminal]** Start webpack dev server
+#### 4. **[New Terminal]** Start webpack dev server
 
 ```bash
 cd client
