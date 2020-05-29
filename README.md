@@ -4,7 +4,7 @@
 
 #### 0. Add host entries OR DNS entries for dev servers
 
-*DNS entry is only required if you need to connect devices other than your main workstation. In which case, you'll want to install dnsmasq on your host machine and add the host machine's IP to your external devices' DNS resolver entries*
+*DNS entries are only required if you need to connect devices other than your main workstation. In which case, you'll want to install dnsmasq on your host machine and add the host machine's IP to your external devices' DNS resolver entries*
 
 Server | Domain
 --- | ---
