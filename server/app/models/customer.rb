@@ -2,7 +2,7 @@ class Customer < ApplicationRecord
 
   has_one_attached :avatar
 
-  belongs_to :location_drop_off, class_name: 'Location::DropOff'
+  has_many :location_drop_offs, class_name: 'Location::DropOff'
   has_many :orders
 
   def update_trackable(request_ip)
@@ -32,6 +32,11 @@ class Customer < ApplicationRecord
     end
 
     customer_hash
+  end
+
+  # Temp empty method
+  def location_drop_off
+    # TODO Added customer home location association
   end
 
 end

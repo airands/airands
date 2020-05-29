@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'delivery.levimurray.dev'
+    origins %w[*.airands.ca dev1.airands.ca dev2.airands.ca]
 
     resource '*',
              headers: :any,

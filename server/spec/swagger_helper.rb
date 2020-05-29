@@ -27,7 +27,7 @@ RSpec.configure do |config|
           url: 'https://{defaultHost}/api/v1',
           variables: {
             defaultHost: {
-              default: 'api.levimurray.dev'
+              default: 'dev2.airands.ca'
             }
           }
         }

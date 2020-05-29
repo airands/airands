@@ -34,7 +34,8 @@ export class Customer {
         return this._authProvider;
     }
 
+    // TODO
     get avatarUrl(): string {
-        return 'https://api.levimurray.dev' + this._avatarUrl;
+        return 'https://dev2.airands.ca' + this._avatarUrl;
     }
 }

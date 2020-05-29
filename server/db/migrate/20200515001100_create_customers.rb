@@ -6,8 +6,6 @@ class CreateCustomers < ActiveRecord::Migration[6.0]
       t.string :last_name, length: 40
       t.string :phone_number, length: 14
 
-      t.references :location_drop_off, foreign_key: true, type: :uuid
-
       t.string :auth_provider, length: 40, null: false
       t.string :auth_provider_uid
 

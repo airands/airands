@@ -1,0 +1,47 @@
+server {
+    listen 80;
+    server_name dev1.airands.ca;
+    return 301 https://dev1.airands.ca$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name dev1.airands.ca;
+
+    ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers         HIGH:!aNULL:!MD5;
+    ssl_certificate /etc/nginx/tls/dev1.airands.ca/fullchain.pem;
+    ssl_certificate_key /etc/nginx/tls/dev1.airands.ca/privkey.pem;
+
+    location / {
+        proxy_pass http://$CLIENT_PROXY;
+    }
+
+    location /sockjs-node {
+        proxy_set_header X-Real-IP  $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Host $host;
+
+        proxy_pass http://$CLIENT_PROXY;
+        proxy_redirect off;
+
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+}
+
+server {
+    listen 443 ssl;
+    server_name dev2.airands.ca;
+
+    ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers         HIGH:!aNULL:!MD5;
+    ssl_certificate /etc/nginx/tls/dev2.airands.ca/fullchain.pem;
+    ssl_certificate_key /etc/nginx/tls/dev2.airands.ca/privkey.pem;
+
+    location / {
+        proxy_pass http://$API_PROXY;
+    }
+
+}

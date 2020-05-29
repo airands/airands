@@ -5,23 +5,23 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: db
+  host: airands_db
   username: postgres
   password:
 
 development:
   <<: *default
-  database: airand_dev
+  database: airands_dev
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: airand_test
+  database: airands_test
 
 production:
   <<: *default
-  database: airand_prod
-  username: airand
-  password: <%= ENV['AIRAND_DB_PASSWORD'] %>
+  database: airands
+  username: airands
+  password: <%= ENV['AIRANDS_DB_PASSWORD'] %>

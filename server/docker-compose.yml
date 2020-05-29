@@ -1,7 +1,26 @@
 version: '3'
 
 services:
-  db:
+
+  # rails api
+  api:
+    container_name: airands_api
+    depends_on:
+      - postgres
+    build: .
+    entrypoint: ["/airands/entrypoint.sh"]
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/airands
+    env_file:
+      - .env
+    networks:
+      - app-network
+
+  # postgres
+  postgres:
+    container_name: airands_db
     image: postgres:11-alpine
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
@@ -9,14 +28,34 @@ services:
       - ./tmp/db:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - app-network
 
-  web:
+  # nginx
+  nginx:
     depends_on:
-      - db
-    build: .
+      - api
+    image: nginx:alpine
+    container_name: airands_nginx
+    restart: always
+    tty: true
+    logging:
+      driver: none
+    environment:
+      - CLIENT_PROXY=192.168.1.10:8100
+      - API_PROXY=192.168.1.10:3000
     ports:
-      - "3000:3000"
+      - "80:80"
+      - "443:443"
     volumes:
-      - .:/airand
-    env_file:
-      - .env
+      - ./nginx/dev.airands.ca.conf.template:/dev.airands.ca.conf.template
+      - ./nginx/tls/:/etc/nginx/tls/
+      - ./nginx/entrypoint.sh:/entrypoint.sh
+    entrypoint: ["/entrypoint.sh"]
+    command: ["nginx", "-g", "daemon off;"]
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

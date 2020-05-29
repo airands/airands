@@ -31,7 +31,7 @@ import { Configuration }                                     from '../configurat
 })
 export class SessionService {
 
-    protected basePath = 'https://api.levimurray.dev/api/v1';
+    protected basePath = 'https://dev2.airands.ca/api/v1';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;

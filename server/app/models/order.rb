@@ -7,8 +7,8 @@ class Order < ApplicationRecord
 
   belongs_to :customer
 
-  belongs_to :location_pick_up, class_name: 'Location::PickUp'
-  belongs_to :location_drop_off, class_name: 'Location::DropOff'
+  belongs_to :location_pick_up, class_name: 'Location::PickUp', optional: true
+  belongs_to :location_drop_off, class_name: 'Location::DropOff', optional: true
 
   def to_hash
     {

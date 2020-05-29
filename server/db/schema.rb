@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(version: 2020_05_23_194619) do
     t.string "first_name"
     t.string "last_name"
     t.string "phone_number"
-    t.uuid "location_drop_off_id"
     t.string "auth_provider", null: false
     t.string "auth_provider_uid"
     t.integer "sign_in_count", default: 0, null: false
@@ -53,7 +52,6 @@ ActiveRecord::Schema.define(version: 2020_05_23_194619) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_customers_on_email", unique: true
-    t.index ["location_drop_off_id"], name: "index_customers_on_location_drop_off_id"
   end
 
   create_table "drivers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -70,6 +68,7 @@ ActiveRecord::Schema.define(version: 2020_05_23_194619) do
   end
 
   create_table "location_drop_offs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "customer_id"
     t.integer "location_type", default: 0
     t.string "location_name"
     t.string "street_number"
@@ -80,6 +79,7 @@ ActiveRecord::Schema.define(version: 2020_05_23_194619) do
     t.string "postal_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_location_drop_offs_on_customer_id"
   end
 
   create_table "location_pick_ups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -96,11 +96,11 @@ ActiveRecord::Schema.define(version: 2020_05_23_194619) do
   end
 
   create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.integer "order_type", default: 0
-    t.uuid "customer_id", null: false
-    t.uuid "location_drop_off_id", null: false
-    t.uuid "location_pick_up_id", null: false
+    t.uuid "customer_id"
     t.uuid "driver_id"
+    t.integer "order_type", default: 0
+    t.uuid "location_drop_off_id"
+    t.uuid "location_pick_up_id"
     t.string "order_summary"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -111,9 +111,6 @@ ActiveRecord::Schema.define(version: 2020_05_23_194619) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "customers", "location_drop_offs"
-  add_foreign_key "orders", "customers"
-  add_foreign_key "orders", "drivers"
   add_foreign_key "orders", "location_drop_offs"
   add_foreign_key "orders", "location_pick_ups"
 end

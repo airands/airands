@@ -1,6 +1,8 @@
 class CreateLocationDropOffs < ActiveRecord::Migration[6.0]
   def change
     create_table :location_drop_offs, id: :uuid do |t|
+      t.belongs_to :customer, type: :uuid
+
       t.integer :location_type, default: 0
       t.string :location_name, length: 256
 
