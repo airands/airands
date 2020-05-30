@@ -16,13 +16,13 @@ import {AuthenticationService} from "./services/auth/authentication.service";
 import {IonicStorageModule} from "@ionic/storage";
 import {ApiModule, Configuration, ConfigurationParameters} from "../open_api";
 import {AllGuard} from "./guards/all.guard";
-import {ProfileService} from "./services/user/profile.service";
 import {LoginService} from "./services/auth/login.service";
 import {FacebookService} from "./services/auth/facebook.service";
 import {GoogleService} from "./services/auth/google.service";
 import {AppleService} from "./services/auth/apple.service";
 import {SharedModule} from "./modules/shared/shared.module";
 import {NewOrderStore} from "./store/orders/new-order.store";
+import {GoogleMapsModule} from "@angular/google-maps";
 
 export function apiConfigFactory(): Configuration {
     const params: ConfigurationParameters = {
@@ -42,6 +42,7 @@ export function apiConfigFactory(): Configuration {
         AppRoutingModule,
         IonicStorageModule.forRoot(),
         SharedModule,
+        GoogleMapsModule,
     ],
     providers: [
         StatusBar,
@@ -54,7 +55,6 @@ export function apiConfigFactory(): Configuration {
         FacebookService,
         GoogleService,
         AppleService,
-        ProfileService,
         NewOrderStore,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     ],

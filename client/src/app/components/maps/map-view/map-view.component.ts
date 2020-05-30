@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Loader} from "@googlemaps/js-api-loader";
 import {Plugins} from "@capacitor/core";
 import {AirandsMapStyles} from "../map.styles";
 
@@ -22,14 +21,15 @@ export class MapViewComponent implements OnInit, AfterViewInit {
         this.initMap();
     }
 
+    // TODO: Use @angular/google-maps
     async initMap() {
         const coordinates = await Plugins.Geolocation.getCurrentPosition();
 
-        const loader = new Loader({
-            apiKey: 'AIzaSyCeiZFiiBHy1SmDCZmi2ZhPXF95VSQUZQ0',
-            version: 'weekly',
-            libraries: ['places'],
-        });
+        // const loader = new Loader({
+        //     apiKey: 'AIzaSyCeiZFiiBHy1SmDCZmi2ZhPXF95VSQUZQ0',
+        //     version: 'weekly',
+        //     libraries: ['places'],
+        // });
 
         const userPosition = { lat: coordinates.coords.latitude, lng: coordinates.coords.longitude };
 
@@ -42,10 +42,10 @@ export class MapViewComponent implements OnInit, AfterViewInit {
             clickableIcons: false,
         };
 
-        loader.load().then(() => {
-            const map = new google.maps.Map(this.mapView.nativeElement, mapOptions);
-            new google.maps.Marker({position: userPosition, map: map});
-        });
+        // loader.load().then(() => {
+        //     const map = new google.maps.Map(this.mapView.nativeElement, mapOptions);
+        //     new google.maps.Marker({position: userPosition, map: map});
+        // });
     }
 
 

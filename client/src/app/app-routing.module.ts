@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {NoAuthGuard} from "./guards/auth/no-auth.guard";
 import {AuthGuard} from "./guards/auth/auth.guard";
-import {IncompleteProfileGuard} from "./guards/profile/incomplete-profile.guard";
 import {CompleteProfileGuard} from "./guards/profile/complete-profile.guard";
 import {AllGuard} from "./guards/all.guard";
 

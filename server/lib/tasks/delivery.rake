@@ -1,4 +1,4 @@
-namespace :airand do
+namespace :airands do
 
   desc "Generates swagger API and docs"
   task rswag: :environment do

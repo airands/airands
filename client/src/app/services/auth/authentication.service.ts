@@ -40,9 +40,11 @@ export class AuthenticationService {
     }
 
     logout() {
-        this.sessionService.logout().toPromise().finally(() => {
-            this.setCustomer(null);
-        });
+        this.loginService.logout(this.customer.value.authProvider).finally(() => {
+            this.sessionService.logout().toPromise().finally(() => {
+                this.setCustomer(null);
+            });
+        })
     }
 
     setCustomer(dto: CustomerDto): void {

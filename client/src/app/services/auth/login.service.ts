@@ -2,14 +2,8 @@ import {Injectable} from "@angular/core";
 import {FacebookService} from "./facebook.service";
 import {GoogleService} from "./google.service";
 import {AppleService} from "./apple.service";
-import {AppPlatform, CustomerDto, CustomersService} from "../../../open_api";
+import {AppPlatform, CustomerDto, CustomersService, SocialPlatform} from "../../../open_api";
 import {Plugins} from "@capacitor/core";
-
-enum SocialLoginType {
-    Google,
-    Facebook,
-    Apple,
-}
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
@@ -20,6 +14,22 @@ export class LoginService {
         private appleService: AppleService,
         private customersService: CustomersService,
     ) {
+    }
+
+    async logout(platform: SocialPlatform) {
+        switch (platform)
+        {
+            case "apple":
+                return;
+                // TODO this.appleService.logout();
+            case "google":
+                return await this.googleService.logout();
+            case "facebook":
+                return;
+                // TODO return await this.facebookService.logout();
+            default:
+                throw new Error(`Unrecognized or empty platform on logout: ${platform}`);
+        }
     }
 
     async loginGoogle() {
