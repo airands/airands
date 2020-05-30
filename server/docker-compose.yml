@@ -42,8 +42,8 @@ services:
     logging:
       driver: none
     environment:
-      - CLIENT_PROXY=192.168.1.10:8100
-      - API_PROXY=192.168.1.10:3000
+      - CLIENT_PROXY=${CLIENT_PROXY}
+      - API_PROXY=${API_PROXY}
     ports:
       - "80:80"
       - "443:443"
