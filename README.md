@@ -1,5 +1,8 @@
 <img src="https://github.com/airands/airands-assets/blob/master/1x/name-banner-green%401x.png" alt="">
 
+Here are various useful project links:
+- [Airands Database Visualization](https://app.lucidchart.com/invitations/accept/738eeaf3-9404-4c20-91fa-6b890d71de16)
+
 ## Setup
 
 #### 0. Add host entries OR DNS entries for dev servers
