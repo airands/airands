@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PaidForComponent} from "../paid-for/paid-for.component";
-import {NewOrderStore} from "../../../../store/orders/new-order.store";
-import {OrderType} from "../../../../../open_api";
+import {NewOrderStore} from "../../../../../store/orders/new-order.store";
+import {OrderType} from "../../../../../../open_api";
 
 @Component({
     selector: 'app-order-type',

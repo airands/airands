@@ -23,18 +23,13 @@ const routes: Routes = [
         loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule),
         canActivate: [NoAuthGuard],
     },
-    {
-        path: 'incomplete',
-        loadChildren: () => import('./pages/incomplete-profile/incomplete-profile.module').then(m => m.IncompleteProfilePageModule),
-        data: {guards: [AuthGuard, IncompleteProfileGuard]},
-        canActivate: [AllGuard],
-    },
-    {
-        path: 'tabs',
-        loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule),
-        data: {guards: [AuthGuard, CompleteProfileGuard]},
-        canActivate: [AllGuard],
-    },
+    // TODO: Re-implement incomplete profile guard
+    // {
+    //     path: 'incomplete',
+    //     loadChildren: () => import('./pages/incomplete-profile/incomplete-profile.module').then(m => m.IncompleteProfilePageModule),
+    //     data: {guards: [AuthGuard, IncompleteProfileGuard]},
+    //     canActivate: [AllGuard],
+    // },
 ];
 
 @NgModule({

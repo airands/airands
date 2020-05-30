@@ -1,13 +1,13 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import AutocompleteOptions = google.maps.places.AutocompleteOptions;
 import {NavController} from "@ionic/angular";
-import {BasicInputComponent} from "../../../../components/inputs/basic-input/basic-input.component";
+import {BasicInputComponent} from "../../../../inputs/basic-input/basic-input.component";
 import {OrderDescriptionComponent} from "../order-description/order-description.component";
 import {Plugins} from "@capacitor/core";
-import {createLocationAddress, NewOrderStore} from "../../../../store/orders/new-order.store";
+import {createLocationAddress, NewOrderStore} from "../../../../../store/orders/new-order.store";
 import GeocoderAddressComponent = google.maps.GeocoderAddressComponent;
 import PlaceResult = google.maps.places.PlaceResult;
-import {LocationAddress} from "../../../../../open_api";
+import {LocationAddress} from "../../../../../../open_api";
 
 @Component({
     selector: 'app-order-location',

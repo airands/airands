@@ -8,8 +8,8 @@ import {HomePageRoutingModule} from './home-routing.module';
 
 import {HomePage} from './home.page';
 import {SharedModule} from "../../modules/shared/shared.module";
-import {OrderWorkflowModalModule} from "../order-workflow-modal/order-workflow-modal.module";
-import {OrderWorkflowModalPage} from "../order-workflow-modal/order-workflow-modal.page";
+import {OrderWorkflowModalModule} from "../../components/modals/order-workflow-modal/order-workflow-modal.module";
+import {OrderWorkflowModalPage} from "../../components/modals/order-workflow-modal/order-workflow-modal.page";
 
 @NgModule({
     imports: [

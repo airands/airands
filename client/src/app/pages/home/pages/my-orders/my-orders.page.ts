@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {IonRouterOutlet, ModalController} from "@ionic/angular";
-import {OrderWorkflowModalPage} from "../../../order-workflow-modal/order-workflow-modal.page";
+import {OrderWorkflowModalPage} from "../../../../components/modals/order-workflow-modal/order-workflow-modal.page";
 import {Order, OrdersService} from "../../../../../open_api";
 
 @Component({

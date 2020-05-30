@@ -8,9 +8,6 @@ import {LoginPageRoutingModule} from './login-routing.module';
 
 import {LoginPage} from './login.page';
 import {SplashComponent} from "./components/splash/splash.component";
-import {PhonePromptComponent} from "./components/phone-prompt/phone-prompt.component";
-import {ConfirmationPromptComponent} from "./components/confirmation-prompt/confirmation-prompt.component";
-import {AuthOptionsComponent} from "./components/auth-options/auth-options.component";
 import {OrderTypeSelectionComponent} from "../../components/order-type-selection/order-type-selection.component";
 import {SharedModule} from "../../modules/shared/shared.module";
 
@@ -25,9 +22,6 @@ import {SharedModule} from "../../modules/shared/shared.module";
     declarations: [
         LoginPage,
         SplashComponent,
-        PhonePromptComponent,
-        ConfirmationPromptComponent,
-        AuthOptionsComponent,
         OrderTypeSelectionComponent,
     ],
 })

@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {OrderSummaryComponent} from "../order-summary/order-summary.component";
-import {NewOrderStore} from "../../../../store/orders/new-order.store";
-import {BasicInputComponent} from "../../../../components/inputs/basic-input/basic-input.component";
+import {NewOrderStore} from "../../../../../store/orders/new-order.store";
+import {BasicInputComponent} from "../../../../inputs/basic-input/basic-input.component";
 
 @Component({
     selector: 'app-order-description',

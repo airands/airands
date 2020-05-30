@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {NewOrderStore} from "../../../../store/orders/new-order.store";
-import {OrdersService} from "../../../../../open_api";
+import {NewOrderStore} from "../../../../../store/orders/new-order.store";
+import {OrdersService} from "../../../../../../open_api";
 
 @Component({
     selector: 'app-order-summary',
