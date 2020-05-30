@@ -36,8 +36,10 @@ address=/dev2.airands.ca/<HOST_IP>
 vi server/.env
 
 # .env
-CLIENT_PROXY=<HOST_IP>:8100 # client dev server
-API_PROXY=<HOST_IP>:3000    # rails api server
+# client dev server
+CLIENT_PROXY=<HOST_IP>:8100
+# rails api server
+API_PROXY=<HOST_IP>:3000
 ```
 
 #### 3. Start nginx, rails & postgres containers
