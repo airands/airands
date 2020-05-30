@@ -1,26 +1,20 @@
-module Location
-  def self.table_name_prefix
-    'location_'
-  end
+class Location < ApplicationRecord
 
-  module Concern
-    extend ActiveSupport::Concern
-
-    included do
-      enum location_type: { commercial: 0, residential: 1 }
-    end
+    enum location_type: { commercial: 0, residential: 1 }
 
     def self.permitted_params
-      [
-        :street_number,
-        :street_name,
-        :unit_number,
-        :city,
-        :province,
-        :postal_code,
-        :location_name,
-        :location_type,
-      ]
+      [ :street_number, :street_name, :unit_number, :city,
+        :province, :postal_code, :location_name, :location_type ]
+    end
+
+    # TODO: Validate is an actual Canadian address?
+    def self.validate_address(params)
+      non_required = [:first_name, :last_name, :unit_number]
+      blank_keys = params.select {|k, v| v.blank? && !non_required.include?(k) }.keys
+
+      unless blank_keys.empty?
+        raise Airands::Exception::ValidationException.new(blank_keys)
+      end
     end
 
     def self.validate_postal_code(params)
@@ -28,15 +22,6 @@ module Location
         if params[:postal_code].length < 6
           raise Airands::Exception::ValidationException.new([:postal_code])
         end
-      end
-    end
-
-    def self.validate_address(params)
-      non_required = [:first_name, :last_name, :unit_number]
-      blank_keys = params.select {|k, v| v.blank? && !non_required.include?(k) }.keys
-
-      unless blank_keys.empty?
-        raise Airands::Exception::ValidationException.new(blank_keys)
       end
     end
 
@@ -57,5 +42,4 @@ module Location
         postal_code: postal_code,
       }
     end
-  end
 end

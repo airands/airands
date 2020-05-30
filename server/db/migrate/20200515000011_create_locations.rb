@@ -1,7 +1,7 @@
-class CreateLocationDropOffs < ActiveRecord::Migration[6.0]
+class CreateLocations < ActiveRecord::Migration[6.0]
   def change
-    create_table :location_drop_offs, id: :uuid do |t|
-      t.belongs_to :customer, type: :uuid
+    create_table :locations, id: :uuid do |t|
+      t.timestamps
 
       t.integer :location_type, default: 0
       t.string :location_name, length: 256
@@ -12,8 +12,6 @@ class CreateLocationDropOffs < ActiveRecord::Migration[6.0]
       t.string :city, length: 32
       t.string :province, length: 2
       t.string :postal_code, length: 6
-
-      t.timestamps
     end
   end
 end

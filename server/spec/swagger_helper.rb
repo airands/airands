@@ -100,7 +100,7 @@ RSpec.configure do |config|
             type: :object,
             properties: {
                 order_type: {'$ref': '#/components/schemas/order_type'},
-                order_summary: {type: :string},
+                order_description: {type: :string},
                 locations: {'$ref': '#/components/schemas/new_order_locations'},
             },
             required: %w[],
@@ -110,10 +110,10 @@ RSpec.configure do |config|
             type: :object,
             properties: {
               order_type: {'$ref': '#/components/schemas/order_type'},
-              order_summary: {type: :string},
+              order_description: {type: :string},
               locations: {'$ref': '#/components/schemas/new_order_locations'},
             },
-            required: %w[order_type order_summary locations],
+            required: %w[order_type order_description locations],
           },
 
           new_order_locations: {

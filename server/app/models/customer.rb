@@ -2,7 +2,8 @@ class Customer < ApplicationRecord
 
   has_one_attached :avatar
 
-  has_many :location_drop_offs, class_name: 'Location::DropOff'
+  belongs_to :primary_location, class_name: 'Location', optional: true
+
   has_many :orders
 
   def update_trackable(request_ip)

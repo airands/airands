@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :driver do
+  factory :runner do
     
   end
 end

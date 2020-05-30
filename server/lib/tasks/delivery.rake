@@ -6,12 +6,12 @@ namespace :airands do
     sh "RAILS_ENV=test rails rswag"
   end
 
-  desc "Executes client openapi-generator"
-  task api: :environment do
-    Rake::Task["airand:rswag"].invoke
-
-    client_dir = "#{Rails.root}/../client"
-    sh "cd #{client_dir} && yarn openapi"
-  end
+  # desc "Executes client openapi-generator"
+  # task api: :environment do
+  #   Rake::Task["airands:rswag"].invoke
+  #
+  #   client_dir = "#{Rails.root}/../client"
+  #   sh "cd #{client_dir} && yarn openapi"
+  # end
 
 end

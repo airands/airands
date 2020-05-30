@@ -38,20 +38,20 @@ class Api::V1::OrdersController < ApplicationController
 
   def create_params
     locations = params.require(:locations)
-    pick_up = locations.require(:pick_up).permit(Location::Concern.permitted_params)
+    pick_up = locations.require(:pick_up).permit(Location.permitted_params)
 
     order_params = {
       order_type: params.require(:order_type),
-      order_summary: params.require(:order_summary),
-      location_pick_up: Location::PickUp.new(pick_up),
+      order_description: params.require(:order_description),
+      pick_up_location: Location.new(pick_up),
     }
 
     # TODO: Ensure user profiles are complete
-    # TODO: Default to current_user location_drop_off
+    # TODO: Default to current_user primary_location
     if locations[:drop_off].present? || true
       # drop_off = locations.require(:drop_off).permit(Location::Concern.permitted_params)
       # order_params[:drop_off] = Location::PickUp.new(drop_off)
-      order_params[:location_drop_off] = Location::DropOff.new(pick_up)
+      order_params[:drop_off_location] = Location.new(pick_up)
     end
 
     order_params

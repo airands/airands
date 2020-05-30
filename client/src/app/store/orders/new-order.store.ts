@@ -14,7 +14,7 @@ const emptyLocationAddress: LocationAddress = {
 
 const emptyNewOrder: NewOrder = {
     order_type: null,
-    order_summary: '',
+    order_description: '',
     locations: {
         pick_up: {...emptyLocationAddress},
         drop_off: null,
@@ -45,8 +45,8 @@ export class NewOrderStore {
         this.order.order_type = orderType;
     }
 
-    setSummary(summary: string) {
-        this.order.order_summary = summary;
+    setDescription(description: string) {
+        this.order.order_description = description;
     }
 
     setPickUpLocation(location: LocationAddress) {

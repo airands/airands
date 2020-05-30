@@ -237,7 +237,7 @@ components:
       properties:
         order_type:
           "$ref": "#/components/schemas/order_type"
-        order_summary:
+        order_description:
           type: string
         locations:
           "$ref": "#/components/schemas/new_order_locations"
@@ -247,13 +247,13 @@ components:
       properties:
         order_type:
           "$ref": "#/components/schemas/order_type"
-        order_summary:
+        order_description:
           type: string
         locations:
           "$ref": "#/components/schemas/new_order_locations"
       required:
       - order_type
-      - order_summary
+      - order_description
       - locations
     new_order_locations:
       type: object

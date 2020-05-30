@@ -15,7 +15,7 @@ import { OrderType } from './orderType';
 
 export interface Order { 
     order_type?: OrderType;
-    order_summary?: string;
+    order_description?: string;
     locations?: NewOrderLocations;
 }
 

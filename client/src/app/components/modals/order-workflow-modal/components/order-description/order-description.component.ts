@@ -22,8 +22,7 @@ export class OrderDescriptionComponent implements OnInit {
 
     goNext() {
         const orderDescription = this.basicInput.getInputElement().value;
-        console.log(orderDescription);
-        this.newOrderStore.setSummary(orderDescription);
+        this.newOrderStore.setDescription(orderDescription);
         this.modalNav().push(OrderSummaryComponent);
     }
 
