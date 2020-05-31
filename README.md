@@ -73,3 +73,11 @@ docker exec -it airands_api sh
 ```bash
 docker exec -it airands_db psql -U postgres airands_dev
 ```
+
+#### Openapi Generation
+
+```bash
+docker exec airands_api rake airands:rswag
+cd client
+yarn openapi
+```

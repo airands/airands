@@ -8,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class AppButtonComponent implements OnInit {
 
   @Input() disabled: boolean;
-  @Input() color: 'primary' | 'facebook' | 'google' | 'apple';
+  @Input() color: 'primary' | 'facebook' | 'google' | 'apple' | 'airands';
   @Input() icon: string;
   @Input() iconColor: string;
   @Input() bottom: string = '8';

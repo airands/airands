@@ -1,10 +1,20 @@
 <ion-content [scrollY]="false">
 
-  <app-workflow-header>Order Summary</app-workflow-header>
+  <app-workflow-header>
+    Order Summary
+    <span class="sub-text">Commercial Pick Up</span>
+  </app-workflow-header>
 
   <div class="ion-padding-horizontal">
-    <app-input-display label="Pre-Purchased">True</app-input-display>
-    <app-button (click)="goNext()" top="48">Continue</app-button>
+    <div class="order-locations app-border">
+      <app-input-display label="Pick Up" [pre]="true">{{ fullAddress }}</app-input-display>
+      <app-input-display label="Drop Off" [pre]="true">{{ fullAddress }}</app-input-display>
+    </div>
+    <div class="order-description app-border">
+      <app-input-display label="Description">{{ order.order_description }}</app-input-display>
+    </div>
+    <app-button (click)="saveOrder()" top="32">Save</app-button>
+    <app-button (click)="placeOrder()" color="airands" top="12">Place Order</app-button>
   </div>
 
 </ion-content>

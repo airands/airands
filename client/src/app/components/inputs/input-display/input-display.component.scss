@@ -1,0 +1,18 @@
+.input-display {
+
+  ion-label {
+    font-weight: bolder;
+    max-height: fit-content;
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .display-value {
+    font-size: 14px;
+    color: var(--ion-color-dark-tint);
+
+    &.pre {
+      white-space: pre;
+    }
+  }
+}
