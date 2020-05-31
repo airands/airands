@@ -1,0 +1,41 @@
+.order-locations {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  margin-bottom: 16px;
+
+  app-input-display {
+    width: 50%;
+    padding: 16px 4px 16px 12px;
+
+    &:first-child {
+      background-color: var(--app-input-background-color-shade);
+    }
+  }
+
+  .locations-arrow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    font-size: 32px;
+    transform: translate3d(-3px, -3px, 0);
+    color: var(--app-brand-color);
+  }
+
+}
+
+.order-description {
+  background-color: var(--app-input-background-color-shade);
+  padding: 8px;
+  min-height: 160px;
+
+  app-input-display {
+    ::ng-deep .display-value {
+      font-weight: lighter;
+    }
+  }
+}

@@ -1,5 +1,8 @@
-<ion-item class="ion-no-padding" color="transparent" lines="none">
-  <ion-label *ngIf="hasLabel"
-             position="stacked"
-  >{{ label }}</ion-label>
+<ion-item class="ion-no-padding input-display" color="transparent" lines="none">
+  <ion-label *ngIf="hasLabel" position="stacked" color="medium">
+    {{ label }}
+  </ion-label>
+  <span class="display-value sub-text" [class.pre]="pre">
+    <ng-content></ng-content>
+  </span>
 </ion-item>

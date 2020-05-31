@@ -51,4 +51,13 @@ ion-button {
             white,
     );
   }
+
+  &.airands {
+    @include solid-fill-button(
+            var(--app-brand-color),
+            var(--app-brand-color-shade),
+            var(--app-brand-color),
+            white,
+    );
+  }
 }
