@@ -3,7 +3,11 @@
   padding-left: 8px;
 }
 
-h3 {
+.inline-title {
+  font-size: 2em;
+}
+
+h3:not(:empty) {
   font-size: 2em;
   padding-bottom: 32px;
 }

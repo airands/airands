@@ -1,0 +1,23 @@
+<ion-content [scrollY]="false">
+  <app-modal-layout>
+    <modal-title>
+      Sign Up
+    </modal-title>
+
+    <modal-body>
+      <form (submit)="singUp()" (keyup.enter)="singUp()" class="login-form">
+        <h4>Please complete the fields below.</h4>
+        <app-basic-input bottom="8" [(value)]="email" placeholder="Email" type="email"></app-basic-input>
+        <div class="password-match-msg">
+          <span *ngIf="!passwordsMatch() && passwordConfirmation !== ''">
+            *passwords must match
+          </span>
+        </div>
+        <app-basic-input [(value)]="password" placeholder="Password" type="password"></app-basic-input>
+        <app-basic-input [(value)]="passwordConfirmation" placeholder="Confirm Password" type="password"></app-basic-input>
+        <app-button top="32" color="primary" type="submit" [disabled]="!inputsValid()">Sign Up</app-button>
+      </form>
+    </modal-body>
+
+  </app-modal-layout>
+</ion-content>

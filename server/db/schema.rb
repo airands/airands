@@ -56,6 +56,47 @@ ActiveRecord::Schema.define(version: 2020_05_23_194619) do
     t.index ["primary_location_id"], name: "index_customers_on_primary_location_id"
   end
 
+  create_table "drivers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "email", null: false
+    t.string "phone_number"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_drivers_on_email", unique: true
+  end
+
+  create_table "location_drop_offs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "customer_id"
+    t.integer "location_type", default: 0
+    t.string "location_name"
+    t.string "street_number"
+    t.string "street_name"
+    t.string "unit_number"
+    t.string "city"
+    t.string "province"
+    t.string "postal_code"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_location_drop_offs_on_customer_id"
+  end
+
+  create_table "location_pick_ups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "location_type", default: 0
+    t.string "location_name"
+    t.string "street_number"
+    t.string "street_name"
+    t.string "unit_number"
+    t.string "city"
+    t.string "province"
+    t.string "postal_code"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "locations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

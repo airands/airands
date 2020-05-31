@@ -3,6 +3,7 @@
        [ngStyle]="inputStyles"
        [placeholder]="placeholder"
        [(ngModel)]="value"
+       (ngModelChange)="valueChange.emit(value)"
        [disabled]="disabled"
-       type="text"
+       [type]="type"
 >

@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {NavController} from "@ionic/angular";
+import {ModalController, NavController} from "@ionic/angular";
 import {Plugins} from "@capacitor/core";
 import "@codetrix-studio/capacitor-google-auth";
 import {LoginService} from "../../../../services/auth/login.service";
+import {OrderWorkflowModalPage} from "../../../../components/modals/order-workflow-modal/order-workflow-modal.page";
+import {AirandsLoginComponent} from "../modal/airands-login/airands-login.component";
 
 @Component({
     selector: 'app-splash',
@@ -15,6 +17,7 @@ export class SplashComponent implements OnInit {
 
     constructor(
         private navCtrl: NavController,
+        private modalController: ModalController,
         private loginService: LoginService,
     ) {
         Plugins.Device.getInfo().then((value) => {
@@ -42,6 +45,13 @@ export class SplashComponent implements OnInit {
     loginApple() {
         this.loginService.loginApple();
         this.goHome();
+    }
+
+    async loginAirands() {
+        const modal = await this.modalController.create({
+            component: AirandsLoginComponent,
+        });
+        return await modal.present();
     }
 
     get isIos(): boolean {

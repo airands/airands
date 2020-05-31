@@ -1,0 +1,18 @@
+<ion-content [scrollY]="false">
+  <app-modal-layout [hasBackButton]="false">
+    <modal-title>
+      Airands Login
+    </modal-title>
+
+    <modal-body>
+      <form (submit)="login()" (keyup.enter)="login()" class="login-form">
+        <h4>Please enter your login information.</h4>
+        <app-basic-input [(value)]="email" placeholder="Email"></app-basic-input>
+        <app-basic-input [(value)]="password" placeholder="Password" type="password"></app-basic-input>
+        <app-button top="16" color="primary" type="submit" [disabled]="!inputsValid()">Login</app-button>
+        <app-button top="8" (click)="toSignUp()">Sign up</app-button>
+      </form>
+    </modal-body>
+
+  </app-modal-layout>
+</ion-content>

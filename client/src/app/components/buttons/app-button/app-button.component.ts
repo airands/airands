@@ -13,6 +13,7 @@ export class AppButtonComponent implements OnInit {
   @Input() iconColor: string;
   @Input() bottom: string = '8';
   @Input() top: string = '0';
+  @Input() type: string = 'button';
 
   constructor() { }
 
