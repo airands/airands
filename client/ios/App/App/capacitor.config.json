@@ -5,9 +5,9 @@
   "npmClient": "yarn",
   "webDir": "www",
 	"server": {
-		"url": "https://delivery.levimurray.dev",
+		"url": "https://dev1.airands.ca",
 		"allowNavigation": [
-			"delivery.levimurray.dev"
+			"https://dev1.airands.ca"
 		]
 	},
   "cordova": {},
