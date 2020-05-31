@@ -1,0 +1,24 @@
+{
+  "name": "airands-icons",
+  "css_prefix_text": "icon-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "0a6ad65c91e83e599b0aa28caf4c8f66",
+      "css": "brand-leaf",
+      "code": 59392,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M969.6 106.5C438.9 6.5-6.8 200.5 32.9 786.2H32.9C381.6 881.7 387.6 282.9 707.3 200.3H707.3C416.1 344.8 477.9 810.3 126.7 870.2H126.7C598.3 1043.5 837.3 723.2 841.3 337.2 841.3 337.2 846.8 157.6 968.7 105.3Z",
+        "width": 1000
+      },
+      "search": [
+        "brand-leaf"
+      ]
+    }
+  ]
+}
