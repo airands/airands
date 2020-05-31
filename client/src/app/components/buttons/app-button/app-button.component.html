@@ -1,5 +1,6 @@
 <ion-button expand="block" [ngClass]="colorClass" [ngStyle]="buttonStyle" [disabled]="disabled" [type]="type">
-  <ion-icon [ngStyle]="iconStyle" *ngIf="hasIcon" [name]="icon" slot="start"></ion-icon>
+  <ion-icon *ngIf="hasIcon && ionicIcon" [ngStyle]="iconStyle" [name]="icon" slot="start"></ion-icon>
+  <i *ngIf="hasIcon && !ionicIcon" [ngStyle]="iconStyle" [class]="icon"></i>
   <ion-label>
     <ng-content></ng-content>
   </ion-label>
