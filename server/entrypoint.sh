@@ -1,7 +1,6 @@
 #!/bin/sh
 
-rake db:setup
-rake db:migrate
+rake db:prepare
 
 rm ./tmp/pids/server.pid
 
