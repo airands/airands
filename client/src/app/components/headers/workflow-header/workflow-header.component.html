@@ -5,6 +5,9 @@
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <div class="inline-title d-flex justify-content-center">
+      <ng-content select="inline-title"></ng-content>
+    </div>
     <ion-buttons *ngIf="hasClose" slot="end">
       <ion-button (click)="closeModal()">
         <ion-icon slot="icon-only" name="close-sharp"></ion-icon>

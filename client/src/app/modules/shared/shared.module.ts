@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CardButtonComponent} from "../../components/buttons/card-button/card-button.component";
 import {BasicInputComponent} from "../../components/inputs/basic-input/basic-input.component";
@@ -8,9 +8,13 @@ import {IonicModule} from "@ionic/angular";
 import {FormsModule} from "@angular/forms";
 import {AppButtonComponent} from "../../components/buttons/app-button/app-button.component";
 import {WorkflowHeaderComponent} from "../../components/headers/workflow-header/workflow-header.component";
+import {ModalLayoutComponent} from "../../components/layout/modal-layout/modal-layout.component";
 
 
 @NgModule({
+    schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+    ],
     imports: [
         CommonModule,
         IonicModule,
@@ -23,6 +27,7 @@ import {WorkflowHeaderComponent} from "../../components/headers/workflow-header/
         UserAvatarComponent,
         AppButtonComponent,
         WorkflowHeaderComponent,
+        ModalLayoutComponent,
     ],
     exports: [
         CardButtonComponent,
@@ -31,6 +36,7 @@ import {WorkflowHeaderComponent} from "../../components/headers/workflow-header/
         UserAvatarComponent,
         AppButtonComponent,
         WorkflowHeaderComponent,
+        ModalLayoutComponent,
     ],
 })
 export class SharedModule {

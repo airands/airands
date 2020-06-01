@@ -4,6 +4,31 @@ info:
   title: API V1
   version: v1
 paths:
+  "/auth/airands/accounts":
+    post:
+      summary: Create a new account
+      tags:
+      - Accounts
+      operationId: createAccount
+      parameters: []
+      responses:
+        '200':
+          description: Account created
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/airands_account"
+        '400':
+          description: Creation error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_response"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/airands_account"
   "/customers":
     post:
       summary: Create new customer user
@@ -160,6 +185,13 @@ components:
       properties:
         message:
           type: string
+    error_response:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          "$ref": "#/components/schemas/error_code"
     customer_dto:
       type: object
       properties:
@@ -265,6 +297,15 @@ components:
       required:
       - pick_up
       - drop_off
+    airands_account:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
     social_platform:
       type: string
       enum:
@@ -287,3 +328,8 @@ components:
       enum:
       - commercial
       - residential
+    error_code:
+      type: string
+      enum:
+      - generic
+      - account_exists

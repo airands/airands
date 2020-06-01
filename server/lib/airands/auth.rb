@@ -4,15 +4,19 @@ module Airands
     PROVIDER_FACEBOOK = :facebook
     PROVIDER_GOOGLE = :google
     PROVIDER_APPLE = :apple
+    PROVIDER_AIRANDS = :airands
     AUTH_PROVIDERS = [PROVIDER_FACEBOOK, PROVIDER_GOOGLE, PROVIDER_APPLE]
 
     def self.authenticate(token, auth_provider, platform = :ios)
-      if auth_provider == PROVIDER_GOOGLE
+      case auth_provider
+      when PROVIDER_GOOGLE
         CoreModules::Google::Auth.validate(token, Airands::Credentials.google_client_id(platform)).symbolize_keys
-      elsif auth_provider == PROVIDER_FACEBOOK
+      when PROVIDER_FACEBOOK
         # TODO
-      elsif auth_provider == PROVIDER_APPLE
+      when PROVIDER_APPLE
         # TODO
+      when PROVIDER_AIRANDS
+        ::CoreModules::Airands::Auth.validate(token)
       else
         # TODO: Exception
       end

@@ -11,8 +11,7 @@ export class NoAuthGuard implements CanActivate {
     constructor(
         private authenticationService: AuthenticationService,
         private navController: NavController,
-    ) {
-    }
+    ) {}
 
     async canActivate(route, state): Promise<boolean> {
         if (this.authenticationService.isAuthenticated()) {

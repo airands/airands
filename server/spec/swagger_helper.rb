@@ -43,7 +43,15 @@ RSpec.configure do |config|
             },
           },
 
-          # Application DTOs
+          error_response: {
+            type: :object,
+            properties: {
+              message: { type: :string},
+              code: {'$ref': '#/components/schemas/error_code'},
+            }
+          },
+
+          # ======================== Application DTOs ===============================
 
           customer_dto: {
             type: :object,
@@ -125,7 +133,22 @@ RSpec.configure do |config|
             required: %w[pick_up drop_off],
           },
 
-          # Enums
+          airands_account: {
+              type: :object,
+              properties: {
+                  id: {
+                    type: :string
+                  },
+                  email: {
+                    type: :string
+                  },
+                  password: {
+                    type: :string
+                  }
+              }
+          },
+
+          # ============================ Enums =============================
 
           social_platform: {
             type: :string,
@@ -145,6 +168,11 @@ RSpec.configure do |config|
           location_type: {
             type: :string,
             enum: %w[commercial residential],
+          },
+
+          error_code: {
+            type: :string,
+            enum: %w[generic account_exists]
           }
 
         }

@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
   include ActionController::Cookies
+  include ::Airands::Dto
 
   def authenticate_cookie
     user_id = cookies.signed[:customer_id]

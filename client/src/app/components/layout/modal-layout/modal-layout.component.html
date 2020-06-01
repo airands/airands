@@ -1,0 +1,9 @@
+<app-workflow-header slot="fixed" class="header" [hasBack]="hasBackButton">
+  <inline-title>
+    <ng-content select="modal-title"></ng-content>
+  </inline-title>
+</app-workflow-header>
+
+<div class="content">
+  <ng-content select="modal-body"></ng-content>
+</div>

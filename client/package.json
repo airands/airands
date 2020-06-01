@@ -6,7 +6,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng run app:serve --host=0.0.0.0 --port=8100 --disable-host-check",
-    "openapi": "openapi-generator generate -c ./open_api.json -i ../server/swagger/v1/swagger.yaml -g typescript-angular -o ./src/open_api/",
+    "start:poll": "ng run app:serve --host=0.0.0.0 --port=8100 --disable-host-check --poll 5",
+    "openapi": "docker exec airands_api rake airands:rswag && openapi-generator generate -c ./open_api.json -i ../server/swagger/v1/swagger.yaml -g typescript-angular -o ./src/open_api/",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

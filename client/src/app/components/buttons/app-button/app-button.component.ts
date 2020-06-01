@@ -10,9 +10,11 @@ export class AppButtonComponent implements OnInit {
   @Input() disabled: boolean;
   @Input() color: 'primary' | 'facebook' | 'google' | 'apple' | 'airands';
   @Input() icon: string;
+  @Input() ionicIcon: boolean = true;
   @Input() iconColor: string;
   @Input() bottom: string = '8';
   @Input() top: string = '0';
+  @Input() type: string = 'button';
 
   constructor() { }
 

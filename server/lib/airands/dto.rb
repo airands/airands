@@ -1,0 +1,2 @@
+module Airands::Dto
+end
