@@ -4,6 +4,7 @@ import {GoogleService} from "./google.service";
 import {AppleService} from "./apple.service";
 import {AppPlatform, CustomerDto, CustomersService, SocialPlatform} from "../../../open_api";
 import {Plugins} from "@capacitor/core";
+import {HttpResponse} from "@angular/common/http";
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
@@ -47,6 +48,17 @@ export class LoginService {
         await this.facebookService.login();
         const response = await this.facebookService.getProfile();
         console.log(response);
+    }
+
+    public async loginAirands(email: string, password: string): Promise<any> {
+        let token = JSON.stringify({email, password})
+        return this.postRegistration(token, {
+            auth_provider: 'airands',
+            auth_provider_uid: null,
+            email: email,
+            first_name: null,
+            last_name: null,
+        });
     }
 
     async loginApple() {

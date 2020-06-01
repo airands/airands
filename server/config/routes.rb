@@ -8,19 +8,40 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
 
-      get '/sessions', to: 'sessions#show'
-      post '/sessions', to: 'sessions#create'
-      delete '/sessions', to: 'sessions#destroy'
+      scope "/sessions" do
+        get '', to: 'sessions#show'
+        post '', to: 'sessions#create'
+        delete '', to: 'sessions#destroy'
+      end
 
-      post '/customers', to: 'customers#create'
-      get '/customers', to: 'customers#show'
+      scope "/customers" do
+        post '', to: 'customers#create'
+        get '', to: 'customers#show'
+      end
 
-      post '/orders', to: 'orders#create'
-      get '/orders', to: 'orders#show_all'
-      get '/orders/:order_id', to: 'orders#show'
-      put '/orders/:order_id', to: 'orders#update'
-      delete '/orders/:order_id', to: 'orders#destroy'
+      scope "/orders" do
+        post '', to: 'orders#create'
+        get '', to: 'orders#show_all'
 
+        scope "/:order_id" do
+          get '', to: 'orders#show'
+          put '', to: 'orders#update'
+          delete '', to: 'orders#destroy'
+        end
+      end
+
+
+      namespace :auth do
+        namespace :airands do
+          scope "/accounts" do
+            post '', to: "accounts#create"
+          end
+
+          scope "/account/:account_id" do
+            put '', to: "accounts#update"
+          end
+        end
+      end
     end
   end
 

@@ -1,5 +1,8 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SignUpComponent} from "../sign-up/sign-up.component";
+import {LoginService} from "../../../../../../../services/auth/login.service";
+import {Router} from "@angular/router";
+import {ModalController} from "@ionic/angular";
 
 @Component({
   selector: 'app-login',
@@ -11,11 +14,22 @@ export class LoginComponent implements OnInit {
   public email: string = '';
   public password: string = '';
 
+  constructor(private loginService: LoginService,
+              private router: Router,
+              private modalController: ModalController) {}
+
   ngOnInit() {}
 
-  public login():void {
+  public async login() {
     if (this.inputsValid()) {
-      console.log('LOGIN!');
+      try {
+        await this.loginService.loginAirands(this.email, this.password);
+        await this.router.navigateByUrl("/home");
+        await this.modalController.dismiss();
+      }
+      catch (errorResponse) {
+        alert("BAD LOGIN, TODO BETTER THIS")
+      }
     }
   }
 
