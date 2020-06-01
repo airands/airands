@@ -5,7 +5,10 @@
 </ion-header>
 
 <ion-content [scrollY]="false">
-  <div class="ion-padding-horizontal">
-    <app-button (click)="createOrder()">New Order</app-button>
+  <div class="ion-padding-horizontal expand-v">
+    <div class="d-flex flex-col expand-v justify-content-center">
+      <span class="sub-text ion-text-center">Easily create an order in a few simple steps!</span>
+      <app-button top="16" (click)="createOrder()">New Order</app-button>
+    </div>
   </div>
 </ion-content>

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NewOrderStore} from "../../../../../store/orders/new-order.store";
-import {LocationAddress, NewOrder, OrdersService} from "../../../../../../open_api";
+import {LocationAddress, NewOrder, OrdersService, OrderType} from "../../../../../../open_api";
 import {AlertController, LoadingController, ModalController, ToastController} from "@ionic/angular";
 
 @Component({
@@ -79,6 +79,21 @@ export class OrderSummaryComponent implements OnInit {
 
     get dropOff(): LocationAddress {
         return this.order.locations.drop_off;
+    }
+
+    get orderTypeUF(): string {
+        switch (this.orderType) {
+            case OrderType.CommercialPickUp:
+                return "Commercial Pick Up";
+            case OrderType.PrivatePickUp:
+                return "Private Pick Up";
+            default:
+                return "Unknown Order Type";
+        }
+    }
+
+    get orderType(): OrderType {
+        return this.order.order_type;
     }
 
 }
