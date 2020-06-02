@@ -1,4 +1,5 @@
-.map-view {
-  height: 100%;
-  width: 100%;
+.top-overlay {
+  position: fixed;
+  bottom: calc(#{env(safe-area-inset-bottom)} + 16px);
+  z-index: 1000;
 }

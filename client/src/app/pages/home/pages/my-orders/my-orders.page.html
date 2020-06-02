@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [scrollY]="">
+<ion-content [scrollY]="activeOrders.length > 3">
   <div class="ion-padding-horizontal expand-v">
 
     <div class="order-list" *ngIf="hasOrders; else noOrders">

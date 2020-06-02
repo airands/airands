@@ -1,2 +1,22 @@
-<!-- TODO: Replace with @angular/google-maps -->
-<div class="map-view" #mapView></div>
+<div class="top-overlay expand-h ion-padding-horizontal">
+  <app-button color="airands" (click)="closeMap()">Close</app-button>
+</div>
+
+<google-map *ngIf="options"
+            [options]="options"
+            height="100vh"
+            width="100%"
+>
+  <map-marker *ngIf="pickUpMarker"
+              [position]="pickUpMarker.position"
+              [label]="pickUpMarker.label"
+              [title]="pickUpMarker.title"
+              [options]="pickUpMarker.options"
+  ></map-marker>
+  <map-marker *ngIf="dropOffMarker"
+              [position]="dropOffMarker.position"
+              [label]="dropOffMarker.label"
+              [title]="dropOffMarker.title"
+              [options]="dropOffMarker.options"
+  ></map-marker>
+</google-map>

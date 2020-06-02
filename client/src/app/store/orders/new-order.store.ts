@@ -10,6 +10,8 @@ const emptyLocationAddress: LocationAddress = {
     postal_code: null,
     location_name: null,
     location_type: null,
+    lat: null,
+    lng: null,
 };
 
 const emptyNewOrder: NewOrder = {

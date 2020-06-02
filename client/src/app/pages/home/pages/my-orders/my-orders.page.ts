@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AlertController, IonRouterOutlet, ModalController} from "@ionic/angular";
 import {OrderWorkflowModalPage} from "../../../../components/modals/order-workflow-modal/order-workflow-modal.page";
 import {Order, OrdersService} from "../../../../../open_api";
+import {MapViewComponent} from "../../../../components/maps/map-view/map-view.component";
 
 @Component({
     selector: 'app-my-orders',
@@ -41,12 +42,20 @@ export class MyOrdersPage implements OnInit {
     }
 
     async openOrder(order: Order) {
-        const alert = await this.alertController.create({
-            header: 'TODO',
-            subHeader: 'Open order settings & map view',
-            buttons: ['Dismiss'],
+        // const alert = await this.alertController.create({
+        //     header: 'TODO',
+        //     subHeader: 'Open order settings & map view',
+        //     buttons: ['Dismiss'],
+        // });
+        // await alert.present();
+        const modal = await this.modalController.create({
+            component: MapViewComponent,
+            componentProps: {
+                order,
+            }
         });
-        await alert.present();
+        modal.onWillDismiss().then(() => this.fetchOrders());
+        return await modal.present();
     }
 
     get hasOrders(): boolean {

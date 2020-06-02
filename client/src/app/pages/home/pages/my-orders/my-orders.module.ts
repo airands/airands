@@ -9,6 +9,7 @@ import { MyOrdersPageRoutingModule } from './my-orders-routing.module';
 import { MyOrdersPage } from './my-orders.page';
 import {MapViewComponent} from "../../../../components/maps/map-view/map-view.component";
 import {SharedModule} from "../../../../modules/shared/shared.module";
+import {GoogleMapsModule} from "@angular/google-maps";
 
 @NgModule({
     imports: [
@@ -16,7 +17,8 @@ import {SharedModule} from "../../../../modules/shared/shared.module";
         FormsModule,
         IonicModule,
         MyOrdersPageRoutingModule,
-        SharedModule
+        SharedModule,
+        GoogleMapsModule,
     ],
   declarations: [
       MyOrdersPage,

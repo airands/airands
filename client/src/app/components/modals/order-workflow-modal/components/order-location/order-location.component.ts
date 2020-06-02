@@ -54,6 +54,7 @@ export class OrderLocationComponent implements OnInit, AfterViewInit {
         google.maps.event.addListener(autocomplete, 'place_changed', () => {
             const place = autocomplete.getPlace();
             console.log(place);
+            console.log(place.geometry.location.toJSON());
             this.newOrderStore.setPickUpLocation(this.toLocationAddress(place));
             inputEl.value = place.formatted_address;
         });
@@ -78,6 +79,10 @@ export class OrderLocationComponent implements OnInit, AfterViewInit {
                 locationAddress.postal_code = long_name;
             }
         });
+
+        const coords = place.geometry.location.toJSON();
+        locationAddress.lat = coords.lat.toString();
+        locationAddress.lng = coords.lng.toString();
 
         return locationAddress;
     }

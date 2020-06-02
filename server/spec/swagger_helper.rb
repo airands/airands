@@ -98,6 +98,8 @@ RSpec.configure do |config|
               city: {type: :string},
               province: {type: :string},
               postal_code: {type: :string},
+              lat: {type: :string},
+              lng: {type: :string},
               location_name: {type: :string},
               location_type: {'$ref': '#/components/schemas/location_type'},
             },

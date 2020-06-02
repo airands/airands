@@ -4,7 +4,8 @@ class Location < ApplicationRecord
 
     def self.permitted_params
       [ :street_number, :street_name, :unit_number, :city,
-        :province, :postal_code, :location_name, :location_type ]
+        :province, :postal_code, :location_name, :location_type,
+        :lat, :lng ]
     end
 
     # TODO: Validate is an actual Canadian address?
@@ -40,6 +41,8 @@ class Location < ApplicationRecord
         city: city,
         province: province,
         postal_code: postal_code,
+        lat: lat,
+        lng: lng,
       }
     end
 end

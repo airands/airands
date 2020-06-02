@@ -19,6 +19,8 @@ export interface LocationAddress {
     city: string;
     province: string;
     postal_code: string;
+    lat?: string;
+    lng?: string;
     location_name?: string;
     location_type?: LocationType;
 }
