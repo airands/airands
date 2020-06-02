@@ -1,0 +1,76 @@
+.active-card-button {
+  width: 100%;
+  height: 128px;
+  margin-bottom: 8px;
+  padding: 8px 8px 0 8px;
+  position: relative;
+  overflow: hidden;
+
+  .icon-brand-leaf {
+    position: absolute;
+    font-size: 205px;
+    left: -18%;
+    top: -102px;
+    transform: rotate(15deg);
+    opacity: 0.2;
+    color: var(--app-brand-color);
+  }
+
+  .top-row {
+    text-align: right;
+    margin-top: -8px;
+
+    .order-type {
+      font-size: 0.75rem;
+      color: var(--ion-color-medium);
+      text-transform: uppercase;
+    }
+  }
+
+  .location {
+    text-align: right;
+
+    span {
+      display: block;
+      position: relative;
+      top: -5px;
+
+      &:first-of-type {
+        top: unset;
+      }
+    }
+  }
+
+  .bottom-row {
+    position: absolute;
+    bottom: 8px;
+
+    .status-indicator {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      margin-right: 8px;
+
+      background-color: var(--ion-color-medium);
+
+      &.shopping {
+        background-color: var(--ion-color-warning);
+      }
+
+      &.enroute {
+        background-color: var(--ion-color-secondary);
+      }
+
+      &.delivered {
+        background-color: var(--ion-color-success);
+      }
+
+      &.cancelled {
+        background-color: var(--ion-color-danger);
+      }
+
+    }
+
+  }
+
+}

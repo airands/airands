@@ -9,6 +9,7 @@ import {FormsModule} from "@angular/forms";
 import {AppButtonComponent} from "../../components/buttons/app-button/app-button.component";
 import {WorkflowHeaderComponent} from "../../components/headers/workflow-header/workflow-header.component";
 import {ModalLayoutComponent} from "../../components/layout/modal-layout/modal-layout.component";
+import {ActiveOrderButtonComponent} from "../../components/buttons/active-order-button/active-order-button.component";
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {ModalLayoutComponent} from "../../components/layout/modal-layout/modal-l
     ],
     declarations: [
         CardButtonComponent,
+        ActiveOrderButtonComponent,
         BasicInputComponent,
         InputDisplayComponent,
         UserAvatarComponent,
@@ -31,6 +33,7 @@ import {ModalLayoutComponent} from "../../components/layout/modal-layout/modal-l
     ],
     exports: [
         CardButtonComponent,
+        ActiveOrderButtonComponent,
         BasicInputComponent,
         InputDisplayComponent,
         UserAvatarComponent,

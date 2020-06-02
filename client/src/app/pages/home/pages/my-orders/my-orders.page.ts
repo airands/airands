@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {IonRouterOutlet, ModalController} from "@ionic/angular";
+import {AlertController, IonRouterOutlet, ModalController} from "@ionic/angular";
 import {OrderWorkflowModalPage} from "../../../../components/modals/order-workflow-modal/order-workflow-modal.page";
 import {Order, OrdersService} from "../../../../../open_api";
 
@@ -11,19 +11,24 @@ import {Order, OrdersService} from "../../../../../open_api";
 export class MyOrdersPage implements OnInit {
 
     constructor(
-        private modalController: ModalController,
         private routerOutlet: IonRouterOutlet,
         private ordersService: OrdersService,
+        private modalController: ModalController,
+        private alertController: AlertController,
     ) {
     }
 
-    orders: Order[] = [];
+    activeOrders: Order[] = [];
 
     ngOnInit() {
+        this.fetchOrders();
+    }
+
+    fetchOrders() {
         this.ordersService.getAllOrders().subscribe((orders) =>
         {
-            this.orders = orders;
-            console.log(this.orders);
+            this.activeOrders = orders;
+            console.log(this.activeOrders);
         });
     }
 
@@ -31,7 +36,21 @@ export class MyOrdersPage implements OnInit {
         const modal = await this.modalController.create({
             component: OrderWorkflowModalPage,
         });
+        modal.onWillDismiss().then(() => this.fetchOrders());
         return await modal.present();
+    }
+
+    async openOrder(order: Order) {
+        const alert = await this.alertController.create({
+            header: 'TODO',
+            subHeader: 'Open order settings & map view',
+            buttons: ['Dismiss'],
+        });
+        await alert.present();
+    }
+
+    get hasOrders(): boolean {
+        return this.activeOrders.length > 0;
     }
 
 }

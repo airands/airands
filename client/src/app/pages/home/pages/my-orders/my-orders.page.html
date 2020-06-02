@@ -4,11 +4,28 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [scrollY]="false">
+<ion-content [scrollY]="">
   <div class="ion-padding-horizontal expand-v">
-    <div class="d-flex flex-col expand-v justify-content-center">
-      <span class="sub-text ion-text-center">Easily create an order in a few simple steps!</span>
-      <app-button top="16" (click)="createOrder()">New Order</app-button>
+
+    <div class="order-list" *ngIf="hasOrders; else noOrders">
+      <div class="orders-top-row">
+        <app-button (click)="createOrder()" top="32" bottom="32">Create Order</app-button>
+      </div>
+
+      <ion-list>
+        <app-active-order-button *ngFor="let order of activeOrders"
+                                 [order]="order"
+                                 (click)="openOrder(order)"
+        ></app-active-order-button>
+      </ion-list>
     </div>
+
+    <ng-template #noOrders>
+      <div class="d-flex flex-col expand-v justify-content-center">
+        <span class="sub-text ion-text-center">Easily create an order in a few simple steps!</span>
+        <app-button top="16" (click)="createOrder()">New Order</app-button>
+      </div>
+    </ng-template>
+
   </div>
 </ion-content>

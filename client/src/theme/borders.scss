@@ -21,3 +21,12 @@
           white,
   );
 }
+
+.airands-fill-button {
+  @include app-fill-button(
+          var(--app-brand-color),
+          var(--app-brand-color-shade),
+          var(--app-brand-color),
+          white,
+  );
+}

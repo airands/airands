@@ -1,0 +1,16 @@
+<div class="app-border-button active-card-button">
+  <i class="icon-brand-leaf"></i>
+
+  <div class="top-row">
+    <span class="order-type">{{ orderTypeUF }}</span>
+  </div>
+  <div class="location">
+    <span *ngIf="pickUp.location_name && isCommercial">{{ pickUp.location_name }}</span>
+    <span>{{ pickUpStreet }}</span>
+    <span>{{ pickUpCity }}</span>
+  </div>
+  <div class="bottom-row d-flex align-items-center">
+    <div class="status-indicator" [ngClass]="orderStatus"></div>
+    <span class="order-status">{{ orderStatusUF }}</span>
+  </div>
+</div>
