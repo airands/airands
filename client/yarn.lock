@@ -1024,10 +1024,10 @@
     rxjs "6.5.3"
     webpack-sources "1.4.3"
 
-"@openapitools/openapi-generator-cli@^1.0.12-4.3.0":
-  version "1.0.12-4.3.0"
-  resolved "https://registry.yarnpkg.com/@openapitools/openapi-generator-cli/-/openapi-generator-cli-1.0.12-4.3.0.tgz#845f0bfd47a73bdaa188667c3085d721e0d91785"
-  integrity sha512-p6y0ur69/vEslpARrcWg3geujOAjxoQIlIamZGm1cWsu4y4RrEdrolueWA1Lxww2pUzgxvb9PwD6hHFZNNfgrw==
+"@openapitools/openapi-generator-cli@^1.0.13-4.3.1":
+  version "1.0.13-4.3.1"
+  resolved "https://registry.yarnpkg.com/@openapitools/openapi-generator-cli/-/openapi-generator-cli-1.0.13-4.3.1.tgz#3360698a6b34a33dd46eaf7cdf1a6a9027b1183f"
+  integrity sha512-hUbSHCXak8vujMpTgH5dDACq0mynya37xgPFD3JbmnwRrPrgrZ4mr3+w7QZJ5aLMCIfb2j3s96d1sWaOZYZzxA==
 
 "@rdlabo/capacitor-facebook-login@^2.0.3":
   version "2.0.3"

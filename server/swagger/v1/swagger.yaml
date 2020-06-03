@@ -17,13 +17,13 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/airands_account"
+                "$ref": "#/components/schemas/airands_account_response"
         '400':
           description: Creation error
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/error_response"
+                "$ref": "#/components/schemas/base_response"
       requestBody:
         content:
           application/json:
@@ -42,7 +42,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/customer_registration"
+                "$ref": "#/components/schemas/customer_registration_response"
         '422':
           description: invalid request
           content: {}
@@ -62,7 +62,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/customer_dto"
+                "$ref": "#/components/schemas/customer_response"
   "/orders":
     post:
       summary: Create new order
@@ -76,7 +76,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/order"
+                "$ref": "#/components/schemas/order_response"
         '422':
           description: invalid request
           content: {}
@@ -96,9 +96,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/order"
+                "$ref": "#/components/schemas/orders_response"
   "/orders/{order_id}":
     get:
       summary: Get specific customer order
@@ -117,7 +115,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/order"
+                "$ref": "#/components/schemas/order_response"
   "/sessions":
     post:
       summary: Creates an authenticated session
@@ -131,13 +129,13 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/customer_dto"
+                "$ref": "#/components/schemas/customer_response"
         '422':
           description: invalid request
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/error_dto"
+                "$ref": "#/components/schemas/base_response"
       requestBody:
         content:
           application/json:
@@ -154,13 +152,13 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/customer_dto"
+                "$ref": "#/components/schemas/customer_response"
         '401':
           description: unauthorized
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/error_dto"
+                "$ref": "#/components/schemas/base_response"
     delete:
       summary: Deletes an auth session
       tags:
@@ -192,6 +190,28 @@ components:
           type: string
         code:
           "$ref": "#/components/schemas/error_code"
+    base_response:
+      type: object
+      properties:
+        status:
+          "$ref": "#/components/schemas/status_code"
+        error:
+          type: object
+          properties:
+            code:
+              "$ref": "#/components/schemas/error_code"
+            message:
+              type: string
+      required:
+      - status
+      - error
+    customer_response:
+      allOf:
+      - "$ref": "#/components/schemas/base_response"
+      - type: object
+        properties:
+          data:
+            "$ref": "#/components/schemas/customer_dto"
     customer_dto:
       type: object
       properties:
@@ -216,6 +236,13 @@ components:
       - first_name
       - last_name
       - auth_provider
+    customer_registration_response:
+      allOf:
+      - "$ref": "#/components/schemas/base_response"
+      - type: object
+        properties:
+          data:
+            "$ref": "#/components/schemas/customer_registration"
     customer_registration:
       type: object
       properties:
@@ -268,6 +295,22 @@ components:
       - city
       - province
       - postal_code
+    order_response:
+      allOf:
+      - "$ref": "#/components/schemas/base_response"
+      - type: object
+        properties:
+          data:
+            "$ref": "#/components/schemas/order"
+    orders_response:
+      allOf:
+      - "$ref": "#/components/schemas/base_response"
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              "$ref": "#/components/schemas/order"
     order:
       type: object
       properties:
@@ -301,6 +344,13 @@ components:
       required:
       - pick_up
       - drop_off
+    airands_account_response:
+      allOf:
+      - "$ref": "#/components/schemas/base_response"
+      - type: object
+        properties:
+          data:
+            "$ref": "#/components/schemas/airands_account"
     airands_account:
       type: object
       properties:
@@ -336,4 +386,10 @@ components:
       type: string
       enum:
       - generic
+      - unauthorized
       - account_exists
+    status_code:
+      type: string
+      enum:
+      - success
+      - error

@@ -4,6 +4,10 @@ class Api::V1::CustomersController < ApplicationController
     authenticate_cookie
   end
 
+  #==========================================================================
+  # Endpoints
+  #==========================================================================
+
   # POST /api/v1/users
   def create
     user_data = customer_data_params
@@ -46,17 +50,21 @@ class Api::V1::CustomersController < ApplicationController
         cookies.signed[:customer_id] = {value: customer.id, httponly: true, expires: Time.now + 3.months}
         customer.update_trackable(request.remote_ip)
 
-        render json: customer.to_hash, status: :created
+        success_response(customer.to_hash, :created)
       else
-        render json: customer.errors, status: :unprocessable_entity
+        error_response(ERROR_CODE::GENERIC, customer.errors.join("/n"), :unprocessable_entity)
       end
     end
   end
 
   # GET /api/v1/users
   def show
-    render json: current_user&.to_hash, status: :ok
+    success_response(current_user.to_hash)
   end
+
+  #==========================================================================
+  # Private Methods
+  #==========================================================================
 
   private
 

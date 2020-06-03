@@ -11,11 +11,10 @@
  */
 
 
-export type ErrorCode = 'generic' | 'unauthorized' | 'account_exists';
+export type StatusCode = 'success' | 'error';
 
-export const ErrorCode = {
-    Generic: 'generic' as ErrorCode,
-    Unauthorized: 'unauthorized' as ErrorCode,
-    AccountExists: 'account_exists' as ErrorCode
+export const StatusCode = {
+    Success: 'success' as StatusCode,
+    Error: 'error' as StatusCode
 };
 

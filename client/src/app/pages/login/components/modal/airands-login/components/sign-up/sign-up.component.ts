@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AccountsService, ErrorResponse} from "../../../../../../../../open_api";
+import {AccountsService, BaseResponse, ErrorResponse} from "../../../../../../../../open_api";
 import {ErrorCode} from "../../../../../../../../open_api/model/errorCode";
 import {LoginService} from "../../../../../../../services/auth/login.service";
 import {Router} from "@angular/router";
@@ -33,8 +33,8 @@ export class SignUpComponent implements OnInit {
         await this.modalController.dismiss();
       }
       catch (e) {
-        let error = e.error as ErrorResponse
-        if (error.code == ErrorCode.AccountExists) {
+        let error = e.error as BaseResponse
+        if (error.error.code == ErrorCode.AccountExists) {
           alert("ACCOUNT EXISTS, TODO BETTER THIS");
         }
         else {

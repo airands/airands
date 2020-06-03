@@ -18,14 +18,14 @@ describe 'Sessions API' do
       response 200, 'session authenticated' do
         let(:user_confirmation) { {phone_number: 7789869397, confirmation_pin: '7BFD6Y'} }
 
-        schema '$ref' => '#/components/schemas/customer_dto'
+        schema '$ref' => '#/components/schemas/customer_response'
         run_test!
       end
 
       response 422, 'invalid request' do
         let(:user_confirmation) { {phone_number: 7789869397} }
 
-        schema '$ref' => '#/components/schemas/error_dto'
+        schema '$ref' => '#/components/schemas/base_response'
         run_test!
       end
     end
@@ -37,12 +37,12 @@ describe 'Sessions API' do
       produces 'application/json'
 
       response 200, 'session info' do
-        schema '$ref' => '#/components/schemas/customer_dto'
+        schema '$ref' => '#/components/schemas/customer_response'
         run_test!
       end
 
       response 401, 'unauthorized' do
-        schema '$ref' => '#/components/schemas/error_dto'
+        schema '$ref' => '#/components/schemas/base_response'
         run_test!
       end
     end
@@ -57,7 +57,7 @@ describe 'Sessions API' do
       end
 
       response 401, 'unauthorized' do
-        schema '$ref' => '#/components/schemas/error_dto'
+        schema '$ref' => '#/components/schemas/base_response'
         run_test!
       end
     end

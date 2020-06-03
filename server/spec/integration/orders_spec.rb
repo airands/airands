@@ -16,7 +16,7 @@ describe 'Orders API' do
       parameter name: :order, in: :body, schema: {'$ref' => '#/components/schemas/new_order' }
 
       response 201, 'order created' do
-        schema '$ref' => '#/components/schemas/order'
+        schema '$ref' => '#/components/schemas/order_response'
         run_test!
       end
 
@@ -35,7 +35,7 @@ describe 'Orders API' do
       produces 'application/json'
 
       response 200, 'All customer orders' do
-        schema type: :array, items: {'$ref': '#/components/schemas/order'}
+        schema '$ref': '#/components/schemas/orders_response'
         run_test!
       end
 
@@ -53,7 +53,7 @@ describe 'Orders API' do
       parameter name: :order_id, in: :path, type: :string
 
       response 200, 'Specified customer order' do
-        schema '$ref': '#/components/schemas/order'
+        schema '$ref': '#/components/schemas/order_response'
         run_test!
       end
 

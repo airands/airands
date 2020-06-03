@@ -15,18 +15,16 @@ module Api::V1::Auth
           new_account = ::Auth::Airands::Account.create(email: params[:email],
                                                         password: params[:password],
                                                         password_confirmation: params[:password])
-          render json: new_account, status: @status
+          success_response(new_account.to_hash)
         rescue ActiveRecord::RecordNotUnique => e
           # account already exists
-          render json: Error::AirandsAuthErrorResponse.new("account with email #{params[:email]} already exists",
-                                                           Error::AirandsAuthErrorResponse::CODE::ACCOUNT_EXISTS),
-                 status: :bad_request
+          error_response(ERROR_CODE::ACCOUNT_EXISTS, 'Account already exists', :bad_request)
         end
       end
 
       # PUT. update a account
       def update
-        render json: {}, status: @status
+        # TODO this
       end
 
 

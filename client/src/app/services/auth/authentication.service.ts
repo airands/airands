@@ -31,7 +31,7 @@ export class AuthenticationService {
 
     async verifyLogin(): Promise<boolean> {
         try {
-            this.setCustomer(await this.customersService.getUser().toPromise());
+            this.setCustomer((await this.customersService.getUser().toPromise()).data);
             return true;
         } catch (error) {
             this.setCustomer(null);
@@ -58,9 +58,9 @@ export class AuthenticationService {
     async login(phoneConfirmation: PhoneConfirmation) {
         return new Promise((resolve, reject) => {
             this.sessionService.authenticate(phoneConfirmation).subscribe(
-                (userDto) => {
-                    this.setUser(userDto);
-                    resolve(userDto);
+                (customerResponse) => {
+                    this.setUser(customerResponse.data);
+                    resolve(customerResponse.data);
                 },
                 (error) => reject(error),
             );

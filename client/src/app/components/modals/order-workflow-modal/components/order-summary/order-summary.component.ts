@@ -33,7 +33,7 @@ export class OrderSummaryComponent implements OnInit {
         await loader.present();
 
         try {
-            const order = await this.ordersService.createOrder(this.newOrderStore.newOrder).toPromise();
+            const order = (await this.ordersService.createOrder(this.newOrderStore.newOrder).toPromise()).data;
             await loader.dismiss();
             const toast = await this.toastController.create({
                 message: "Your order has been placed!",

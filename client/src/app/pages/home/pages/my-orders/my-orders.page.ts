@@ -26,9 +26,9 @@ export class MyOrdersPage implements OnInit {
     }
 
     fetchOrders() {
-        this.ordersService.getAllOrders().subscribe((orders) =>
+        this.ordersService.getAllOrders().subscribe((ordersResponse) =>
         {
-            this.activeOrders = orders;
+            this.activeOrders = ordersResponse.data;
             console.log(this.activeOrders);
         });
     }

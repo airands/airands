@@ -18,7 +18,8 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { NewOrder } from '../model/models';
-import { Order } from '../model/models';
+import { OrderResponse } from '../model/models';
+import { OrdersResponse } from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -92,9 +93,9 @@ export class OrdersService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createOrder(newOrder?: NewOrder, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Order>;
-    public createOrder(newOrder?: NewOrder, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Order>>;
-    public createOrder(newOrder?: NewOrder, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Order>>;
+    public createOrder(newOrder?: NewOrder, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<OrderResponse>;
+    public createOrder(newOrder?: NewOrder, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<OrderResponse>>;
+    public createOrder(newOrder?: NewOrder, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<OrderResponse>>;
     public createOrder(newOrder?: NewOrder, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -126,7 +127,7 @@ export class OrdersService {
             responseType = 'text';
         }
 
-        return this.httpClient.post<Order>(`${this.configuration.basePath}/orders`,
+        return this.httpClient.post<OrderResponse>(`${this.configuration.basePath}/orders`,
             newOrder,
             {
                 responseType: <any>responseType,
@@ -143,9 +144,9 @@ export class OrdersService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllOrders(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<Order>>;
-    public getAllOrders(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<Order>>>;
-    public getAllOrders(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<Order>>>;
+    public getAllOrders(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<OrdersResponse>;
+    public getAllOrders(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<OrdersResponse>>;
+    public getAllOrders(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<OrdersResponse>>;
     public getAllOrders(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -168,7 +169,7 @@ export class OrdersService {
             responseType = 'text';
         }
 
-        return this.httpClient.get<Array<Order>>(`${this.configuration.basePath}/orders`,
+        return this.httpClient.get<OrdersResponse>(`${this.configuration.basePath}/orders`,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,
@@ -185,9 +186,9 @@ export class OrdersService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getOrder(orderId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Order>;
-    public getOrder(orderId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Order>>;
-    public getOrder(orderId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Order>>;
+    public getOrder(orderId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<OrderResponse>;
+    public getOrder(orderId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<OrderResponse>>;
+    public getOrder(orderId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<OrderResponse>>;
     public getOrder(orderId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
         if (orderId === null || orderId === undefined) {
             throw new Error('Required parameter orderId was null or undefined when calling getOrder.');
@@ -213,7 +214,7 @@ export class OrdersService {
             responseType = 'text';
         }
 
-        return this.httpClient.get<Order>(`${this.configuration.basePath}/orders/${encodeURIComponent(String(orderId))}`,
+        return this.httpClient.get<OrderResponse>(`${this.configuration.basePath}/orders/${encodeURIComponent(String(orderId))}`,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,

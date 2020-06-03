@@ -17,8 +17,8 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
-import { CustomerDto } from '../model/models';
-import { ErrorDto } from '../model/models';
+import { BaseResponse } from '../model/models';
+import { CustomerResponse } from '../model/models';
 import { PhoneConfirmation } from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -93,9 +93,9 @@ export class SessionService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public authenticate(phoneConfirmation?: PhoneConfirmation, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<CustomerDto>;
-    public authenticate(phoneConfirmation?: PhoneConfirmation, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<CustomerDto>>;
-    public authenticate(phoneConfirmation?: PhoneConfirmation, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<CustomerDto>>;
+    public authenticate(phoneConfirmation?: PhoneConfirmation, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<CustomerResponse>;
+    public authenticate(phoneConfirmation?: PhoneConfirmation, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<CustomerResponse>>;
+    public authenticate(phoneConfirmation?: PhoneConfirmation, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<CustomerResponse>>;
     public authenticate(phoneConfirmation?: PhoneConfirmation, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -127,7 +127,7 @@ export class SessionService {
             responseType = 'text';
         }
 
-        return this.httpClient.post<CustomerDto>(`${this.configuration.basePath}/sessions`,
+        return this.httpClient.post<CustomerResponse>(`${this.configuration.basePath}/sessions`,
             phoneConfirmation,
             {
                 responseType: <any>responseType,
@@ -144,9 +144,9 @@ export class SessionService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getCurrentSession(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<CustomerDto>;
-    public getCurrentSession(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<CustomerDto>>;
-    public getCurrentSession(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<CustomerDto>>;
+    public getCurrentSession(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<CustomerResponse>;
+    public getCurrentSession(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<CustomerResponse>>;
+    public getCurrentSession(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<CustomerResponse>>;
     public getCurrentSession(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -169,7 +169,7 @@ export class SessionService {
             responseType = 'text';
         }
 
-        return this.httpClient.get<CustomerDto>(`${this.configuration.basePath}/sessions`,
+        return this.httpClient.get<CustomerResponse>(`${this.configuration.basePath}/sessions`,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,

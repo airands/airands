@@ -17,8 +17,9 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
-import { CustomerDto } from '../model/models';
 import { CustomerRegistration } from '../model/models';
+import { CustomerRegistrationResponse } from '../model/models';
+import { CustomerResponse } from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -92,9 +93,9 @@ export class CustomersService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createUser(customerRegistration?: CustomerRegistration, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<CustomerRegistration>;
-    public createUser(customerRegistration?: CustomerRegistration, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<CustomerRegistration>>;
-    public createUser(customerRegistration?: CustomerRegistration, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<CustomerRegistration>>;
+    public createUser(customerRegistration?: CustomerRegistration, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<CustomerRegistrationResponse>;
+    public createUser(customerRegistration?: CustomerRegistration, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<CustomerRegistrationResponse>>;
+    public createUser(customerRegistration?: CustomerRegistration, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<CustomerRegistrationResponse>>;
     public createUser(customerRegistration?: CustomerRegistration, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -126,7 +127,7 @@ export class CustomersService {
             responseType = 'text';
         }
 
-        return this.httpClient.post<CustomerRegistration>(`${this.configuration.basePath}/customers`,
+        return this.httpClient.post<CustomerRegistrationResponse>(`${this.configuration.basePath}/customers`,
             customerRegistration,
             {
                 responseType: <any>responseType,
@@ -143,9 +144,9 @@ export class CustomersService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getUser(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<CustomerDto>;
-    public getUser(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<CustomerDto>>;
-    public getUser(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<CustomerDto>>;
+    public getUser(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<CustomerResponse>;
+    public getUser(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<CustomerResponse>>;
+    public getUser(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<CustomerResponse>>;
     public getUser(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -168,7 +169,7 @@ export class CustomersService {
             responseType = 'text';
         }
 
-        return this.httpClient.get<CustomerDto>(`${this.configuration.basePath}/customers`,
+        return this.httpClient.get<CustomerResponse>(`${this.configuration.basePath}/customers`,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,

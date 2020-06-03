@@ -18,7 +18,8 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { AirandsAccount } from '../model/models';
-import { ErrorResponse } from '../model/models';
+import { AirandsAccountResponse } from '../model/models';
+import { BaseResponse } from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -92,9 +93,9 @@ export class AccountsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createAccount(airandsAccount?: AirandsAccount, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<AirandsAccount>;
-    public createAccount(airandsAccount?: AirandsAccount, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<AirandsAccount>>;
-    public createAccount(airandsAccount?: AirandsAccount, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<AirandsAccount>>;
+    public createAccount(airandsAccount?: AirandsAccount, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<AirandsAccountResponse>;
+    public createAccount(airandsAccount?: AirandsAccount, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<AirandsAccountResponse>>;
+    public createAccount(airandsAccount?: AirandsAccount, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<AirandsAccountResponse>>;
     public createAccount(airandsAccount?: AirandsAccount, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -126,7 +127,7 @@ export class AccountsService {
             responseType = 'text';
         }
 
-        return this.httpClient.post<AirandsAccount>(`${this.configuration.basePath}/auth/airands/accounts`,
+        return this.httpClient.post<AirandsAccountResponse>(`${this.configuration.basePath}/auth/airands/accounts`,
             airandsAccount,
             {
                 responseType: <any>responseType,

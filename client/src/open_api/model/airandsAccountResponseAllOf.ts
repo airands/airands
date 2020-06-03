@@ -9,13 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { AirandsAccount } from './airandsAccount';
 
 
-export type ErrorCode = 'generic' | 'unauthorized' | 'account_exists';
-
-export const ErrorCode = {
-    Generic: 'generic' as ErrorCode,
-    Unauthorized: 'unauthorized' as ErrorCode,
-    AccountExists: 'account_exists' as ErrorCode
-};
+export interface AirandsAccountResponseAllOf { 
+    data?: AirandsAccount;
+}
 

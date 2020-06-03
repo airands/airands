@@ -25,16 +25,16 @@ class Api::V1::SessionsController < ApplicationController
 
   # GET /api/v1/sessions
   def show
-    render json: current_user&.to_hash
+    success_response(current_user&.to_hash)
   end
 
   # DELETE /api/v1/sessions
   def destroy
     if current_user.present?
       cookies.delete(:customer_id)
-      render json: {message: 'OK'}, status: :ok
+      success_response({})
     else
-      render json: {message: 'session not found'}, status: :not_found
+      error_response(ERROR_CODE::GENERIC, 'session not found', :not_found)
     end
   end
 

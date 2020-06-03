@@ -16,7 +16,7 @@ describe 'Customers API' do
       parameter name: :customer, in: :body, schema: {'$ref' => '#/components/schemas/customer_registration' }
 
       response 201, 'sms confirmation sent' do
-        schema '$ref' => '#/components/schemas/customer_registration'
+        schema '$ref' => '#/components/schemas/customer_registration_response'
         run_test!
       end
 
@@ -34,7 +34,7 @@ describe 'Customers API' do
       produces 'application/json'
 
       response 200, 'authenticated customer user' do
-        schema '$ref' => '#/components/schemas/customer_dto'
+        schema '$ref' => '#/components/schemas/customer_response'
         run_test!
       end
 

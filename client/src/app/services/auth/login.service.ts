@@ -35,7 +35,7 @@ export class LoginService {
 
     async loginGoogle() {
         const response = await this.googleService.login();
-        const userResponse = await this.postRegistration(response.authentication.idToken, {
+        await this.postRegistration(response.authentication.idToken, {
             auth_provider: 'google',
             auth_provider_uid: response.id,
             email: response.email,

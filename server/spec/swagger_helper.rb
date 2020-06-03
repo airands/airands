@@ -51,7 +51,37 @@ RSpec.configure do |config|
             }
           },
 
+          base_response: {
+            type: :object,
+            properties: {
+              status: {'$ref': '#/components/schemas/status_code'},
+              # data: <-- subclasses provide this
+              error: {
+                type: :object,
+                properties: {
+                  code: {'$ref': '#/components/schemas/error_code'},
+                  message: {type: :string},
+                }
+              },
+            },
+            required: [:status, :error],
+          },
+
           # ======================== Application DTOs ===============================
+
+          customer_response: {
+            allOf: [
+              {'$ref': '#/components/schemas/base_response'},
+              {
+                type: :object,
+                properties: {
+                  data: {
+                    '$ref': '#/components/schemas/customer_dto'
+                  }
+                }
+              },
+            ],
+          },
 
           customer_dto: {
             type: :object,
@@ -69,6 +99,20 @@ RSpec.configure do |config|
           },
 
           # Request Payloads
+
+          customer_registration_response: {
+            allOf: [
+              {'$ref': '#/components/schemas/base_response'},
+              {
+                type: :object,
+                properties: {
+                  data: {
+                    '$ref': '#/components/schemas/customer_registration'
+                  }
+                }
+              },
+            ],
+          },
 
           customer_registration: {
             type: :object,
@@ -106,6 +150,37 @@ RSpec.configure do |config|
             required: %w[street_number street_name city province postal_code],
           },
 
+          order_response: {
+            allOf: [
+              {'$ref': '#/components/schemas/base_response'},
+              {
+                type: :object,
+                properties: {
+                  data: {
+                    '$ref': '#/components/schemas/order'
+                  }
+                }
+              },
+            ],
+          },
+
+          orders_response: {
+            allOf: [
+              {'$ref': '#/components/schemas/base_response'},
+              {
+                type: :object,
+                properties: {
+                  data: {
+                    type: :array,
+                    items: {
+                      '$ref': '#/components/schemas/order'
+                    }
+                  }
+                }
+              },
+            ],
+          },
+
           order: {
             type: :object,
             properties: {
@@ -133,6 +208,20 @@ RSpec.configure do |config|
               drop_off: {'$ref': '#/components/schemas/location_address'},
             },
             required: %w[pick_up drop_off],
+          },
+
+          airands_account_response: {
+            allOf: [
+              {'$ref': '#/components/schemas/base_response'},
+              {
+                type: :object,
+                properties: {
+                  data: {
+                    '$ref': '#/components/schemas/airands_account'
+                  }
+                }
+              },
+            ],
           },
 
           airands_account: {
@@ -174,7 +263,12 @@ RSpec.configure do |config|
 
           error_code: {
             type: :string,
-            enum: %w[generic account_exists]
+            enum: %w[generic unauthorized account_exists]
+          },
+
+          status_code: {
+            type: :string,
+            enum: %w[success error]
           }
 
         }

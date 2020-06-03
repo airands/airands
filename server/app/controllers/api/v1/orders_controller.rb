@@ -2,21 +2,25 @@ class Api::V1::OrdersController < ApplicationController
 
   before_action :authenticate_cookie
 
+  #==========================================================================
+  # Endpoints
+  #==========================================================================
+
   # POST /api/v1/orders
   def create
-    @order = current_user.orders.new(create_params)
+    order = current_user.orders.new(create_params)
 
-    if @order.save
-      render json: @order.to_hash, status: :ok
+    if order.save
+      success_response(order.to_hash)
     else
-      render json: @order.errors, status: :unprocessable_entity
+      error_response(ERROR_CODE::GENERIC, order.errors.join("\n"), :unprocessable_entity)
     end
   end
 
   # GET /api/v1/orders
   def show_all
-    @orders = current_user.orders
-    render json: @orders.map(&:to_hash), status: :ok
+    orders = current_user.orders
+    success_response(orders.map(&:to_hash))
   end
 
   # GET /api/v1/orders/:order_id
@@ -33,6 +37,10 @@ class Api::V1::OrdersController < ApplicationController
   def destroy
 
   end
+
+  #==========================================================================
+  # Private Methods
+  #==========================================================================
 
   private
 
