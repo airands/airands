@@ -18,7 +18,8 @@ module CoreModules
             family_name: '',
           }
         else
-          # TODO throw some sort of auth error
+          raise ::Airands::Exception::Auth::BaseAuthException.new(
+            ::Airands::Exception::Auth::BaseAuthException::EXCEPTION::INVALID_CREDENTIALS, "invalid login")
         end
       end
 
